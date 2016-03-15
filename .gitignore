@@ -1,0 +1,10 @@
+*.pyc
+._*
+aenea.json
+core/
+_capture_client_control.py
+_aenea.py
+server_state.json
+aenea/
+aenea_client.py
+vocabulary_config/
