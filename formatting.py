@@ -60,13 +60,16 @@ def format_dotword(text):
 def format_dashword(text):
     return '-'.join(text)
 
+
 def format_say(text):
     x = ' '.join(text)
     x = re.sub(r' \.', r'. ', x)
     return re.sub(r'  ', r' ', x)
 
+
 def format_broodingnarrative(text):
     return ''
+
 
 def format_cap(text):
     x = ' '.join([text[0].capitalize()] + text[1:])

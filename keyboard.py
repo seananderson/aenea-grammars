@@ -37,8 +37,27 @@ from dragonfly.actions.typeables import typeables
 if 'semicolon' not in typeables:
     typeables["semicolon"] = keyboard.get_typeable(char=';')
 
-
 release = Key("shift:up, ctrl:up, alt:up")
+srt = Key("escape, l")
+end = Key("i")
+append = Key("a")
+
+def goto_line(line1):
+    for c in str(line1):
+        Key(c).execute()
+    Key("s-g").execute()
+
+def yank_lines(line1, line2):
+    goto_line(line1)
+    Key("V").execute()
+    goto_line(line2)
+    Key("y").execute()
+
+def delete_lines(line1, line2):
+    goto_line(line1)
+    Key("V").execute()
+    goto_line(line2)
+    Key("d").execute()
 
 
 def cancel_and_sleep(text=None, text2=None):
@@ -63,7 +82,7 @@ specialCharMap = {
     "M-dash": "---",
     "N-dash": "--",
     "dot|point": ".",
-    "comma": ", ",
+    "comma": ",",
     "backslash": "\\",
     "underscore": "_",
     "(star|asterisk|times)": " * ",
@@ -90,21 +109,21 @@ specialCharMap = {
     "assign": " <- ",
 }
 
-# Modifiers for the press-command.
-modifierMap = {
-    "alt": "a",
-    "control": "c",
-    "shift": "s",
-    "super": "w",
-}
+# # Modifiers for the press-command.
+# modifierMap = {
+#     "alt": "a",
+#     "control": "c",
+#     "shift": "s",
+#     "super": "w",
+# }
 
-# Modifiers for the press-command, if only the modifier is pressed.
-singleModifierMap = {
-    "alt": "alt",
-    "control": "ctrl",
-    "shift": "shift",
-    "super": "win",
-}
+# # Modifiers for the press-command, if only the modifier is pressed.
+# singleModifierMap = {
+#     "alt": "alt",
+#     "control": "ctrl",
+#     "shift": "shift",
+#     "super": "win",
+# }
 
 letterMap = {
     "(alpha|arch)": "a",
@@ -226,9 +245,10 @@ grammarCfg.cmd.map = Item(
         "space [<n>]": Key("space:%(n)d"),
         "(enter|slap|slop) [<n>]": Key("enter:%(n)d"),
         "tab [<n>]": Key("tab:%(n)d"),
-        ###"delete [<n>]": Key("del/3:%(n)d"),
+        "delete [<n>]": Key("del:%(n)d"),
         #"delete [this] line": Key("home, s-end, del"),  # @IgnorePep8
         "backspace [<n>]": Key("backspace:%(n)d"),
+        "extract [<n>]": Key("x:%(n)d"),
         #"application key": Key("apps/3"),
         #"win key": Key("win/3"),
         #"paste [that]": Function(paste_command),
@@ -308,6 +328,174 @@ grammarCfg.cmd.map = Item(
         "(delete|remove) (double|extra) (type|char|character)": Key("c-left/3, del, c-right/3"),  # @IgnorePep8
         # Microphone sleep/cancel started dictation.
         "[<text>] (go to sleep|cancel and sleep) [<text2>]": Function(cancel_and_sleep),  # @IgnorePep8
+
+     "paste":                                      srt + Key("p") + end,
+     "paste up":                                   srt + Key("P") + end,
+     "yank":                                       srt + Key("y") + end,
+     "duplicate line [<n>]":                       srt + Key("y,y,p:%(n)d") + end,
+     "duplicate line up <n>":                      srt + Key("y,y,P:%(n)d") + end,
+
+    "toggle case":                                 srt + Key("tilde") + end,
+
+    "visual mode":                                 srt + Key("v"),
+    "visual line|select line":                     srt + Key("s-v"),
+    "visual block":                                srt + Key("c-v"),
+    "reselect visual":                             srt + Key("g,v"),
+
+    "next [<n>]":                                  srt + Key("n:%(n)d") + end,
+    "previous [<n>]":                              srt + Key("N:%(n)d") + end,
+
+    "format":                                      srt + Key("g,q") + end,
+
+    'matching': srt + Key("percent") + end,
+    'screen center': srt + Key("z, dot") + end,
+    'screen top': srt + Key("z, t") + end,
+    'screen bottom': srt + Key("z, b") + end,
+
+    "word [<n>]":                                  srt + Key("%(n)d, w") + end,
+    "word end [<n>]":                                   srt + Key("%(n)d, e") + append,
+    "bird [<n>]":                                  srt + Key("%(n)d, b") + end,
+    "bird end [<n>]":                                  srt + Key("%(n)d, g, e") + append,
+    "next para [<n>]":                                  srt + Key("%(n)d, rbrace") + end,
+    "preev para [<n>]":                                  srt + Key("%(n)d, lbrace") + end,
+    "next scent [<n>]":                                  srt + Key("%(n)d, rparen") + end,
+    "preev scent [<n>]":                                  srt + Key("%(n)d, lparen") + end,
+
+    "undo [<n>]":                                  srt + Key("u:%(n)d") + end,
+    "redo [<n>]":                                  srt + Key("c-r:%(n)d") + end,
+    "repeat [<n>]":                                srt + Key("%(n)d, dot") + end,
+
+    "delete around word":                          srt + Key("d,a,w") + end,
+    "delete inner word":                           srt + Key("d,i,w") + end,
+    "delete around paragraph":                     srt + Key("d,a,p") + end,
+    "delete inner paragraph":                      srt + Key("d,i,p") + end,
+    "delete around sentence":                      srt + Key("d,a,s") + end,
+    "delete inner sentence":                       srt + Key("d,i,s") + end,
+    "delete around paren":                         srt + Key("d,a,rparen") + end,
+    "delete inner paren":                          srt + Key("d,i,rparen") + end,
+    "delete around bracks":                        srt + Key("d,a,rbracket") + end,
+    "delete inner bracks":                         srt + Key("d,i,rbracket") + end,
+    "delete around braces":                        srt + Key("d,a,rbrace") + end,
+    "delete inner braces":                         srt + Key("d,i,rbrace") + end,
+    "delete around quotes":                        srt + Key("d,a,s-squote") + end,
+    "delete inner quotes":                         srt + Key("d,i,s-squote") + end,
+    "delete around single quotes":                 srt + Key("d,a,squote") + end,
+    "delete inner single quotes":                  srt + Key("d,i,squote") + end,
+
+    "yank around word":                            srt + Key("y,a,w") + end,
+    "yank inner word":                             srt + Key("y,i,w") + end,
+    "yank around paragraph":                       srt + Key("y,a,p") + end,
+    "yank inner paragraph":                        srt + Key("y,i,p") + end,
+    "yank around sentence":                        srt + Key("y,a,s") + end,
+    "yank inner sentence":                         srt + Key("y,i,s") + end,
+    "yank around parens":                          srt + Key("y,a,rparen") + end,
+    "yank inner parens":                           srt + Key("y,i,rparen") + end,
+    "yank around bracks":                          srt + Key("y,a,rbracket") + end,
+    "yank inner bracks":                           srt + Key("y,i,rbracket") + end,
+    "yank around braces":                          srt + Key("y,a,rbrace") + end,
+    "yank inner braces":                           srt + Key("y,i,rbrace") + end,
+    "yank around quotes":                          srt + Key("y,a,dquote") + end,
+    "yank inner quotes":                           srt + Key("y,i,dquote") + end,
+    "yank around single quotes":                   srt + Key("y,a,squote") + end,
+    "yank inner single quotes":                    srt + Key("y,i,squote") + end,
+
+    "delete [this] line":                          srt + Key("d:2") + end,
+    "kill [this] line":                            srt + Key("D") + end,
+    "delete line <line1>":                         srt + Key("escape") + Function(goto_line) + Key("d:2") + end,
+    "delete (line|lines) <line1> through <line2>": srt + Key("escape") + Function(delete_lines) + end,
+    "yank [this] line":                            srt + Key("escape, y:2"),
+    "yank line <line1>":                           srt + Key("escape") + Function(goto_line) + Key("y:2"),
+    "yank (line|lines) <line1> through <line2>":   srt + Key("escape") + Function(yank_lines),
+     "change [this] line":                         srt + Key("c:2"),
+
+    "delete through are-paren": srt + Key("d,t,rparen") + end,
+    "delete through laip": srt + Key("d,t,lparen") + end,
+    "delete through rack": srt + Key("d,t,rbrace") + end,
+    "delete through lack": srt + Key("d,t,lbracket") + end,
+    "delete through rack": srt + Key("d,t,rbracket") + end,
+
+    "paste":                                       srt + Key("p") + end,
+    "shift paste":                                 srt + Key("P") + end,
+    "out-dent line":                               srt + Key("langle,langle") + end,
+    "join [<n>]":                                  srt + Key("J:%(n)d") + end,
+
+    "indent line":                                 srt + Key("rangle,rangle") + end,
+
+    "split (screen|window)":                                srt + Key("c-w,s") + end,
+    "split (screen|window) vertically":                     srt + Key("c-w,v") + end,
+    "(screen|window) left":                                 srt + Key("c-w,h") + end,
+    "(screen|window) right":                                srt + Key("c-w,l") + end,
+    "(screen|window) up":                                   srt + Key("c-w,k") + end,
+    "(screen|window) down":                                 srt + Key("c-w,j") + end,
+    "close split":                                srt + Key("c-w,c") + end,
+    "close other splits":                         srt + Key("colon/100,o,n,l,y/100,enter") + end,
+    "make split wide":                                srt + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter") + end,
+    "make split narrow":                                srt + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter") + end,
+    "make split tall":                                srt + Key("colon/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter") + end,
+    "make split short":                                srt + Key("colon/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter") + end,
+
+    "go to [line] <line1>":                        srt + Function(goto_line) + end,
+    "visual go to [line] <line1>":                 Function(goto_line),
+
+    "(type|insert)":                               Key("i"),
+    "(big insert)":                                srt + Key("I") + end,
+    "(append)":                                    Key("a"),
+    "(big append)":                                srt + Key("A") + end,
+    "(out|escape)":                                Key("escape"),
+    "open":                                        srt + Key("o"),
+    "open up|big open":                            srt + Key("O"),
+
+    "find <text>":                                 srt + Key("slash") + Text("%(text)s"),
+    "find back <text>":                            srt + Key("question") + Text("%(text)s"),
+    "visual find <text>":                          Key("slash") + Text("%(text)s"),
+    "visual find back <text>":                     Key("question") + Text("%(text)s"),
+    "jump to <text>":                              srt + Key("slash") + Text("%(text)s") + Key("enter"),
+    "jump back to <text>":                         srt + Key("question") + Text("%(text)s") + Key("enter"),
+    "find blank":                                  srt + Key("slash"),
+    "find back blank":                             srt + Key("question"),
+    "clear search":                                srt + Key("enter:2"),
+
+    "mark":                                        srt + Key("m,a") + end,
+    "jark":                                        srt + Key("backtick,a") + end,
+    "vark":                                        srt + Key("v,backtick,a") + end,
+    "yark":                                        srt + Key("y,backtick,a") + end,
+    "cark":                                        srt + Key("d,backtick,a") + end,
+
+    "jump forward [<n>]":                                   srt + Key("c-i:%(n)d") + end,
+    "jump back [<n>]":                                   srt + Key("c-o:%(n)d") + end,
+    # "jump back here [<n>]":                                   srt + Key("%(n)d,g,semicolon") + end,
+
+    "complete [<n>]":                              Key("c-p:%(n)d"),
+    "complete again":                              Key("c-x,c-p"),
+    "complete next [<n>]":                         Key("c-n:%(n)d"),
+    "complete next again":                         Key("c-x,c-n"),
+    "complete file":                               Key("c-x,c-f"),
+    "complete line":                               Key("c-x,c-l"),
+    "complete omni":                               Key("c-x,c-o"),
+    "choose":                                      Key("c-c,a"),
+    "magic star":                                  srt + Key("asterisk") + end,
+
+    "switch":                                      srt + Key("escape, c-p"),
+
+    "comment":                                     srt + Key("g,c,c") + end,
+    "comment paragraph":                           srt + Key("g,c,a,p") + end,
+    "comment <line1> to <line2>":                  srt + Key("colon,%(line1)d") + Text(",") + Key("%(line2)d") + Text("Commentary") + end,
+
+
+
+    "scroll down [<n>]":                           srt + Key("c-d:%(n)d")  + end,
+    "scroll up [<n>]":                             srt + Key("c-d:%(n)d")  + end,
+    "scroll up":                                   srt + Key("c-u") + end,
+
+     "record macro": Key("q,q"),
+     "end macro": Key("q"),
+     "repeat macro [<n>]": Key("at,at:%(n)d"),
+
+
+
+
+
+
     },
     namespace={
         "Key": Key,
@@ -321,18 +509,18 @@ class KeystrokeRule(MappingRule):
     mapping = grammarCfg.cmd.map
     extras = [
         IntegerRef("n", 1, 100),
-        IntegerRef("num", 0, 1000000),
+        IntegerRef("num", 0, 1000),
+        IntegerRef("line1", 1, 900),
+        IntegerRef("line2", 1, 900),
         Dictation("text"),
         Dictation("text2"),
         Choice("char", specialCharMap),
         Choice("letters", letterMap),
-        Choice("modifier1", modifierMap),
-        Choice("modifier2", modifierMap),
-        Choice("modifierSingle", singleModifierMap),
+        # Choice("modifier1", modifierMap),
+        # Choice("modifier2", modifierMap),
+        # Choice("modifierSingle", singleModifierMap),
         Choice("pressKey", pressKeyMap),
     ]
     defaults = {
         "n": 1,
     }
-
-
