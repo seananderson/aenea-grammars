@@ -71,6 +71,15 @@ class ExModeCommands(MappingRule):
     # "P. W. D.":                    Text("pwd "),
     # "help":                        esc + Text(":h "),
     "substitute":                  esc + Key("s,slash"),
+    "make split wide": esc + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter"),
+    "make split narrow": esc + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
+    "make split tall": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter"),
+    "make split short": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
+    'buff-delete': esc + Key('colon,b,d,enter'),
+    'buff-next': esc + Key('colon,b,n,enter'),
+    'buff-previous': esc + Key('colon,b,p,enter'),
+    'buff-list': esc + Key('colon,l,s,enter'),
+
     }
     extras = [
         Dictation("text"),
