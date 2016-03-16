@@ -45,42 +45,32 @@ grammar.load()  # Load the grammar.
 
 #################################
 
-srt = Key("escape, l/30")
-end = Key("i")
-append = Key("a")
+esc = Key("escape")
 
 # handles ExMode control structures
 class ExModeCommands(MappingRule):
     mapping  = {
-        "edit": srt + Key("colon,e,space"),
-        "exit vim":                                    srt + Key("colon,q,enter"),
-        "please exit vim":                             srt + Key("colon,q,exclamation,enter"),
-        "save and exit vim":                       srt + Key("colon,w,q,exclamation,enter"),
-    "save file":                           srt + Key("colon,u,p,d,a,t,e,enter") + end,
-    "save as":                                     srt + Key("colon,s,a,v,e,a,s,space") + end,
-        "toggle numbers": srt + Key("colon,s,e,t,space,r,e,l,a,t,i,v,e,n,u,m,b,e,r,exclamation") + Key("enter") + end,
-    "browse (old|recent) files":                   srt + Key("colon,b,r,o,space,o,l") + Key("enter") + end,
-    "set theme ocean":                             srt + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,o,c,e,a,n/50,enter") + end,
-    "set theme one dark":                             srt + Key("colon,c,o,l,o/50,space,o,n,e,d,a,r,k") + Key("enter") + end,
-    "set theme solarized":                         srt + Key("colon/50,c,o,l,o/50,space,s,o,l,a,r,i,z,e,d") + Key("enter") + end,
-    "set theme Seoul":                             srt + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6") + Key("enter") + end,
-    "toggle [the] lights":                         srt + Key("colon/50,T,o,g,g,l,e,B,G")+Key("enter") + end,
-    "toggle spelling":                             srt + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter") + end,
-    "toggle invisible characters":                 srt + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter") + end,
-
-
-    'toggle nerd': srt + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter") + end,
-    'toggle cursor-line': srt + Key("colon/50,s,e,space,c,u,r,s,o,r,l,i,n,e/50,exclamation,enter") + end,
-
-        # "set file format UNIX": Text("set fileformat=unix "),
-        # "set file format DOS": Text("set fileformat=dos "),
-        # "set file type Python": Text("set filetype=python"),
-        # "set file type tex": Text("set filetype=tex"),
-
-        "P. W. D.": Text("pwd "),
-        "help": srt + Text(":h "),
-        "substitute": Text("s/"),
-
+    "edit":                        esc + Key("colon,e,space"),
+    "exit vim":                    esc + Key("colon,q,enter"),
+    "split explorer":              esc + Key("colon,s-S,e,x,enter"),
+    "please exit vim":             esc + Key("colon,q,exclamation,enter"),
+    "save and exit vim":           esc + Key("colon,w,q,exclamation,enter"),
+    "save file":                   esc + Key("colon,u,p,d,a,t,e,enter"),
+    "save as":                     esc + Key("colon,s,a,v,e,a,s,space"),
+    "toggle numbers":              esc + Key("colon,s,e,t,space,r,e,l,a,t,i,v,e,n,u,m,b,e,r,exclamation") + Key("enter"),
+    "browse (old|recent) files":   esc + Key("colon,b,r,o,space,o,l") + Key("enter"),
+    "set theme ocean":             esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,o,c,e,a,n/50,enter"),
+    "set theme one dark":          esc + Key("colon,c,o,l,o/50,space,o,n,e,d,a,r,k") + Key("enter"),
+    "set theme solarized":         esc + Key("colon/50,c,o,l,o/50,space,s,o,l,a,r,i,z,e,d") + Key("enter"),
+    "set theme Seoul":             esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6") + Key("enter"),
+    "toggle [the] lights":         esc + Key("colon/50,T,o,g,g,l,e,B,G")+Key("enter"),
+    "toggle spelling":             esc + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter"),
+    "toggle invisible characters": esc + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter"),
+    "toggle nerd":                 esc + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter"),
+    "toggle cursor-line":          esc + Key("colon/50,s,e,space,c,u,r,s,o,r,l,i,n,e/50,exclamation,enter"),
+    # "P. W. D.":                    Text("pwd "),
+    # "help":                        esc + Text(":h "),
+    "substitute":                  esc + Key("s,slash"),
     }
     extras = [
         Dictation("text"),
