@@ -201,7 +201,6 @@ specialCharKeyMap = {
     "comma": "comma",
     "dollar": "dollar",
     "dot": "dot",
-    "period": "dot,space",
     "[double] quote": "dquote",
     "equal": "equal",
     "bang": "exclamation",
@@ -217,11 +216,60 @@ specialCharKeyMap = {
     "underscore | score": "underscore",
 }
 
+navCharMap = {
+    "colon": "colon",
+    "comma": "comma",
+    "dollar": "dollar",
+    "dot": "dot",
+    "equal": "equal",
+    "percent": "percent",
+    "underscore | score": "underscore",
+    "wren": "rparen",
+    "rack": "rbracket",
+    "quote": "dquote",
+    "single quote": "squote",
+}
+
+operateCharMap = {
+    "parens": "rparen",
+    "word": "w",
+    "scent": "s",
+    "para": "p",
+    "bracks": "rbracket",
+    "braces": "rbrace",
+    "quotes": "dquote",
+    "single quotes": "squote",
+}
+
+# TODO , is not working.
+advCharMap = {
+        "inner": "i",
+        "around": "a",
+}
+
+verbCharMap = {
+        "dell": "d",
+        "yank": "y",
+        "change": "c",
+        "sell": "v",
+}
+
+lineVerbCharMap = {
+        "dine": "d:2",
+        "yank line": "y:2",
+        "chine": "c:2",
+        "vine": "s-V",
+        "diner": "s-D",
+        "viner": "v,dollar",
+        "yanker": "y,dollar",
+        "chiner": "s-C",
+}
+
 pressKeyMap = {}
 pressKeyMap.update(letterMap)
 pressKeyMap.update(numberMap)
 pressKeyMap.update(controlKeyMap)
-# pressKeyMap.update(specialCharKeyMap)
+pressKeyMap.update(specialCharKeyMap)
 
 def handle_word(text):
     words = str(text).split()
@@ -245,13 +293,13 @@ grammarCfg.cmd.map = Item(
     "bar": Key("bar"),
     "caret": Key("caret"),
     "colon": Key("colon"),
-    "comma": Key("comma"),
+    "calm": Key("comma"),
     "dollar": Key("dollar"),
     "dot": Key("dot"),
     "period": Key("dot,space"),
     "[double] quote": Key("dquote"),
-    "equal": Key("equal"),
-    "bang": Key("exclamation"),
+    "equals": Key("equal"),
+    "bang|exclamation [mark]": Key("exclamation"),
     "pound symbol": Key("hash"),
     "hyphen": Key("hyphen"),
     "minus": Key("minus"),
@@ -264,10 +312,10 @@ grammarCfg.cmd.map = Item(
     "underscore | score": Key("underscore"),
 
     # Navigation keys.
-    "up [<n>]": Key("up:%(n)d"),
-    "down [<n>]": Key("down:%(n)d"),
-    "left [<n>]": Key("left:%(n)d"),
-    "right [<n>]": Key("right:%(n)d"),
+    "[<n>] up | up [<n>]": Key("up:%(n)d"),
+    "[<n>] down | down [<n>]": Key("down:%(n)d"),
+    "[<n>] left | left [<n>]": Key("left:%(n)d"),
+    "[<n>] right | right [<n>]": Key("right:%(n)d"),
     "page up [<n>]": Key("pgup:%(n)d"),
     "page down [<n>]": Key("pgdown:%(n)d"),
     "left <n> (word|words)": Key("a-left/3:%(n)d"),
@@ -284,22 +332,22 @@ grammarCfg.cmd.map = Item(
     "(backspace|chuck) [<n>]": Key("backspace:%(n)d"),
     "extract [<n>]": Key("x:%(n)d"),
     "release [all]": release,
-    # "press key <pressKey>": Key("%(pressKey)s"),
+    # "<pressKey>": Key("%(pressKey)s"),
 
     # Shorthand multiple characters.
-    "double <char>": Text("%(char)s%(char)s"),
+    # "double <char>": Text("%(char)s%(char)s"),
     "double escape": Key("escape, escape"), # Exiting menus.
 
     # Punctuation and separation characters, for quick editing.
-    "colon [<n>]": Key("colon/2:%(n)d"),
-    "semi-colon [<n>]": Key("semicolon/2:%(n)d"),
-    "comma [<n>]": Key("comma/2:%(n)d"),
+    # "colon [<n>]": Key("colon/2:%(n)d"),
+    # "semi-colon [<n>]": Key("semicolon/2:%(n)d"),
+    # "comma [<n>]": Key("comma/2:%(n)d"),
     "period": Key("dot, space"), # cannot be followed by a repeat count
     "(dash|hyphen|minus) [<n>]": Key("hyphen/2:%(n)d"),
-    "underscore [<n>]": Key("underscore/2:%(n)d"),
+    # "underscore [<n>]": Key("underscore/2:%(n)d"),
     "press <letters>": Key("%(letters)s"),
     "<letters>": Text("%(letters)s"), # TODO
-    # "<char>": Text("%(char)s"),
+    #"<char>": Text("%(char)s"),
 
     'langle [<n>]': Key('langle:%(n)d'),
     'lace [<n>]': Key('lbrace:%(n)d'),
@@ -313,29 +361,27 @@ grammarCfg.cmd.map = Item(
     'chuck [<n>]': Key('del:%(n)d'),
     'scratch [<n>]': Key('backspace:%(n)d'),
 
-    'yoop [<n>]': Key('pgup:%(n)d'),
-    'drop [<n>]': Key('pgdown:%(n)d'),
+    # 'yoop [<n>]': Key('pgup:%(n)d'),
+    # 'drop [<n>]': Key('pgdown:%(n)d'),
 
     'lope [<n>]': Key('a-left:%(n)d'),
     'rope [<n>]': Key('a-right:%(n)d'),
     'drop [<n>]': Key('a-backspace:%(n)d'),
-
-    'suspend': Key('c-z'),
 
     'word <text>': Function(handle_word),
     # 'num <num>': Text("%(num)d"),
     'change <text> to <text2>': Key("home, slash") + Text("%(text)s") + Key("enter, c, e") + Text("%(text2)s") + Key("escape"),
 
     # Text corrections.
-    "(add|fix) missing space": Key("a-left/3, space, a-right/3"),
-    "(delete|remove) (double|extra) (space|whitespace)": Key("a-left/3, backspace, a-right/3"),
-    "(delete|remove) (double|extra) (type|char|character)": Key("a-left/3, del, a-right/3"),
+    # "(add|fix) missing space": Key("a-left/3, space, a-right/3"),
+    # "(delete|remove) (double|extra) (space|whitespace)": Key("a-left/3, backspace, a-right/3"),
+    # "(delete|remove) (double|extra) (type|char|character)": Key("a-left/3, del, a-right/3"),
     # Microphone sleep/cancel started dictation.
     # "[<text>] (go to sleep|cancel and sleep) [<text2>]": Function(cancel_and_sleep),
 
     "paste": esc + Key("p"),
     "paste up": esc + Key("P"),
-    "yank": esc + Key("y"),
+    "yank": Key("y"),
     "duplicate line [<n>]": esc + Key("y,y,p:%(n)d"),
     "duplicate line up <n>": esc + Key("y,y,P:%(n)d"),
 
@@ -344,19 +390,16 @@ grammarCfg.cmd.map = Item(
     "visual|vis-mode": esc + Key("v"),
     "vis-line|vine|visual line|select line": esc + Key("s-v"),
     "visual block|vis-block": esc + Key("c-v"),
-    "vis-reselect": esc + Key("g,v"),
 
     "next [<n>]": esc + Key("n:%(n)d"),
     "previous | preeve [<n>]": esc + Key("N:%(n)d"),
 
-    "format": esc + Key("g,q"),
-
-    "swan": esc + Key("comma,comma,s"),
-    "swan right": esc + Key("comma,comma,f"), # TODO
-    "swan left": esc + Key("comma,comma,F"),
-    "swan word": esc + Key("comma,comma,w"),
-    "swan word end": esc + Key("comma,comma,e"),
-    "swan (anywhere|anything)": esc + Key("comma,comma,a"),
+    # "swan": esc + Key("comma,comma,s"),
+    # "swan right": esc + Key("comma,comma,f"), # TODO
+    # "swan left": esc + Key("comma,comma,F"),
+    # "swan word": esc + Key("comma,comma,w"),
+    # "swan word end": esc + Key("comma,comma,e"),
+    # "swan (anywhere|anything)": esc + Key("comma,comma,a"),
 
     'matching': esc + Key("percent"),
 
@@ -373,105 +416,36 @@ grammarCfg.cmd.map = Item(
     "redo [<n>]": esc + Key("c-r:%(n)d"),
     "repeat [<n>]": esc + Key("%(n)d, dot"),
 
-# TODO condense:
-#    "delete around word": esc + Key("d,a,w"),
-#    "delete inner word": esc + Key("d,i,w"),
-#    "delete around paragraph": esc + Key("d,a,p"),
-#    "delete inner paragraph": esc + Key("d,i,p"),
-#    "delete around sentence": esc + Key("d,a,s"),
-#    "delete inner sentence": esc + Key("d,i,s"),
-#    "delete around paren": esc + Key("d,a,rparen"),
-#    "delete inner paren": esc + Key("d,i,rparen"),
-#    "delete around bracks": esc + Key("d,a,rbracket"),
-#    "delete inner bracks": esc + Key("d,i,rbracket"),
-#    "delete around braces": esc + Key("d,a,rbrace"),
-#    "delete inner braces": esc + Key("d,i,rbrace"),
-#    "delete around quotes": esc + Key("d,a,s-squote"),
-#    "delete inner quotes": esc + Key("d,i,s-squote"),
-#    "delete around single quotes": esc + Key("d,a,squote"),
-#    "delete inner single quotes": esc + Key("d,i,squote"),
-#
-#    "change around word": esc + Key("c,a,w"),
-#    "change inner word": esc + Key("c,i,w"),
-#    "change around paragraph": esc + Key("c,a,p"),
-#    "change inner paragraph": esc + Key("c,i,p"),
-#    "change around sentence": esc + Key("c,a,s"),
-#    "change inner sentence": esc + Key("c,i,s"),
-#    "change around parens": esc + Key("c,a,rparen"),
-#    "change inner parens": esc + Key("c,i,rparen"),
-#    "change around bracks": esc + Key("c,a,rbracket"),
-#    "change inner bracks": esc + Key("c,i,rbracket"),
-#    "change around braces": esc + Key("c,a,rbrace"),
-#    "change inner braces": esc + Key("c,i,rbrace"),
-#    "change around quotes": esc + Key("c,a,dquote"),
-#    "change inner quotes": esc + Key("c,i,dquote"),
-#    "change around single quotes": esc + Key("c,a,squote"),
-#    "change inner single quotes": esc + Key("c,i,squote"),
-#
-#    "yank around word": esc + Key("y,a,w"),
-#    "yank inner word": esc + Key("y,i,w"),
-#    "yank around paragraph": esc + Key("y,a,p"),
-#    "yank inner paragraph": esc + Key("y,i,p"),
-#    "yank around sentence": esc + Key("y,a,s"),
-#    "yank inner sentence": esc + Key("y,i,s"),
-#    "yank around parens": esc + Key("y,a,rparen"),
-#    "yank inner parens": esc + Key("y,i,rparen"),
-#    "yank around bracks": esc + Key("y,a,rbracket"),
-#    "yank inner bracks": esc + Key("y,i,rbracket"),
-#    "yank around braces": esc + Key("y,a,rbrace"),
-#    "yank inner braces": esc + Key("y,i,rbrace"),
-#    "yank around quotes": esc + Key("y,a,dquote"),
-#    "yank inner quotes": esc + Key("y,i,dquote"),
-#    "yank around single quotes": esc + Key("y,a,squote"),
-#    "yank inner single quotes": esc + Key("y,i,squote"),
-
-    "dine": esc + Key("d:2"),
-    "kine": esc + Key("s-D"),
-    "dine <line1>": esc + Key("escape") + Function(goto_line) + Key("d:2"),
-    "dine <line1> through <line2>": esc + Key("escape") + Function(delete_lines),
-    "yine": esc + Key("escape, y:2"),
-    "yine <line1>": esc + Key("escape") + Function(goto_line) + Key("y:2"),
-    "yine <line1> through <line2>": esc + Key("escape") + Function(yank_lines),
-    "chine|chime": esc + Key("c:2"),
-
-    'clay': Key("escape,c,i,dquote"), # TODO was dqoute; file pull request
-    'yip': Key("escape,right,y,i,lparen"),
-    'yib': Key("escape,right,y,i,lbrace"),
+    # Magic:
+    "<verbKey> <advKey> <opKey>": esc + Key("%(verbKey)s") + Key("%(advKey)s") + Key("%(opKey)s"),
+    "<lineVerbKey>": esc + Key("%(lineVerbKey)s"),
 
 ## TODO move out or abbreviate
-    # 'select until <pressKey>': Key("escape, v, t") + Key("%(pressKey)s"),
-    # 'select include <pressKey>': Key("escape, v, f") + Key("%(pressKey)s"),
-    # 'dell until <pressKey>': Key("escape, d, t") + Key("%(pressKey)s"),
-    # 'dell include <pressKey>': Key("escape, d, f") + Key("%(pressKey)s"),
-    # 'change until <pressKey>': Key("escape, c, t") + Key("%(pressKey)s"),
-    # 'change include <pressKey>': Key("escape, c, f") + Key("%(pressKey)s"),
+    'sell to <navKey>': Key("escape, v, t") + Key("%(navKey)s"),
+    # 'sell clude <navKey>': Key("escape, v, f") + Key("%(navKey)s"),
+    'dell to <navKey>': Key("escape, d, t") + Key("%(navKey)s"),
+    # 'dell clude <navKey>': Key("escape, d, f") + Key("%(navKey)s"),
+    'change to <navKey>': Key("escape, c, t") + Key("%(navKey)s"),
+    # 'change clude <navKey>': Key("escape, c, f") + Key("%(navKey)s"),
+    'to <navKey>': Key("escape, f") + Key("%(navKey)s"),
+    # 'clude <navKey>': Key("escape, f") + Key("%(navKey)s"),
 
     "indent": esc + Key("rangle,rangle"),
     "out-dent": esc + Key("langle,langle"),
     "join [<n>]": esc + Key("J:%(n)d"),
 
-### splits:
-    "split (screen|window)": esc + Key("c-w,s"),
-    "split (screen|window) vertically": esc + Key("c-w,v"),
-    "(screen|window) left": esc + Key("c-w,h"),
-    "(screen|window) right": esc + Key("c-w,l"),
-    "(screen|window) up": esc + Key("c-w,k"),
-    "(screen|window) down": esc + Key("c-w,j"),
-    "close [this] (split|screen)": esc + Key("c-w,c"),
-    "close other splits": esc + Key("colon/100,o,n,l,y/100,enter"),
-
-    "go to <line1>": esc + Function(goto_line),
+    "go to [line] <line1>": esc + Function(goto_line),
     "(viz|vis) go to [line] <line1>": Function(goto_line),
 
     "(type|insert)": Key("i"),
-    "(big insert)": esc + Key("I"),
+    "big insert": esc + Key("s-i"),
     "(append)": Key("a"),
-    "(big append)": esc + Key("A"),
+    "big append": esc + Key("s-a"),
     "(out|escape)": Key("escape"),
     "open": esc + Key("o"),
-    "open up": esc + Key("O"),
+    "big open": esc + Key("s-o"),
     "paste": esc + Key("p"),
-    "paste-up": esc + Key("P"),
+    "big paste": esc + Key("s-p"),
 
     "find <text>": esc + Key("slash") + Text("%(text)s"),
     "find back <text>": esc + Key("question") + Text("%(text)s"),
@@ -502,20 +476,7 @@ grammarCfg.cmd.map = Item(
     "pleat line": Key("c-x,c-l"),
     "pleat omni": Key("c-x,c-o"),
     # "choose": Key("c-c,a"), # TODO ??
-    "magic star": esc + Key("asterisk"),
-    "magic pound": esc + Key("hash"),
 
-    "comment": esc + Key("g,c,c"),
-    "comment paragraph": esc + Key("g,c,a,p"),
-    "comment <line1> through <line2>": esc + Key("colon,%(line1)d") + Text(",") + Key("%(line2)d") + Text("Commentary"),
-
-    "scroll down [<n>]": esc + Key("c-d:%(n)d") ,
-    "scroll up [<n>]": esc + Key("c-d:%(n)d") ,
-    "scroll up": esc + Key("c-u"),
-
-    "record macro": Key("q,q"),
-    "end macro": Key("q"),
-    "repeat macro [<n>]": Key("%(n)d,at,q"),
     },
     namespace={
         "Key": Key,
@@ -523,14 +484,16 @@ grammarCfg.cmd.map = Item(
     }
 )
 
+# This is a sentence.
+
 class KeystrokeRule(MappingRule):
     exported = False
     mapping = grammarCfg.cmd.map
     extras = [
         IntegerRef("n", 1, 20),
         # IntegerRef("num", 0, 2000),
-        IntegerRef("line1", 1, 500),
-        IntegerRef("line2", 1, 500),
+        IntegerRef("line1", 1, 700),
+        IntegerRef("line2", 1, 700),
         Dictation("text"),
         Dictation("text2"),
         Choice("char", specialCharMap),
@@ -539,6 +502,11 @@ class KeystrokeRule(MappingRule):
         # Choice("modifier2", modifierMap),
         # Choice("modifierSingle", singleModifierMap),
         # Choice("pressKey", pressKeyMap),
+        Choice("navKey", navCharMap),
+        Choice("opKey", operateCharMap),
+        Choice("advKey", advCharMap),
+        Choice("verbKey", verbCharMap),
+        Choice("lineVerbKey", lineVerbCharMap),
     ]
     defaults = {
         "n": 1,

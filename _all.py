@@ -3,18 +3,18 @@
 from natlink import setMicState
 from aenea import *
 
-import keyboard
+import vim
 import words
-import programs
+# import programs
 
 release = Key("shift:up, ctrl:up, alt:up")
 
 alternatives = []
-alternatives.append(RuleRef(rule=keyboard.KeystrokeRule()))
+alternatives.append(RuleRef(rule=vim.KeystrokeRule()))
 alternatives.append(RuleRef(rule=words.FormatRule()))
 alternatives.append(RuleRef(rule=words.ReFormatRule()))
 alternatives.append(RuleRef(rule=words.NopeFormatRule()))
-alternatives.append(RuleRef(rule=programs.ProgramsRule()))
+# alternatives.append(RuleRef(rule=programs.ProgramsRule()))
 root_action = Alternative(alternatives)
 
 sequence = Repetition(root_action, min=1, max=10, name="sequence")
@@ -38,10 +38,10 @@ class RepeatRule(CompoundRule):
                 action.execute()
             #release.execute()
 
-grammar = Grammar("root rule")
-grammar.add_rule(RepeatRule())  # Add the top-level rule.
-grammar.load()  # Load the grammar.
-
+vim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") | aenea.ProxyCustomAppContext(match="substring", titl="Vim")
+vim_grammar = Grammar("root rule",context=vim_context)
+vim_grammar.add_rule(RepeatRule())  # Add the top-level rule.
+vim_grammar.load()  # Load the grammar.
 
 #################################
 
@@ -63,7 +63,7 @@ class ExModeCommands(MappingRule):
     "set theme one dark": esc + Key("colon,c,o,l,o/50,space,o,n,e,d,a,r,k") + Key("enter"),
     "set theme solarized": esc + Key("colon/50,c,o,l,o/50,space,s,o,l,a,r,i,z,e,d") + Key("enter"),
     "set theme Seoul": esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6") + Key("enter"),
-    "toggle [the] lights": esc + Key("colon/50,T,o,g,g,l,e,B,G")+Key("enter"),
+    "toggle lights": esc + Key("colon/50,s-T,o,g,g,l,e,s-B,s-G") + Key("enter"),
     "toggle spelling": esc + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter"),
     "toggle invisible characters": esc + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter"),
     "toggle nerd": esc + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter"),
@@ -84,6 +84,35 @@ class ExModeCommands(MappingRule):
     'screen bottom': esc + Key("z, b"),
     "switch": esc + Key("escape, c-p"),
     "switch recent": esc + Key("escape,colon,s-C,t,r,l,s-P,s-M,s-R,s-U,enter"),
+
+
+    'suspend': Key('c-z'),
+    "format": esc + Key("g,q"),
+
+### splits:
+    "split (screen|window)": esc + Key("c-w,s"),
+    "split (screen|window) vertically": esc + Key("c-w,v"),
+    "(screen|window) left": esc + Key("c-w,h"),
+    "(screen|window) right": esc + Key("c-w,l"),
+    "(screen|window) up": esc + Key("c-w,k"),
+    "(screen|window) down": esc + Key("c-w,j"),
+    "(split|screen|window) close": esc + Key("c-w,c"),
+    "close other splits": esc + Key("colon/100,o,n,l,y/100,enter"),
+
+    "comment": esc + Key("g,c,c"),
+    "comment paragraph": esc + Key("g,c,a,p"),
+    "comment <line1> through <line2>": esc + Key("colon,%(line1)d") + Text(",") + Key("%(line2)d") + Text("Commentary"),
+
+    "scroll down [<n>]": esc + Key("c-d:%(n)d") ,
+    "scroll up [<n>]": esc + Key("c-d:%(n)d") ,
+    "scroll up": esc + Key("c-u"),
+
+    "record macro": Key("q,q"),
+    "end macro": Key("q"),
+    "repeat macro [<n>]": Key("%(n)d,at,q"),
+    "magic star": esc + Key("asterisk"),
+    "magic pound": esc + Key("hash"),
+
     }
     extras = [
         Dictation("text"),
@@ -95,18 +124,18 @@ class ExModeCommands(MappingRule):
         "n": 1,
     }
 
-ExModeGrammar = Grammar("ExMode grammar")
-ExModeGrammar.add_rule(ExModeCommands())
-ExModeGrammar.load()
+exmode_grammar = Grammar("ExMode grammar",context=vim_context)
+exmode_grammar.add_rule(ExModeCommands())
+exmode_grammar.load()
 
 def unload():
     """Unload function which will be called at unload time."""
-    global grammar
-    if grammar:
-        grammar.unload()
-    grammar = None
+    global vim_grammar
+    if vim_grammar:
+        vim_grammar.unload()
+    vim_grammar = None
 
-    global ExModeGrammar
-    if ExModeGrammar:
-        ExModeGrammar.unload()
-    ExModeGrammar = None
+    global exmode_grammar
+    if exmode_grammar:
+        exmode_grammar.unload()
+    exmode_grammar = None
