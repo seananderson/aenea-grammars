@@ -52,7 +52,8 @@ class ExModeCommands(MappingRule):
     "exit vim": esc + Key("colon,q,enter"),
     "split explorer": esc + Key("colon,s-S,e,x,enter"),
     "please exit vim": esc + Key("colon,q,exclamation,enter"),
-    "save and exit vim": esc + Key("colon,w,q,exclamation,enter"),
+    "save and exit please": esc + Key("colon,w,q,exclamation,enter"),
+    "save and exit": esc + Key("colon,w,q,enter"),
     "save file": esc + Key("colon,u,p,d,a,t,e,enter"),
     "save as": esc + Key("colon,s,a,v,e,a,s,space"),
     "toggle numbers": esc + Key("colon,s,e,t,space,r,e,l,a,t,i,v,e,n,u,m,b,e,r,exclamation") + Key("enter"),
@@ -83,7 +84,6 @@ class ExModeCommands(MappingRule):
     "switch": esc + Key("escape, c-p"),
     "switch recent": esc + Key("escape,colon,s-C,t,r,l,s-P,s-M,s-R,s-U,enter"),
 
-
     'suspend': Key('c-z'),
     "format": esc + Key("g,q"),
     "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
@@ -102,9 +102,8 @@ class ExModeCommands(MappingRule):
     "comment paragraph": esc + Key("g,c,a,p"),
     "comment <line1> through <line2>": esc + Key("colon,%(line1)d") + Text(",") + Key("%(line2)d") + Text("Commentary"),
 
-    "scroll down [<n>]": esc + Key("c-d:%(n)d") ,
-    "scroll up [<n>]": esc + Key("c-d:%(n)d") ,
-    "scroll up": esc + Key("c-u"),
+    "scroll-down [<n>]": esc + Key("c-d:%(n)d") ,
+    "scroll-up [<n>]": esc + Key("c-u:%(n)d") ,
 
     "record macro": Key("q,q"),
     "end macro": Key("q"),
@@ -114,7 +113,7 @@ class ExModeCommands(MappingRule):
 
     "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
     "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
-    "fugitive commit": esc + Key("colon,s-G,c,o,m,m,i,t,enter"),
+    "fugitive commit": esc + Key("colon,s-G,c,o,m,m,i,t,enter,i"),
     "fugitive add": esc + Key("colon,s-G,w,r,i,t,e,enter"),
     "fugitive blame": esc + Key("colon,s-G,b,l,a,m,e,enter"),
     "fugitive remove": esc + Key("colon,s-G,r,e,m,o,v,e,enter"),
@@ -123,6 +122,7 @@ class ExModeCommands(MappingRule):
     "fugitive move": esc + Key("colon,s-G,m,o,v,e,space"),
     "fugitive log": esc + Key("colon,s-G,l,o,g,enter"),
     "fugitive commit all": esc + Key("colon,s-G,i,t,space,c,o,m,m,i,t,space,hyphen,a,v,enter"),
+    "app switcher": Key("w-space/50,w-r"),# TODO move this to a module that is always loaded
     }
     extras = [
         Dictation("text"),

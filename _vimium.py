@@ -13,6 +13,7 @@ import aenea.configuration
 from aenea.lax import Key, Text, Dictation
 import dragonfly
 from aenea import *
+import words
 
 chrome_context = aenea.ProxyCustomAppContext(id="Google Chrome")
 chrome_grammar = dragonfly.Grammar('chrome', context=chrome_context)
@@ -47,14 +48,78 @@ letterMap = {
     "(zulu|zooch) ": "z",
 }
 
+numberMap = {
+    "zero": "0",
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
+    }
+
+controlKeyMap = {
+    "left": "left",
+    "right": "right",
+    "up": "up",
+    "down": "down",
+    "page up": "pgup",
+    "page down": "pgdown",
+    "home": "home",
+    "end": "end",
+    "space": "space",
+    "(enter|return)": "enter",
+    "escape": "escape",
+    "tab": "tab",
+    "backspace": "backspace"
+}
+
+
+specialCharKeyMap = {
+    "ampersand": "ampersand",
+    "apostrophe": "apostrophe",
+    "asterisk": "asterisk",
+    "at symbol": "at",
+    "backslash": "backslash",
+    "backtick": "backtick",
+    "bar": "bar",
+    "caret": "caret",
+    "colon": "colon",
+    "comma": "comma",
+    "dollar": "dollar",
+    "dot": "dot",
+    "[double] quote": "dquote",
+    "equal": "equal",
+    "bang": "exclamation",
+    "pound symbol": "hash",
+    "hyphen": "hyphen",
+    "minus": "minus",
+    "percent": "percent",
+    "plus": "plus",
+    "question": "question",
+    "slash": "slash",
+    "single quote": "squote",
+    "tilde": "tilde",
+    "underscore | score": "underscore",
+}
+
+pressKeyMap = {}
+pressKeyMap.update(letterMap)
+pressKeyMap.update(numberMap)
+pressKeyMap.update(controlKeyMap)
+pressKeyMap.update(specialCharKeyMap)
+
 window_mapping = {
     # Tab navigation
-    '(previous|left) tab': Key("cs-tab"),
-    '(next|right) tab': Key("c-tab"),
-    'new tab': Key("w-t"),
-    'reopen tab': Key("ws-t"),
-    'close tab': Key("w-w"),
-    'close window': Key("ws-w"),
+    '(previous|left) window': Key("cs-tab"),
+    '(next|right) window': Key("c-tab"),
+    'new window': Key("w-t"),
+    'reopen window': Key("ws-t"),
+    'close window': Key("w-w"),
+    'close all window': Key("ws-w"),
     'go back': Key("w-lbracket"),
     'go forward': Key("w-rbracket"),
     'go to': Key("w-l"),
@@ -100,8 +165,8 @@ class Mapping(dragonfly.MappingRule):
     extras = [
         IntegerRef('n', 1, 99),
         Dictation('text'),
-        Choice('letters1', letterMap),
-        Choice('letters2', letterMap),
+        Choice('letters1', pressKeyMap),
+        Choice('letters2', pressKeyMap),
     ]
 
 class MappingMail(dragonfly.MappingRule):
@@ -113,6 +178,9 @@ class MappingMail(dragonfly.MappingRule):
 alternatives = []
 alternatives.append(RuleRef(rule=Mapping()))
 alternatives.append(RuleRef(rule=MappingMail()))
+alternatives.append(RuleRef(rule=words.FormatRule()))
+alternatives.append(RuleRef(rule=words.ReFormatRule()))
+alternatives.append(RuleRef(rule=words.NopeFormatRule()))
 root_action = Alternative(alternatives)
 sequence = Repetition(root_action, min=1, max=10, name="sequence")
 

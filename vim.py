@@ -1,3 +1,4 @@
+# TODO fix the consistency of split , screen,window
 # Low-level keyboard input module
 #
 # Based on the work done by the creators of the Dictation Toolbox
@@ -432,7 +433,7 @@ grammarCfg.cmd.map = Item(
 
     "indent": esc + Key("rangle,rangle"),
     "out-dent": esc + Key("langle,langle"),
-    "join [<n>]": esc + Key("J:%(n)d"),
+    "join [<n>]": esc + Key("s-J:%(n)d"),
 
     "go to [line] <line1>": esc + Function(goto_line),
     "(viz|vis) go to [line] <line1>": Function(goto_line),
