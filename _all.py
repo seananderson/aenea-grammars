@@ -1,5 +1,3 @@
-# _all.py: main rule for DWK's grammar
-
 from natlink import setMicState
 from aenea import *
 
@@ -79,7 +77,7 @@ class ExModeCommands(MappingRule):
     'buff-next': esc + Key('colon,b,n,enter'),
     'buff-previous': esc + Key('colon,b,p,enter'),
     'buff-list': esc + Key('colon,l,s,enter'),
-    'screen center': esc + Key("z, dot"),
+    'screen (center|middle)': esc + Key("z, dot"),
     'screen top': esc + Key("z, t"),
     'screen bottom': esc + Key("z, b"),
     "switch": esc + Key("escape, c-p"),
@@ -88,6 +86,7 @@ class ExModeCommands(MappingRule):
 
     'suspend': Key('c-z'),
     "format": esc + Key("g,q"),
+    "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
 
 ### splits:
     "split (screen|window)": esc + Key("c-w,s"),
@@ -113,6 +112,17 @@ class ExModeCommands(MappingRule):
     "magic star": esc + Key("asterisk"),
     "magic pound": esc + Key("hash"),
 
+    "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
+    "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
+    "fugitive commit": esc + Key("colon,s-G,c,o,m,m,i,t,enter"),
+    "fugitive add": esc + Key("colon,s-G,w,r,i,t,e,enter"),
+    "fugitive blame": esc + Key("colon,s-G,b,l,a,m,e,enter"),
+    "fugitive remove": esc + Key("colon,s-G,r,e,m,o,v,e,enter"),
+    "fugitive grep": esc + Key("colon,s-G,g,r,e,p,space"),
+    "fugitive browse": esc + Key("colon,s-G,b,r,o,w,s,e,enter"),
+    "fugitive move": esc + Key("colon,s-G,m,o,v,e,space"),
+    "fugitive log": esc + Key("colon,s-G,l,o,g,enter"),
+    "fugitive commit all": esc + Key("colon,s-G,i,t,space,c,o,m,m,i,t,space,hyphen,a,v,enter"),
     }
     extras = [
         Dictation("text"),

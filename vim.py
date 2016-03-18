@@ -358,8 +358,8 @@ grammarCfg.cmd.map = Item(
     'rack [<n>]': Key('rbracket:%(n)d'),
     '(ren|wren) [<n>]': Key('rparen:%(n)d'),
 
-    'chuck [<n>]': Key('del:%(n)d'),
-    'scratch [<n>]': Key('backspace:%(n)d'),
+    # 'chuck [<n>]': Key('del:%(n)d'),
+    # 'scratch [<n>]': Key('backspace:%(n)d'),
 
     # 'yoop [<n>]': Key('pgup:%(n)d'),
     # 'drop [<n>]': Key('pgdown:%(n)d'),
@@ -421,13 +421,13 @@ grammarCfg.cmd.map = Item(
     "<lineVerbKey>": esc + Key("%(lineVerbKey)s"),
 
 ## TODO move out or abbreviate
-    'sell to <navKey>': Key("escape, v, t") + Key("%(navKey)s"),
+    'sell till <navKey>': Key("escape, v, t") + Key("%(navKey)s"),
     # 'sell clude <navKey>': Key("escape, v, f") + Key("%(navKey)s"),
-    'dell to <navKey>': Key("escape, d, t") + Key("%(navKey)s"),
+    'dell till <navKey>': Key("escape, d, t") + Key("%(navKey)s"),
     # 'dell clude <navKey>': Key("escape, d, f") + Key("%(navKey)s"),
-    'change to <navKey>': Key("escape, c, t") + Key("%(navKey)s"),
+    'change till <navKey>': Key("escape, c, t") + Key("%(navKey)s"),
     # 'change clude <navKey>': Key("escape, c, f") + Key("%(navKey)s"),
-    'to <navKey>': Key("escape, f") + Key("%(navKey)s"),
+    'till <navKey>': Key("escape, f") + Key("%(navKey)s"),
     # 'clude <navKey>': Key("escape, f") + Key("%(navKey)s"),
 
     "indent": esc + Key("rangle,rangle"),
