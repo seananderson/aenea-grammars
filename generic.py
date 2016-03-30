@@ -1,6 +1,7 @@
 from aenea import (
     Key,
     Text,
+    Mouse,
 )
 
 letterMap = {
@@ -73,8 +74,8 @@ specialCharMap = {
     # "colon": ":",
     # "(semicolon|semi-colon)": ";",
     # "at symbol": "@",
-    # "[double] quote": '"',
-    # "single quote": "'",
+    # "[double] quote": """,
+    # "single quote": """,
     # "pound|hash": "#",
     # "dollar": "$",
     # "percent": "%",
@@ -159,9 +160,9 @@ genericKeys = {
     "kill [<n>]": Key("del:%(n)d"),
     "kill to end": Key("c-k"),
     "cut line": Key("c-a, sw-right, w-x, w-right, del"),
-    "copy line": Key("c-a, sw-right, w-c, w-right"),
+    "copy line": Key("w-left, sw-right, w-c, w-right"),
 
-    "del [<n>]": Key("backspace:%(n)d"),
+    "(del|chuck) [<n>]": Key("backspace:%(n)d"),
     "space [<n>]": Key("space:%(n)d"),
     "copy [that]": Key("w-c"),
     "cut [that]": Key("w-x"),
@@ -180,7 +181,7 @@ genericKeys = {
     "bar": Key("bar"),
     "caret": Key("caret"),
     "colon": Key("colon"),
-    "comma": Key("comma,space"),
+    "calm|com": Key("comma,space"),
     "dollar": Key("dollar"),
     "dot": Key("dot"),
     "period": Key("dot,space"),
@@ -208,27 +209,36 @@ genericKeys = {
     "[<n>] right": Key("right:%(n)d"),
     "page up [<n>]": Key("pgup:%(n)d"),
     "page down [<n>]": Key("pgdown:%(n)d"),
+
     "bit [<n>]": Key("a-left:%(n)d"),
     "fit [<n>]": Key("a-right:%(n)d"),
     "de-bit [<n>]": Key("sa-left:%(n)d") + Key("del"),
     "de-fit [<n>]": Key("sa-right:%(n)d") + Key("del"),
+
     "home": Key("w-left"),
     "end": Key("w-right"),
     "to top": Key("w-up"),
     "to bottom": Key("w-down"),
-    'langle [<n>]': Key('langle:%(n)d'),
-    'lace [<n>]': Key('lbrace:%(n)d'),
-    'lack [<n>]': Key('lbracket:%(n)d'),
-    'len|lape [<n>]': Key('lparen:%(n)d'),
-    'rangle [<n>]': Key('rangle:%(n)d'),
-    'race [<n>]': Key('rbrace:%(n)d'),
-    'rack [<n>]': Key('rbracket:%(n)d'),
-    '(ren|wren) [<n>]': Key('rparen:%(n)d'),
+
+    "langle [<n>]": Key("langle:%(n)d"),
+    "lace [<n>]": Key("lbrace:%(n)d"),
+    "lack [<n>]": Key("lbracket:%(n)d"),
+    "len|lape [<n>]": Key("lparen:%(n)d"),
+    "rangle [<n>]": Key("rangle:%(n)d"),
+    "race [<n>]": Key("rbrace:%(n)d"),
+    "rack [<n>]": Key("rbracket:%(n)d"),
+    "(ren|wren) [<n>]": Key("rparen:%(n)d"),
 
     "<modifier1> <pressKey> [<n>]":
       Key("%(modifier1)s-%(pressKey)s:%(n)d"),
     "<modifier1> <modifier2> <pressKey> [<n>]":
       Key("%(modifier1)s%(modifier2)s-%(pressKey)s:%(n)d"),
 
-    "duplicate": Key("c-a, ws-right, w-c, w-right, enter, w-v"),
+    "tick": Mouse("left"),
+    "dub": Mouse("left:2"),
+    "right tick": Mouse("right"),
+
+    "dupe line": Key("w-left, ws-right, w-c, w-right, enter, w-v"),
+    "sell line": Key("w-left, ws-right"),
+
 }

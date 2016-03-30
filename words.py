@@ -39,7 +39,6 @@ from aenea import (
     Text
 )
 
-
 lastFormatRuleLength = 0
 lastFormatRuleWords = []
 class NopeFormatRule(CompoundRule):
