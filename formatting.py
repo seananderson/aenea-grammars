@@ -64,6 +64,8 @@ def format_dashword(text):
 def format_say(text):
     x = ' '.join(text)
     x = re.sub(r' \.', r'. ', x)
+    x = re.sub(r' \?', r'? ', x)
+    x = re.sub(r' \,', r', ', x)
     return re.sub(r'  ', r' ', x)
 
 
@@ -74,7 +76,9 @@ def format_broodingnarrative(text):
 def format_cap(text):
     x = ' '.join([text[0].capitalize()] + text[1:])
     x = re.sub(r' \.', r'. ', x)
+    x = re.sub(r' \?', r'? ', x)
+    x = re.sub(r' \,', r', ', x)
     return re.sub(r'  ', r' ', x)
-    
+
 def format_titlecase(text):
     return ' '.join(word.capitalize() for word in text)
