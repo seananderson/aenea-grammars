@@ -1,4 +1,4 @@
-# Commands for interatcting with MailMate
+# Commands for interatcting with MS Word
 
 import aenea
 import aenea.configuration
@@ -14,14 +14,14 @@ msw_mapping = {
     "toggle track changes": Key("ws-e"),
 }
 
-class MappingMM(dragonfly.MappingRule):
+class MappingMSW(dragonfly.MappingRule):
     mapping = msw_mapping
     extras = [
         IntegerRef("n", 1, 10),
     ]
 
 alternatives = []
-alternatives.append(RuleRef(rule=MappingMM()))
+alternatives.append(RuleRef(rule=MappingMSW()))
 root_action = Alternative(alternatives)
 
 sequence = Repetition(root_action, min=1, max=3, name="sequence")

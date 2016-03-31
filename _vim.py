@@ -42,9 +42,13 @@ navCharMap = {
     "dot": "dot",
     "equal": "equal",
     "percent": "percent",
-    "underscore | score": "underscore",
-    "wren": "rparen",
+    "underscore": "underscore",
+    "ripe": "rparen",
+    "lipe": "lparen",
+    "langle": "langle",
+    "rangle": "rangle",
     "rack": "rbracket",
+    "lack": "lbracket",
     "quote": "dquote",
     "single quote": "squote",
 }
@@ -86,9 +90,9 @@ lineVerbCharMap = {
 
 vimEditing = {
 
-    "homer": Key("0"),
-    "home": esc + Key("caret"),
-    "end": esc + Key("dollar"),
+    "husher": Key("0"),
+    "hush": esc + Key("caret"),
+    "pup": esc + Key("dollar"),
     "go to top": esc + Key("g,g"),
     "go to bottom": esc + Key("s-G"),
     "extract [<n>]": Key("x:%(n)d"),
@@ -117,14 +121,16 @@ vimEditing = {
 
     'matching': esc + Key("percent"),
 
-    "word [<n>]": esc + Key("%(n)d, w"),
-    "word end [<n>]": esc + Key("%(n)d, e"),
+    "nerd [<n>]": esc + Key("%(n)d, w"),
+    "ned [<n>]": esc + Key("%(n)d, e"),
     "bird [<n>]": esc + Key("%(n)d, b"),
-    "bird end [<n>]": esc + Key("%(n)d, g, e"),
+    "bed [<n>]": esc + Key("%(n)d, g, e"),
     "next para [<n>]": esc + Key("%(n)d, rbrace"),
     "preev para [<n>]": esc + Key("%(n)d, lbrace"),
     "next scent [<n>]": esc + Key("%(n)d, rparen"),
     "preev scent [<n>]": esc + Key("%(n)d, lparen"),
+    "next sec [<n>]": esc + Key("%(n)d, rbracket, rbracket"),
+    "preev sec [<n>]": esc + Key("%(n)d, lbracket, lbracket"),
 
     "undo [<n>]": esc + Key("u:%(n)d"),
     "redo [<n>]": esc + Key("c-r:%(n)d"),
@@ -136,7 +142,13 @@ vimEditing = {
     # 'dell clude <navKey>': Key("escape, d, f") + Key("%(navKey)s"),
     'change till <navKey>': Key("escape, c, t") + Key("%(navKey)s"),
     # 'change clude <navKey>': Key("escape, c, f") + Key("%(navKey)s"),
-    'jump till <navKey>': Key("escape, f") + Key("%(navKey)s"),
+    'jump till <navKey> [<n>]': Key("escape, %(n)d, f") + Key("%(navKey)s"),
+    'jump bill <navKey> [<n>]': Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
+    'jump (bill|till) again [<n>]': Key("escape, %(n)d, s-K"),
+     # nnoremap K ;
+    'reverse (bill|till) [<n>]': Key("escape, %(n)d, f6"),
+     # nnoremap <F6> ,
+
     'naper': Key("escape, f, rparen"),
     'paper': Key("escape, s-F, lparen"),
     'nacker': Key("escape, f, rbracket"),
@@ -158,6 +170,8 @@ vimEditing = {
 
 
     "find": esc + Key("slash"),
+    "find and replace": esc + Key("colon, percent, s, slash, slash, g, left, left"),
+    "vis find and replace": Key("colon, s, slash, slash, g, left, left"),
     "find back": esc + Key("question"),
     "find now <text>": esc + Key("slash") + Text("%(text)s"),
     "find back now <text>": esc + Key("question") + Text("%(text)s"),
@@ -178,23 +192,49 @@ vimEditing = {
     "jump back [<n>]": esc + Key("c-o:%(n)d"),
     "last edit [<n>]": esc + Key("%(n)d,g,semicolon"),
 
-    "pleat [preev] [<n>]": Key("c-p:%(n)d"),
-    "pleat again": Key("c-x,c-p"),
-    "pleat next [<n>]": Key("c-n:%(n)d"),
-    "pleat next again": Key("c-x,c-n"),
-    "pleat file": Key("c-x,c-f"),
-    "pleat line": Key("c-x,c-l"),
-    "pleat omni": Key("c-x,c-o"),
-    "pleat arg": Key("c-x,c-a"),
-    "pleat-high [<n>]": Key("c-p:%(n)d"),
-    "pleat-low [<n>]": Key("c-n:%(n)d"),
-    # "choose": Key("c-c,a"), # TODO ??
+    "pop [<n>]": Key("c-p:%(n)d"),
+    "pop again": Key("c-x,c-p"),
+    "pip [<n>]": Key("c-n:%(n)d"),
+    "pip again": Key("c-x,c-n"),
+    "(pip|pop) file": Key("c-x,c-f"),
+    "(pip|pop) line": Key("c-x,c-l"),
+    "(pip|pop) omni": Key("c-x,c-o"),
+    "(pip|pop) arg": Key("c-x,c-a"),
+    "(pip|pop) cancel": Key("c-e"),
     "snip": Key("c-b"),
+
+    "format": esc + Key("g,q"),
+    "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
+
+    "comment": esc + Key("g,c"),
+    "comment line": esc + Key("g,c,c"),
+    "comment paragraph": esc + Key("g,c,a,p"),
+    # "comment <line1> through <line2>": esc + Key("colon,%(line1)d") + Text(",") + Key("%(line2)d") + Text("Commentary"),
+
+    "(mort|scroll-down) [<n>]": esc + Key("c-d:%(n)d") ,
+    "(lest|scroll-up) [<n>]": esc + Key("c-u:%(n)d") ,
+
+    "record macro": Key("q,q"),
+    "end macro": Key("q"),
+    "repeat macro [<n>]": Key("%(n)d,at,q"),
+    "(maru|magic star) [<n>]": esc + Key("%(n)d, asterisk"),
+    "(paru|magic pound) [<n>]": esc + Key("%(n)d, hash"),
+}
+
+class vimCommands(MappingRule):
+    mapping  = {
+### splits:
+    "split (screen|window)": esc + Key("c-w,s"),
+    "split (screen|window) vertically": esc + Key("c-w,v"),
+    "(screen|window) left": esc + Key("c-w,h"),
+    "(screen|window) right": esc + Key("c-w,l"),
+    "(screen|window) up": esc + Key("c-w,k"),
+    "(screen|window) down": esc + Key("c-w,j"),
+    "(split|screen|window) close": esc + Key("c-w,c"),
+    "close other splits": esc + Key("colon/100,o,n,l,y/100,enter"),
 
     "edit file": esc + Key("colon,e,space,tab"),
     "buff-switch": esc + Key("colon,b,space,tab"),
-
-
     'buff-delete': esc + Key('colon,b,d,enter'),
     'buff-next': esc + Key('colon,b,n,enter'),
     'buff-previous': esc + Key('colon,b,p,enter'),
@@ -206,36 +246,6 @@ vimEditing = {
     "swiddle recent": esc + Key("escape,colon,s-C,t,r,l,s-P,s-M,s-R,s-U,enter"),
 
     'suspend': Key('c-z'),
-    "format": esc + Key("g,q"),
-    "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
-
-### splits:
-    "split (screen|window)": esc + Key("c-w,s"),
-    "split (screen|window) vertically": esc + Key("c-w,v"),
-    "(screen|window) left": esc + Key("c-w,h"),
-    "(screen|window) right": esc + Key("c-w,l"),
-    "(screen|window) up": esc + Key("c-w,k"),
-    "(screen|window) down": esc + Key("c-w,j"),
-    "(split|screen|window) close": esc + Key("c-w,c"),
-    "close other splits": esc + Key("colon/100,o,n,l,y/100,enter"),
-
-    "comment": esc + Key("g,c"),
-    "comment line": esc + Key("g,c,c"),
-    "comment paragraph": esc + Key("g,c,a,p"),
-    # "comment <line1> through <line2>": esc + Key("colon,%(line1)d") + Text(",") + Key("%(line2)d") + Text("Commentary"),
-
-    "scroll-down [<n>]": esc + Key("c-d:%(n)d") ,
-    "scroll-up [<n>]": esc + Key("c-u:%(n)d") ,
-
-    "record macro": Key("q,q"),
-    "end macro": Key("q"),
-    "repeat macro [<n>]": Key("%(n)d,at,q"),
-    "magic star [<n>]": esc + Key("%(n)d, asterisk"),
-    "magic pound [<n>]": esc + Key("%(n)d, hash"),
-}
-
-class vimCommands(MappingRule):
-    mapping  = {
     "edit config file": esc + Key("comma, e, v"),
     "table of contents": esc + Key("colon, s-T, s-O, s-C, enter"),
     "source config file": esc + Key("comma, s, v"),
