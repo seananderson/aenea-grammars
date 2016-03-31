@@ -13,6 +13,7 @@ import vocab
 
 generalKeys = {}
 generalKeys.update(generic.genericKeys)
+generalKeys.update(generic.nonVimGenericKeys)
 generalKeys.update(osx.osx)
 generalKeys.update(vocab.vocabWord)
 
@@ -58,7 +59,8 @@ class RepeatRule(CompoundRule):
         for action in sequence:
             action.execute()
 
-grammar = Grammar("root rule")
+vim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
+grammar = Grammar("root rule", context = ~vim_context)
 grammar.add_rule(RepeatRule())
 grammar.load()
 

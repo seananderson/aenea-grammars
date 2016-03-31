@@ -24,7 +24,7 @@ alternatives = []
 alternatives.append(RuleRef(rule=MappingMM()))
 root_action = Alternative(alternatives)
 
-sequence = Repetition(root_action, min=1, max=16, name="sequence")
+sequence = Repetition(root_action, min=1, max=3, name="sequence")
 
 class RepeatRule(CompoundRule):
     spec = "<sequence>"
@@ -34,7 +34,6 @@ class RepeatRule(CompoundRule):
         sequence = extras["sequence"]
         for action in sequence:
             action.execute()
-
 
 grammar.add_rule(RepeatRule())
 grammar.load()

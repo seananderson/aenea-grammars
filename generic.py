@@ -32,6 +32,7 @@ letterMap = {
     "(yankee|yang) ": "y",
     "(Z|zulu|zooch) ": "z",
 }
+
 numberMap = {
     "zero": "0",
     "one": "1",
@@ -149,24 +150,47 @@ reservedWord = {
     "slap": "slap",
     "pound": "pound",
     "hash": "hash",
+    "escape": "escape",
 }
 
-genericKeys = {
-  "<letters>": Key("%(letters)s"),
-    "num <numbers>": Key("%(numbers)s"),
-    "(enter|slap|slop)": Key("enter"),
+nonVimGenericKeys = {
     "undo [<n>]": Key("w-z:%(n)d"),
     "redo [<n>]": Key("sw-z:%(n)d"),
     "kill [<n>]": Key("del:%(n)d"),
     "kill to end": Key("c-k"),
     "cut line": Key("c-a, sw-right, w-x, w-right, del"),
     "copy line": Key("w-left, sw-right, w-c, w-right"),
-
-    "(del|chuck) [<n>]": Key("backspace:%(n)d"),
-    "space [<n>]": Key("space:%(n)d"),
     "copy [that]": Key("w-c"),
     "cut [that]": Key("w-x"),
     "paste [that]": Key("w-v"),
+
+    "home": Key("w-left"),
+    "end": Key("w-right"),
+    "to top": Key("w-up"),
+    "to bottom": Key("w-down"),
+
+    "dupe line": Key("w-left, ws-right, w-c, w-right, enter, w-v"),
+    "sell line": Key("w-left, ws-right"),
+    'sell to start': Key('ws-left'),
+    'sell to end': Key('ws-right'),
+    'sell to top': Key('ws-up'),
+    'sell to bottom': Key('ws-down'),
+
+    "bit [<n>]": Key("a-left:%(n)d"),
+    "fit [<n>]": Key("a-right:%(n)d"),
+    "de-bit [<n>]": Key("sa-left:%(n)d") + Key("del"),
+    "de-fit [<n>]": Key("sa-right:%(n)d") + Key("del"),
+}
+
+genericKeys = {
+    "<letters>": Key("%(letters)s"),
+    "sky <letters>": Key("s-%(letters)s"),
+    "num <numbers>": Key("%(numbers)s"),
+    "(enter|slap|slop)": Key("enter"),
+
+    "(del|chuck) [<n>]": Key("backspace:%(n)d"),
+    "space [<n>]": Key("space:%(n)d"),
+
     "release all": release,
     "press shift": Key("shift:down"),
     "release shift": Key("shift:up"),
@@ -187,10 +211,11 @@ genericKeys = {
     "period": Key("dot,space"),
     "semicolon": Key("semicolon,space"),
     "[double] (quote|quotes)": Key("dquote"),
-    "equals": Key("equal"),
+    "equals|equal": Key("space, equal, space"),
     "bang|exclamation mark": Key("exclamation"),
     "pound|hash": Key("hash"),
     "hyphen": Key("hyphen"),
+    "escape": Key("escape"),
     "minus": Key("minus"),
     "percent": Key("percent"),
     "plus": Key("plus"),
@@ -210,16 +235,6 @@ genericKeys = {
     "page up [<n>]": Key("pgup:%(n)d"),
     "page down [<n>]": Key("pgdown:%(n)d"),
 
-    "bit [<n>]": Key("a-left:%(n)d"),
-    "fit [<n>]": Key("a-right:%(n)d"),
-    "de-bit [<n>]": Key("sa-left:%(n)d") + Key("del"),
-    "de-fit [<n>]": Key("sa-right:%(n)d") + Key("del"),
-
-    "home": Key("w-left"),
-    "end": Key("w-right"),
-    "to top": Key("w-up"),
-    "to bottom": Key("w-down"),
-
     "langle [<n>]": Key("langle:%(n)d"),
     "lace [<n>]": Key("lbrace:%(n)d"),
     "lack [<n>]": Key("lbracket:%(n)d"),
@@ -237,8 +252,4 @@ genericKeys = {
     "tick": Mouse("left"),
     "dub": Mouse("left:2"),
     "right tick": Mouse("right"),
-
-    "dupe line": Key("w-left, ws-right, w-c, w-right, enter, w-v"),
-    "sell line": Key("w-left, ws-right"),
-
 }
