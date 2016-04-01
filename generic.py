@@ -25,9 +25,10 @@ def clean_prose(text):
     text = re.sub(r'[ ]+', r' ', text)
 # if these punctuation characters are on their own then don't have any spacing:
     # text = re.sub(r'^, $', r',', text)
-    text = re.sub(r'^: $', r':', text)
-    text = re.sub(r'^. $', r'.', text)
-    text = re.sub(r'^; $', r';', text)
+    text = re.sub(r'^\: $', r':', text)
+    text = re.sub(r'^\. $', r'.', text)
+    text = re.sub(r'^\; $', r';', text)
+    text = re.sub(r'^\! $', r'!', text)
     return text
 
 def cap_that(text):
