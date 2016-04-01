@@ -3,6 +3,7 @@ from aenea import *
 
 from dragonfly.actions.keyboard import keyboard
 from dragonfly.actions.typeables import typeables
+# from dragonfly import Function
 if 'semicolon' not in typeables:
     typeables["semicolon"] = keyboard.get_typeable(char=';')
 
@@ -88,15 +89,14 @@ lineVerbCharMap = {
         "chiner": "s-C",
 }
 
-vimEditing = {
 
+vimEditing = {
     "husher": Key("0"),
     "hush": esc + Key("caret"),
     "pup": esc + Key("dollar"),
     "go to top": esc + Key("g,g"),
     "go to bottom": esc + Key("s-G"),
     "extract [<n>]": Key("x:%(n)d"),
-
     "paste": esc + Key("p"),
     "paste up": esc + Key("P"),
     "yank": Key("y"),

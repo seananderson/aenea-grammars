@@ -51,7 +51,7 @@ class NopeFormatRule(CompoundRule):
 
 class ReFormatRule(CompoundRule):
     spec = ('that was [upper | natural] ( proper | camel | rel-path | '
-    'abs-path | score | cap | scope-resolve | jumble | dotword | titlecase |'
+    'abs-path | score | scope-resolve | jumble | dotword | titlecase |'
     'dashword | say | snakeword | brooding-narrative)')
 
     def value(self, node):
@@ -81,7 +81,7 @@ class ReFormatRule(CompoundRule):
 
 class FormatRule(CompoundRule):
     spec = ('[upper | natural] ( proper | camel | rel-path | abs-path | score | '
-    'cap | scope-resolve | jumble | dotword | dashword | say | titlecase |'
+    'scope-resolve | jumble | dotword | dashword | say | titlecase |'
     'snakeword | brooding-narrative) [<dictation>] [bomb]')
     extras = [Dictation(name='dictation')]
 

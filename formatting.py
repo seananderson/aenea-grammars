@@ -68,7 +68,6 @@ def format_say(text):
     x = re.sub(r' \,', r', ', x)
     return re.sub(r'  ', r' ', x)
 
-
 def format_broodingnarrative(text):
     return ''
 
