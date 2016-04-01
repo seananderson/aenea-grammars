@@ -14,14 +14,15 @@ def clean_prose(text):
     text = re.sub(r' ,', r',', text)
     text = re.sub(r' \?', r'? ', text)
     text = re.sub(r' \!', r'! ', text)
-    text = re.sub(r' \.', r'.', text)
+    text = re.sub(r' \.', r'. ', text)
     text = re.sub(r' \:', r':', text)
     text = re.sub(r' \;', r';', text)
 # capitalize the letter I if it's a word on its own:
     text = re.sub(r'^i ', r'I ', text)
     text = re.sub(r' i ', r' I ', text)
 # be smart about the spaces at the end of dictation:
-    text = re.sub(r'$', r' ', text)
+    # text = re.sub(r'$', r' ', text)
+    # text = re.sub(r' $', r'', text)
     text = re.sub(r'[ ]+', r' ', text)
 # if these punctuation characters are on their own then don't have any spacing:
     # text = re.sub(r'^, $', r',', text)
