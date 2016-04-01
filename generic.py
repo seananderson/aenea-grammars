@@ -205,8 +205,8 @@ nonVimGenericKeys = {
 
     "hush": Key("w-left"),
     "pup": Key("w-right"),
-    "to top": Key("w-up"),
-    "to bottom": Key("w-down"),
+    "go to top": Key("w-up"),
+    "go to bottom": Key("w-down"),
 
     "dupe line": Key("w-left, ws-right, w-c, w-right, enter, w-v"),
     "sell line": Key("w-left, ws-right"),
