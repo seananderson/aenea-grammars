@@ -3,6 +3,43 @@ from aenea import (
     Text,
     Mouse,
 )
+from dragonfly import Function
+import re
+
+def clean_prose(text):
+    print "was: " + str(text)
+# strip out the \punctuation that Dragon adds in for some reason:
+    text = re.sub(r'\\[a-z-]+', r'', str(text))
+# fix the spacing around punctuation:
+    text = re.sub(r' ,', r',', text)
+    text = re.sub(r' \?', r'? ', text)
+    text = re.sub(r' \!', r'! ', text)
+    text = re.sub(r' \.', r'.', text)
+    text = re.sub(r' \:', r':', text)
+    text = re.sub(r' \;', r';', text)
+# capitalize the letter I if it's a word on its own:
+    text = re.sub(r'^i ', r'I ', text)
+    text = re.sub(r' i ', r' I ', text)
+# be smart about the spaces at the end of dictation:
+    text = re.sub(r'$', r' ', text)
+    text = re.sub(r'[ ]+', r' ', text)
+# if these punctuation characters are on their own then don't have any spacing:
+    # text = re.sub(r'^, $', r',', text)
+    text = re.sub(r'^: $', r':', text)
+    text = re.sub(r'^. $', r'.', text)
+    text = re.sub(r'^; $', r';', text)
+    return text
+
+def cap_that(text):
+    text = clean_prose(str(text))
+    text = text.capitalize()
+    print "typing: " + text
+    return Text(text).execute()
+
+def lower_that(text):
+    text = clean_prose(str(text))
+    print "typing: " + text
+    return Text(text).execute()
 
 letterMap = {
     "(alpha|arch)": "a",
@@ -183,6 +220,8 @@ nonVimGenericKeys = {
 }
 
 genericKeys = {
+    "<text>": Function(lower_that),
+    "cap <text>": Function(cap_that),
     "<letters>": Key("%(letters)s"),
     "sky <letters>": Key("s-%(letters)s"),
     "num <numbers>": Key("%(numbers)s"),
