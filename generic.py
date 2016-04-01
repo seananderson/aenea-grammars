@@ -277,11 +277,11 @@ genericKeys = {
     "langle [<n>]": Key("langle:%(n)d"),
     "lace [<n>]": Key("lbrace:%(n)d"),
     "lack [<n>]": Key("lbracket:%(n)d"),
-    "lipe [<n>]": Key("lparen:%(n)d"),
+    "lap [<n>]": Key("lparen:%(n)d"),
     "rangle [<n>]": Key("rangle:%(n)d"),
     "race [<n>]": Key("rbrace:%(n)d"),
     "rack [<n>]": Key("rbracket:%(n)d"),
-    "ripe [<n>]": Key("rparen:%(n)d"),
+    "rap [<n>]": Key("rparen:%(n)d"),
 
     "<modifier1> <pressKey> [<n>]":
       Key("%(modifier1)s-%(pressKey)s:%(n)d"),
