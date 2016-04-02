@@ -149,10 +149,10 @@ vimEditing = {
     'reverse (bill|till) [<n>]': Key("escape, %(n)d, f6"),
      # nnoremap <F6> ,
 
-    'naper': Key("escape, f, rparen"),
-    'paper': Key("escape, s-F, lparen"),
-    'nacker': Key("escape, f, rbracket"),
-    'packer': Key("escape, s-F, lbracket"),
+    # 'naper': Key("escape, f, rparen"),
+    # 'paper': Key("escape, s-F, lparen"),
+    # 'nacker': Key("escape, f, rbracket"),
+    # 'packer': Key("escape, s-F, lbracket"),
     # 'clude <navKey>': Key("escape, f") + Key("%(navKey)s"),
 
     "indent": esc + Key("rangle,rangle"),
