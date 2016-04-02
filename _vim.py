@@ -16,6 +16,9 @@ import formatting
 
 esc = Key("escape")
 LEADER = 'comma'
+out = Key("escape:2,l")
+ii = Key("i")
+
 class FormatRule(CompoundRule):
     spec = ('[upper | natural] ( proper | camel | rel-path | abs-path | score | '
     'scope-resolve | jumble | dotword | dashword |  titlecase |'
@@ -52,41 +55,41 @@ def clean_prose(text):
     text = re.sub(r'\\[a-z-]+', r'', str(text))
     text = re.sub(r'space', r' ', str(text))
     # fix the spacing around punctuation:
-    text = re.sub(r' ,', r',', text)
-    text = re.sub(r' \?', r'? ', text)
-    text = re.sub(r' \!', r'! ', text)
-    text = re.sub(r' \.', r'. ', text)
-    text = re.sub(r' \:', r':', text)
-    text = re.sub(r' \;', r';', text)
+    re.sub(r' ([\?\!\.\:;,])', r'\1 ', ' . ?')
     # capitalize the letter I if it's a word on its own:
     text = re.sub(r'^i ', r'I ', text)
     text = re.sub(r' i ', r' I ', text)
-    # be smart about the spaces at the end of dictation:
-    # text = re.sub(r'$', r' ', text)
-    # text = re.sub(r' $', r'', text)
+    # be smart about double spaces:
     text = re.sub(r'[ ]+', r' ', text)
     # if these punctuation characters are on their own then don't have any spacing:
-    # text = re.sub(r'^, $', r',', text)
-    text = re.sub(r'^\: $', r':', text)
-    text = re.sub(r'^\. $', r'.', text)
-    text = re.sub(r'^\; $', r';', text)
-    text = re.sub(r'^\! $', r'!', text)
+    text = re.sub(r'^([\:\.;\!,]) $', r'\1', text)
     return text
 
 def cap_that(text):
-    Key("i").execute()
+    if mode == "normal":
+      Key("i").execute()
     text = clean_prose(str(text))
     text = text.capitalize()
     print "typing: " + text
     Text(text).execute()
-    Key("escape,l").execute()
+    if mode == "normal":
+      Key("escape:2,l").execute()
 
-def lower_that(text):
-    Key("i").execute()
+def lower_that(text, mode = "normal"):
+    if mode == "normal":
+      Key("i").execute()
     text = clean_prose(str(text))
     print "typing: " + text
     Text(text).execute()
-    Key("escape,l").execute()
+    if mode == "normal":
+      Key("escape:2,l").execute()
+
+# def type_stuff(text, mode = "normal"):
+#     if mode == "normal":
+#       Key("i").execute()
+#     Key(str(text)).execute()
+#     if mode == "normal":
+#       Key("escape:2,l").execute()
 
 navCharMap = {
     "colon": "colon",
@@ -119,7 +122,6 @@ operateCharMap = {
     "single quotes": "squote",
 }
 
-# TODO , is not working.
 advCharMap = {
         "inner": "i",
         "around": "a",
@@ -128,29 +130,41 @@ advCharMap = {
 verbCharMap = {
         "dell": "d",
         "yank": "y",
-        "change": "c",
+        "change": "d", # note this is a d because we're staying in normal mode
         "sell": "v",
 }
 
 lineVerbCharMap = {
         "delete line": "d:2",
         "yank line": "y:2",
-        "change line": "c:2",
+        "change line": "c:2,escape",
         "select line": "s-V",
         "kill till end": "s-D",
         "sell till end": "v,dollar",
         "yank till end": "y,dollar",
-        "change till end": "s-C",
+        "change till end": "s-C,escape",
 }
 
-out = Key("escape/20,l")
-ii = Key("i")
-
 vimEditing = {
+    # inserting:
+    "<letters>": ii + Key("%(letters)s") + out,
+    "sky <letters>":ii +  Key("s-%(letters)s") + out,
+    "num <numbers>":ii +  Key("%(numbers)s") + out,
+    "<numbers>":ii +  Key("%(numbers)s") + out,
     "space [<n>]": ii + Key("space:%(n)d") + out,
-
+    "<specials> [<n>]": ii + Key("%(specials)s:%(n)d") + out,
     "say <text>": Function(lower_that),
     "cap <text>": Function(cap_that),
+
+    "(slap|slop) [<n>]": Key("enter:%(n)d"),
+    "chuck [<n>]": Key("%(n)d, d, h"),
+    "kill [<n>]": Key("%(n)d, d, l"),
+
+    "litteral <letters>": Key("%(letters)s"),
+    "litteral sky <letters>": Key("s-%(letters)s"),
+    "litteral num <numbers>":  Key("%(numbers)s"),
+    "litteral <numbers>": Key("%(numbers)s"),
+    "litteral space [<n>]": Key("space:%(n)d"),
 
     "[<n>] up": esc + Key("k:%(n)d"),
     "[<n>] down": esc + Key("j:%(n)d"),
@@ -180,12 +194,12 @@ vimEditing = {
     "reselect": esc + Key("g,v"),
 
     "insert": Key("i"),
-    "big insert": Key("s-i"),
+    "big insert": Key("s-i,escape"),
     "append": Key("a"),
-    "big append": Key("s-a"),
+    "big append": Key("s-a") + out,
     "escape": Key("escape"),
-    "open": esc + Key("o"),
-    "big open": esc + Key("s-o"),
+    "open": esc + Key("o,escape"),
+    "big open": esc + Key("s-o,escape"),
     "paste": esc + Key("p"),
     "big paste": esc + Key("s-p"),
 
@@ -194,19 +208,30 @@ vimEditing = {
 
     'matching': esc + Key("percent"),
 
-        'lope [<n>]': esc + Key('%(n)d, b'),
-        'yope [<n>]': esc + Key('%(n)d, w'),
-        'elope [<n>]': esc + Key('%(n)d, g, e'),
-        'iyope [<n>]': esc + Key('%(n)d, e'),
+    'yope [<n>]': esc + Key('%(n)d, w'),
+    'iyope [<n>]': esc + Key('%(n)d, e'),
+    'lope [<n>]': esc + Key('%(n)d, b'),
+    'ilope [<n>]': esc + Key('%(n)d, g, e'),
 
-        'lopert [<n>]': esc + Key('%(n)d, s-B'),
-        'yopert [<n>]': esc + Key('%(n)d, s-W'),
-        'elopert [<n>]': esc + Key('%(n)d, g, s-E'),
-        'eyopert [<n>]': esc + Key('%(n)d, s-E'),
-    # "nerd [<n>]": esc + Key("%(n)d, w"),
-    # "ned [<n>]": esc + Key("%(n)d, e"),
-    # "bird [<n>]": esc + Key("%(n)d, b"),
-    # "bed [<n>]": esc + Key("%(n)d, g, e"),
+    'yopert [<n>]': esc + Key('%(n)d, s-W'),
+    'iyopert [<n>]': esc + Key('%(n)d, s-E'),
+    'lopert [<n>]': esc + Key('%(n)d, s-B'),
+    'ilopert [<n>]': esc + Key('%(n)d, g, s-E'),
+
+    # EasyMotion
+    'easy lope': Key('%s:2, b' % LEADER),
+    'easy yope': Key('%s:2, w' % LEADER),
+    'easy elope': Key('%s:2, g, e' % LEADER),
+    'easy iyope': Key('%s:2, e' % LEADER),
+
+    'easy lopert': Key('%s:2, B' % LEADER),
+    'easy yopert': Key('%s:2, W' % LEADER),
+    'easy elopert': Key('%s:2, g, E' % LEADER),
+    'easy eyopert': Key('%s:2, E' % LEADER),
+
+    'easy jump': Key('%s:2, f' % LEADER),
+    'easy del': Key('d, %s:2, t' % LEADER),
+
     "next para [<n>]": esc + Key("%(n)d, rbrace"),
     "preev para [<n>]": esc + Key("%(n)d, lbrace"),
     "next scent [<n>]": esc + Key("%(n)d, rparen"),
@@ -219,11 +244,8 @@ vimEditing = {
     "repeat [<n>]": esc + Key("%(n)d, dot"),
 
     'sell till <navKey>': Key("escape, v, t") + Key("%(navKey)s"),
-    # 'sell clude <navKey>': Key("escape, v, f") + Key("%(navKey)s"),
     'dell till <navKey>': Key("escape, d, t") + Key("%(navKey)s"),
-    # 'dell clude <navKey>': Key("escape, d, f") + Key("%(navKey)s"),
-    'change till <navKey>': Key("escape, c, t") + Key("%(navKey)s"),
-    # 'change clude <navKey>': Key("escape, c, f") + Key("%(navKey)s"),
+    'change till <navKey>': Key("escape, c, t") + Key("%(navKey)s") + out,
     'jump till <navKey> [<n>]': Key("escape, %(n)d, f") + Key("%(navKey)s"),
     'jump bill <navKey> [<n>]': Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
     'jump (bill|till) again [<n>]': Key("escape, %(n)d, s-K"),
@@ -231,36 +253,13 @@ vimEditing = {
     'reverse (bill|till) [<n>]': Key("escape, %(n)d, f6"),
      # nnoremap <F6> ,
 
-    # 'naper': Key("escape, f, rparen"),
-    # 'paper': Key("escape, s-F, lparen"),
-    # 'nacker': Key("escape, f, rbracket"),
-    # 'packer': Key("escape, s-F, lbracket"),
-    # 'clude <navKey>': Key("escape, f") + Key("%(navKey)s"),
-
     "indent": esc + Key("rangle,rangle"),
     "out-dent": esc + Key("langle,langle"),
     "join [<n>]": esc + Key("s-J:%(n)d"),
 
-    # "go to [line] <line1>": esc + Function(goto_line),
-    # "delete lines <line1> through <line2>": esc + Function(delete_lines),
-    # "yank lines <line1> through <line2>": esc + Function(yank_lines),
-    # "(viz|vis) go to [line] <line1>": Function(goto_line),
-
     # Magic:
     "<verbKey> <advKey> <opKey>": esc + Key("%(verbKey)s") + Key("%(advKey)s") + Key("%(opKey)s"),
     "<lineVerbKey>": esc + Key("%(lineVerbKey)s"),
-
-        # EasyMotion
-    'easy lope': Key('%s:2, b' % LEADER),
-    'easy yope': Key('%s:2, w' % LEADER),
-    'easy elope': Key('%s:2, g, e' % LEADER),
-    'easy iyope': Key('%s:2, e' % LEADER),
-
-    'easy lopert': Key('%s:2, B' % LEADER),
-    'easy yopert': Key('%s:2, W' % LEADER),
-    'easy elopert': Key('%s:2, g, E' % LEADER),
-    'easy eyopert': Key('%s:2, E' % LEADER),
-
 
     "find": esc + Key("slash"),
     "find and replace": esc + Key("colon, percent, s, slash, slash, g, left, left"),
@@ -272,14 +271,13 @@ vimEditing = {
     "visual find back <text>": Key("question") + Text("%(text)s"),
     "jump to <text>": esc + Key("slash") + Text("%(text)s") + Key("enter"),
     "jump back to <text>": esc + Key("question") + Text("%(text)s") + Key("enter"),
-    # "clear search": esc + Key("enter:2"),
 
     "mark": esc + Key("m,a"),
     "jump [till] mark": esc + Key("backtick,a"),
     "sell [till] mark": esc + Key("v,backtick,a"),
     "yank [till] mark": esc + Key("y,backtick,a"),
-    "change [till] mark": esc + Key("c,backtick,a"),
-    "del [till] mark": esc + Key("c,backtick,a"),
+    "change [till] mark": esc + Key("c,backtick,a") + out,
+    "del [till] mark": esc + Key("d,backtick,a"),
 
     "jump forward [<n>]": esc + Key("c-i:%(n)d"),
     "jump back [<n>]": esc + Key("c-o:%(n)d"),
@@ -302,7 +300,6 @@ vimEditing = {
     "comment": esc + Key("g,c"),
     "comment line": esc + Key("g,c,c"),
     "comment paragraph": esc + Key("g,c,a,p"),
-    # "comment <line1> through <line2>": esc + Key("colon,%(line1)d") + Text(",") + Key("%(line2)d") + Text("Commentary"),
 
     "(mort|scroll-down) [<n>]": esc + Key("c-d:%(n)d") ,
     "(lest|scroll-up) [<n>]": esc + Key("c-u:%(n)d") ,
@@ -347,11 +344,11 @@ class vimCommands(MappingRule):
     "exit vim": esc + Key("colon,q,enter"),
     "split explorer": esc + Key("colon,s-S,e,x,enter"),
     "please exit vim": esc + Key("colon,q,exclamation,enter"),
-    "save and exit please": esc + Key("colon,w,q,exclamation,enter"),
-    "save and (exit|quit)": esc + Key("colon,w,q,enter"),
-    "save file": esc + Key("colon,u,p,d,a,t,e,enter"),
-    "save all files": esc + Key("colon,w,a,l,l,enter"),
-    "save as": esc + Key("colon,s,a,v,e,a,s,space"),
+    "write and exit please": esc + Key("colon,w,q,exclamation,enter"),
+    "write and (exit|quit)": esc + Key("colon,w,q,enter"),
+    "write file": esc + Key("colon,u,p,d,a,t,e,enter"),
+    "write all files": esc + Key("colon,w,a,l,l,enter"),
+    "write as": esc + Key("colon,s,a,v,e,a,s,space"),
     "toggle numbers": esc + Key("colon,s,e,t,space,r,e,l,a,t,i,v,e,n,u,m,b,e,r,exclamation") + Key("enter"),
     "browse (old|recent) files": esc + Key("colon,b,r,o,space,o,l") + Key("enter"),
     "set theme ocean": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,o,c,e,a,n/50,enter"),
@@ -416,6 +413,7 @@ class KeystrokeRule(MappingRule):
         Choice("modifier2", generic.modifierMap),
         Choice("modifierSingle", generic.singleModifierMap),
         Choice('letters', generic.letterMap),
+        Choice('specials', generic.specialKeys),
         Choice('numbers', generic.numberMap),
         Choice("pressKey", generic.pressKeyMap),
         Choice("reservedWord", generic.reservedWord),

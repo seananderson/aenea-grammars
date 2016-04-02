@@ -35,6 +35,7 @@ class KeystrokeRule(MappingRule):
         Choice("modifier2", generic.modifierMap),
         Choice("modifierSingle", generic.singleModifierMap),
         Choice('letters', generic.letterMap),
+        Choice('specials', generic.specialKeys),
         Choice('numbers', generic.numberMap),
         Choice("pressKey", generic.pressKeyMap),
         Choice("reservedWord", generic.reservedWord),
