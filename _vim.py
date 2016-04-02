@@ -14,28 +14,6 @@ import vocab
 
 esc = Key("escape")
 
-def goto_line(line1):
-    for c in str(line1):
-        Key(c).execute()
-    Key("s-g").execute()
-
-# def goto_line2(n1, n2, n3):
-#     for c in (str(n1)+str(n2)+str(n3)):
-#         Key(c).execute()
-#     Key("s-g").execute()
-
-def yank_lines(line1, line2):
-    goto_line(line1)
-    Key("s-V").execute()
-    goto_line(line2)
-    Key("y").execute()
-
-def delete_lines(line1, line2):
-    goto_line(line1)
-    Key("s-V").execute()
-    goto_line(line2)
-    Key("d").execute()
-
 navCharMap = {
     "colon": "colon",
     "comma": "comma",
