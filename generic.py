@@ -94,8 +94,8 @@ controlKeyMap = {
     "down": "down",
     "page up": "pgup",
     "page down": "pgdown",
-    "hush": "home",
-    "pup": "end",
+    "home": "home",
+    "end": "end",
     "space": "space",
     "(enter|return)": "enter",
     "escape": "escape",
@@ -193,6 +193,14 @@ reservedWord = {
 }
 
 nonVimGenericKeys = {
+    "say <text>": Function(lower_that),
+    "cap <text>": Function(cap_that),
+
+    "[<n>] up": Key("up:%(n)d"),
+    "[<n>] down": Key("down:%(n)d"),
+    "[<n>] left": Key("left:%(n)d"),
+    "[<n>] right": Key("right:%(n)d"),
+
     "undo [<n>]": Key("w-z:%(n)d"),
     "redo [<n>]": Key("sw-z:%(n)d"),
     "kill [<n>]": Key("del:%(n)d"),
@@ -203,8 +211,8 @@ nonVimGenericKeys = {
     "cut [that]": Key("w-x"),
     "paste [that]": Key("w-v"),
 
-    "hush": Key("w-left"),
-    "pup": Key("w-right"),
+    "home": Key("w-left"),
+    "end": Key("w-right"),
     "go to top": Key("w-up"),
     "go to bottom": Key("w-down"),
 
@@ -219,17 +227,17 @@ nonVimGenericKeys = {
     "fit [<n>]": Key("a-right:%(n)d"),
     "de-bit [<n>]": Key("sa-left:%(n)d") + Key("del"),
     "de-fit [<n>]": Key("sa-right:%(n)d") + Key("del"),
+
+    "save file": Key("w-s"),
+    "space [<n>]": Key("space:%(n)d"),
 }
 
 genericKeys = {
-    "<text>": Function(lower_that),
-    "cap <text>": Function(cap_that),
     "<letters>": Key("%(letters)s"),
     "sky <letters>": Key("s-%(letters)s"),
     "num <numbers>": Key("%(numbers)s"),
     "(enter|slap|slop)": Key("enter"),
     "(del|chuck) [<n>]": Key("backspace:%(n)d"),
-    "space [<n>]": Key("space:%(n)d"),
     "release all": release,
     "press shift": Key("shift:down"),
     "release shift": Key("shift:up"),
@@ -267,10 +275,6 @@ genericKeys = {
     "say <reservedWord>": Text("%(reservedWord)s"),
 
  # Navigation keys.
-    "[<n>] up": Key("up:%(n)d"),
-    "[<n>] down": Key("down:%(n)d"),
-    "[<n>] left": Key("left:%(n)d"),
-    "[<n>] right": Key("right:%(n)d"),
     "page up [<n>]": Key("pgup:%(n)d"),
     "page down [<n>]": Key("pgdown:%(n)d"),
 

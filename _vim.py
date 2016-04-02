@@ -1,5 +1,6 @@
 from natlink import setMicState
 from aenea import *
+import re
 
 from dragonfly.actions.keyboard import keyboard
 from dragonfly.actions.typeables import typeables
@@ -7,16 +8,89 @@ from dragonfly.actions.typeables import typeables
 if 'semicolon' not in typeables:
     typeables["semicolon"] = keyboard.get_typeable(char=';')
 
-import words
+# import words
 import generic
 import osx
 import vocab
+import formatting
 
 esc = Key("escape")
+LEADER = 'comma'
+class FormatRule(CompoundRule):
+    spec = ('[upper | natural] ( proper | camel | rel-path | abs-path | score | '
+    'scope-resolve | jumble | dotword | dashword |  titlecase |'
+    'snakeword ) [<dictation>]')
+    extras = [Dictation(name='dictation')]
+
+    def value(self, node):
+        words = node.words()
+        print "format rule:", words
+
+        uppercase = words[0] == 'upper'
+        lowercase = words[0] != 'natural'
+
+        if lowercase:
+            words = [word.lower() for word in words]
+        if uppercase:
+            words = [word.upper() for word in words]
+
+        words = [word.split('\\', 1)[0].replace('-', '') for word in words]
+        if words[0].lower() in ('upper', 'natural'):
+            del words[0]
+
+        function = getattr(formatting, 'format_%s' % words[0].lower())
+        formatted = function(words[1:])
+
+        Key("i").execute()
+        print "  ->", formatted
+        Text(formatted).execute()
+        return Key("escape,l")
+
+def clean_prose(text):
+    print "was: " + str(text)
+    # strip out the \punctuation that Dragon adds in for some reason:
+    text = re.sub(r'\\[a-z-]+', r'', str(text))
+    text = re.sub(r'space', r' ', str(text))
+    # fix the spacing around punctuation:
+    text = re.sub(r' ,', r',', text)
+    text = re.sub(r' \?', r'? ', text)
+    text = re.sub(r' \!', r'! ', text)
+    text = re.sub(r' \.', r'. ', text)
+    text = re.sub(r' \:', r':', text)
+    text = re.sub(r' \;', r';', text)
+    # capitalize the letter I if it's a word on its own:
+    text = re.sub(r'^i ', r'I ', text)
+    text = re.sub(r' i ', r' I ', text)
+    # be smart about the spaces at the end of dictation:
+    # text = re.sub(r'$', r' ', text)
+    # text = re.sub(r' $', r'', text)
+    text = re.sub(r'[ ]+', r' ', text)
+    # if these punctuation characters are on their own then don't have any spacing:
+    # text = re.sub(r'^, $', r',', text)
+    text = re.sub(r'^\: $', r':', text)
+    text = re.sub(r'^\. $', r'.', text)
+    text = re.sub(r'^\; $', r';', text)
+    text = re.sub(r'^\! $', r'!', text)
+    return text
+
+def cap_that(text):
+    Key("i").execute()
+    text = clean_prose(str(text))
+    text = text.capitalize()
+    print "typing: " + text
+    Text(text).execute()
+    Key("escape,l").execute()
+
+def lower_that(text):
+    Key("i").execute()
+    text = clean_prose(str(text))
+    print "typing: " + text
+    Text(text).execute()
+    Key("escape,l").execute()
 
 navCharMap = {
     "colon": "colon",
-    "comma": "comma",
+    "calm": "comma",
     "dollar": "dollar",
     "dot": "dot",
     "equal": "equal",
@@ -24,12 +98,14 @@ navCharMap = {
     "underscore": "underscore",
     "rap": "rparen",
     "lap": "lparen",
+    "race": "rbrace",
+    "lace": "lbrace",
     "langle": "langle",
     "rangle": "rangle",
     "rack": "rbracket",
     "lack": "lbracket",
-    "quote": "dquote",
-    "single quote": "squote",
+    "quote|quotes": "dquote",
+    "single (quote|quotes)": "squote",
 }
 
 operateCharMap = {
@@ -57,21 +133,25 @@ verbCharMap = {
 }
 
 lineVerbCharMap = {
-        "dine": "d:2",
+        "delete line": "d:2",
         "yank line": "y:2",
-        "chine": "c:2",
-        "vine": "s-V",
-        "diner": "s-D",
-        "viner": "v,dollar",
-        "yanker": "y,dollar",
-        "chiner": "s-C",
+        "change line": "c:2",
+        "select line": "s-V",
+        "kill till end": "s-D",
+        "sell till end": "v,dollar",
+        "yank till end": "y,dollar",
+        "change till end": "s-C",
 }
 
+out = Key("escape/20,l")
+ii = Key("i")
 
 vimEditing = {
-    "husher": Key("0"),
-    "hush": esc + Key("caret"),
-    "pup": esc + Key("dollar"),
+    "space [<n>]": ii + Key("space:%(n)d") + out,
+
+    "say <text>": Function(lower_that),
+    "cap <text>": Function(cap_that),
+
     "[<n>] up": esc + Key("k:%(n)d"),
     "[<n>] down": esc + Key("j:%(n)d"),
     "[<n>] left": esc + Key("h:%(n)d"),
@@ -81,6 +161,10 @@ vimEditing = {
     "[<n>] arrow down": Key("down:%(n)d"),
     "[<n>] arrow left": Key("left:%(n)d"),
     "[<n>] arrow right": Key("right:%(n)d"),
+
+    "homer": Key("0"),
+    "home": esc + Key("caret"),
+    "end": esc + Key("dollar"),
     "go to top": esc + Key("g,g"),
     "go to bottom": esc + Key("s-G"),
     "extract [<n>]": Key("x:%(n)d"),
@@ -89,10 +173,12 @@ vimEditing = {
     "yank": Key("y"),
     "dupe line [<n>]": esc + Key("y,y,p:%(n)d"),
     "dupe line up <n>": esc + Key("y,y,P:%(n)d"),
-    "visual|vis-mode": esc + Key("v"),
-    "vis-line|vine|visual line|select line": esc + Key("s-v"),
-    "visual block|vis-block": esc + Key("c-v"),
+
+    "vis-mode": esc + Key("v"),
+    "vis-line": esc + Key("s-v"),
+    "vis-block": esc + Key("c-v"),
     "reselect": esc + Key("g,v"),
+
     "insert": Key("i"),
     "big insert": Key("s-i"),
     "append": Key("a"),
@@ -108,10 +194,19 @@ vimEditing = {
 
     'matching': esc + Key("percent"),
 
-    "nerd [<n>]": esc + Key("%(n)d, w"),
-    "ned [<n>]": esc + Key("%(n)d, e"),
-    "bird [<n>]": esc + Key("%(n)d, b"),
-    "bed [<n>]": esc + Key("%(n)d, g, e"),
+        'lope [<n>]': esc + Key('%(n)d, b'),
+        'yope [<n>]': esc + Key('%(n)d, w'),
+        'elope [<n>]': esc + Key('%(n)d, g, e'),
+        'iyope [<n>]': esc + Key('%(n)d, e'),
+
+        'lopert [<n>]': esc + Key('%(n)d, s-B'),
+        'yopert [<n>]': esc + Key('%(n)d, s-W'),
+        'elopert [<n>]': esc + Key('%(n)d, g, s-E'),
+        'eyopert [<n>]': esc + Key('%(n)d, s-E'),
+    # "nerd [<n>]": esc + Key("%(n)d, w"),
+    # "ned [<n>]": esc + Key("%(n)d, e"),
+    # "bird [<n>]": esc + Key("%(n)d, b"),
+    # "bed [<n>]": esc + Key("%(n)d, g, e"),
     "next para [<n>]": esc + Key("%(n)d, rbrace"),
     "preev para [<n>]": esc + Key("%(n)d, lbrace"),
     "next scent [<n>]": esc + Key("%(n)d, rparen"),
@@ -155,6 +250,17 @@ vimEditing = {
     "<verbKey> <advKey> <opKey>": esc + Key("%(verbKey)s") + Key("%(advKey)s") + Key("%(opKey)s"),
     "<lineVerbKey>": esc + Key("%(lineVerbKey)s"),
 
+        # EasyMotion
+    'easy lope': Key('%s:2, b' % LEADER),
+    'easy yope': Key('%s:2, w' % LEADER),
+    'easy elope': Key('%s:2, g, e' % LEADER),
+    'easy iyope': Key('%s:2, e' % LEADER),
+
+    'easy lopert': Key('%s:2, B' % LEADER),
+    'easy yopert': Key('%s:2, W' % LEADER),
+    'easy elopert': Key('%s:2, g, E' % LEADER),
+    'easy eyopert': Key('%s:2, E' % LEADER),
+
 
     "find": esc + Key("slash"),
     "find and replace": esc + Key("colon, percent, s, slash, slash, g, left, left"),
@@ -169,11 +275,11 @@ vimEditing = {
     # "clear search": esc + Key("enter:2"),
 
     "mark": esc + Key("m,a"),
-    "jark": esc + Key("backtick,a"),
-    "vark": esc + Key("v,backtick,a"),
-    "yark": esc + Key("y,backtick,a"),
-    "cark": esc + Key("c,backtick,a"),
-    "del-mark": esc + Key("c,backtick,a"),
+    "jump [till] mark": esc + Key("backtick,a"),
+    "sell [till] mark": esc + Key("v,backtick,a"),
+    "yank [till] mark": esc + Key("y,backtick,a"),
+    "change [till] mark": esc + Key("c,backtick,a"),
+    "del [till] mark": esc + Key("c,backtick,a"),
 
     "jump forward [<n>]": esc + Key("c-i:%(n)d"),
     "jump back [<n>]": esc + Key("c-o:%(n)d"),
@@ -325,7 +431,7 @@ class KeystrokeRule(MappingRule):
 
 alternatives = []
 alternatives.append(RuleRef(rule=KeystrokeRule()))
-alternatives.append(RuleRef(rule=words.FormatRule()))
+alternatives.append(RuleRef(rule=FormatRule()))
 root_action = Alternative(alternatives)
 
 sequence = Repetition(root_action, min=1, max=16, name="sequence")
