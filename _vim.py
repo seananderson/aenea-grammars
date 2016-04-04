@@ -66,23 +66,23 @@ def clean_prose(text):
     return text
 
 def cap_that(text):
-    if mode == "normal":
-      Key("i").execute()
+    # if mode == "normal":
+      # Key("i").execute()
     text = clean_prose(str(text))
     text = text.capitalize()
     print "typing: " + text
     Text(text).execute()
-    if mode == "normal":
-      Key("escape:2,l").execute()
+    # if mode == "normal":
+      # Key("escape:2,l").execute()
 
 def lower_that(text, mode = "normal"):
-    if mode == "normal":
-      Key("i").execute()
+    # if mode == "normal":
+      # Key("i").execute()
     text = clean_prose(str(text))
     print "typing: " + text
     Text(text).execute()
-    if mode == "normal":
-      Key("escape:2,l").execute()
+    # if mode == "normal":
+      # Key("escape:2,l").execute()
 
 # def type_stuff(text, mode = "normal"):
 #     if mode == "normal":
@@ -103,13 +103,40 @@ navCharMap = {
     "lap": "lparen",
     "race": "rbrace",
     "lace": "lbrace",
-    "langle": "langle",
-    "rangle": "rangle",
+    # "langle": "langle",
+    # "rangle": "rangle",
     "rack": "rbracket",
     "lack": "lbracket",
-    "quote|quotes": "dquote",
-    "single (quote|quotes)": "squote",
+    "quote": "dquote",
+    "single quote": "squote",
+    "(alpha|arch)": "a",
+    "(bravo)": "b",
+    "(charlie|char)": "c",
+    "(delta)": "d",
+    "(echo|eck)": "e",
+    "(foxtrot|fox) ": "f",
+    "(golf)": "g",
+    "(hotel) ": "h",
+    "(india|ice) ": "i",
+    "(juliet) ": "j",
+    "(kilo) ": "k",
+    "(lug) ": "l",
+    "(mike) ": "m",
+    "(november) ": "n",
+    "(oscar|ork) ": "o",
+    "(papa|poppa) ": "p",
+    "(quebec|queen) ": "q",
+    "(romeo) ": "r",
+    "(sierra|souk) ": "s",
+    "(tango) ": "t",
+    "(union|unks) ": "u",
+    "(victor|verge) ": "v",
+    "(whiskey|womp) ": "w",
+    "(x-ray) ": "x",
+    "(yankee) ": "y",
+    "(zulu) ": "z",
 }
+# navCharMap.update(generic.letterMap)
 
 operateCharMap = {
     "parens": "rparen",
@@ -147,12 +174,12 @@ lineVerbCharMap = {
 
 vimEditing = {
     # inserting:
-    "<letters>": ii + Key("%(letters)s") + out,
-    "sky <letters>":ii +  Key("s-%(letters)s") + out,
-    "num <numbers>":ii +  Key("%(numbers)s") + out,
-    "<numbers>":ii +  Key("%(numbers)s") + out,
-    "space [<n>]": ii + Key("space:%(n)d") + out,
-    "<specials> [<n>]": ii + Key("%(specials)s:%(n)d") + out,
+    "<letters>": Key("%(letters)s"),
+    "sky <letters>": Key("s-%(letters)s"),
+    "num <numbers>": Key("%(numbers)s"),
+    "<numbers>": Key("%(numbers)s"),
+    "space [<n>]": Key("space:%(n)d"),
+    "<specials> [<n>]": Key("%(specials)s:%(n)d"),
     "say <text>": Function(lower_that),
     "cap <text>": Function(cap_that),
 
@@ -160,11 +187,11 @@ vimEditing = {
     "chuck [<n>]": Key("%(n)d, d, h"),
     "kill [<n>]": Key("%(n)d, d, l"),
 
-    "litteral <letters>": Key("%(letters)s"),
-    "litteral sky <letters>": Key("s-%(letters)s"),
-    "litteral num <numbers>":  Key("%(numbers)s"),
-    "litteral <numbers>": Key("%(numbers)s"),
-    "litteral space [<n>]": Key("space:%(n)d"),
+    # "litteral <letters>": Key("%(letters)s"),
+    # "litteral sky <letters>": Key("s-%(letters)s"),
+    # "litteral num <numbers>":  Key("%(numbers)s"),
+    # "litteral <numbers>": Key("%(numbers)s"),
+    # "litteral space [<n>]": Key("space:%(n)d"),
 
     "[<n>] up": esc + Key("k:%(n)d"),
     "[<n>] down": esc + Key("j:%(n)d"),
@@ -176,7 +203,7 @@ vimEditing = {
     "[<n>] arrow left": Key("left:%(n)d"),
     "[<n>] arrow right": Key("right:%(n)d"),
 
-    "home": Key("0"),
+    "cary": Key("0"),
     "car": esc + Key("caret"),
     "doll": esc + Key("dollar"),
     "go to top": esc + Key("g,g"),
@@ -193,10 +220,10 @@ vimEditing = {
     "vis-block": esc + Key("c-v"),
     "reselect": esc + Key("g,v"),
 
-    "insert": Key("i"),
-    "big insert": Key("s-i,escape"),
+    "sert": Key("i"),
+    "big sert": Key("s-i,escape"),
     "append": Key("a"),
-    "big append": Key("s-a") + out,
+    "big append": Key("s-a"),
     "escape": Key("escape"),
     "open": esc + Key("o,escape"),
     "big open": esc + Key("s-o,escape"),
@@ -233,7 +260,7 @@ vimEditing = {
     'easy del': Key('d, %s:2, t' % LEADER),
 
     # Sneak
-    # 'sneak ': Key('%s:2, b' % LEADER),
+    'sneaker <letters> <letters2>': Key('s') + Key("%(letters)s") + Key("%(letters2)s"),
 
     "next para [<n>]": esc + Key("%(n)d, rbrace"),
     "preev para [<n>]": esc + Key("%(n)d, lbrace"),
@@ -246,14 +273,14 @@ vimEditing = {
     "redo [<n>]": esc + Key("c-r:%(n)d"),
     "repeat [<n>]": esc + Key("%(n)d, dot"),
 
-    'sell till <navKey>': Key("escape, v, t") + Key("%(navKey)s"),
+    # 'sell till <navKey>': Key("escape, v, t") + Key("%(navKey)s"),
     'dell till <navKey>': Key("escape, d, t") + Key("%(navKey)s"),
-    'change till <navKey>': Key("escape, c, t") + Key("%(navKey)s") + out,
-    'jump till <navKey> [<n>]': Key("escape, %(n)d, f") + Key("%(navKey)s"),
-    'jump bill <navKey> [<n>]': Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
-    'jump (bill|till) again [<n>]': Key("escape, %(n)d, s-K"),
+    'change till <navKey>': Key("escape, c, t") + Key("%(navKey)s"),
+    'quick <navKey> [<n>]': Key("escape, %(n)d, f") + Key("%(navKey)s"),
+    'quick back <navKey> [<n>]': Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
+    # 'jump (bill|till) again [<n>]': Key("escape, %(n)d, semicolon"),
      # nnoremap K ;
-    'reverse (bill|till) [<n>]': Key("escape, %(n)d, f6"),
+    'reverse semi [<n>]': Key("escape, %(n)d, f6"),
      # nnoremap <F6> ,
 
     "indent": esc + Key("rangle,rangle"),
@@ -279,7 +306,7 @@ vimEditing = {
     "jump [till] mark": esc + Key("backtick,a"),
     "sell [till] mark": esc + Key("v,backtick,a"),
     "yank [till] mark": esc + Key("y,backtick,a"),
-    "change [till] mark": esc + Key("c,backtick,a") + out,
+    "change [till] mark": esc + Key("c,backtick,a"),
     "del [till] mark": esc + Key("d,backtick,a"),
 
     "jump forward [<n>]": esc + Key("c-i:%(n)d"),
@@ -297,8 +324,7 @@ vimEditing = {
     "(pip|pop) cancel": Key("c-e"),
     "snip": Key("c-b"),
 
-    "format": esc + Key("g,q"),
-    "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
+    "format": Key("s-Q"),
 
     "comment": esc + Key("g,c"),
     "comment line": esc + Key("g,c,c"),
@@ -374,6 +400,9 @@ class vimCommands(MappingRule):
     "make splits equal": esc + Key("c-w,equal"),
 
     "toggle obsession": esc + Key("colon,s-o,b,s,e,s,s,i,o,n,exclamation,enter"),
+    'toggle quick scope': Key('colon,s-Q,u,i,c,k,s-S,c,o,p,e,s-T,o,g,g,l,e,enter'),
+
+    "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
 
     "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
     "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
@@ -408,14 +437,11 @@ class KeystrokeRule(MappingRule):
     mapping = grammarCfg.cmd.map
     extras = [
         IntegerRef("n", 1, 65),
-        # IntegerRef("line1", 1, 100),
-        # IntegerRef("line2", 1, 100),
         Dictation("text"),
-        Dictation("text2"),
         Choice("modifier1", generic.modifierMap),
         Choice("modifier2", generic.modifierMap),
-        Choice("modifierSingle", generic.singleModifierMap),
         Choice('letters', generic.letterMap),
+        Choice('letters2', generic.letterMap),
         Choice('specials', generic.specialKeys),
         Choice('numbers', generic.numberMap),
         Choice("pressKey", generic.pressKeyMap),
