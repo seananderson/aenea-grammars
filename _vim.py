@@ -130,7 +130,7 @@ advCharMap = {
 verbCharMap = {
         "dell": "d",
         "yank": "y",
-        "change": "d", # note this is a d because we're staying in normal mode
+        "change": "c",
         "sell": "v",
 }
 
@@ -176,9 +176,9 @@ vimEditing = {
     "[<n>] arrow left": Key("left:%(n)d"),
     "[<n>] arrow right": Key("right:%(n)d"),
 
-    "homer": Key("0"),
-    "home": esc + Key("caret"),
-    "end": esc + Key("dollar"),
+    "home": Key("0"),
+    "car": esc + Key("caret"),
+    "doll": esc + Key("dollar"),
     "go to top": esc + Key("g,g"),
     "go to bottom": esc + Key("s-G"),
     "extract [<n>]": Key("x:%(n)d"),
@@ -231,6 +231,9 @@ vimEditing = {
 
     'easy jump': Key('%s:2, f' % LEADER),
     'easy del': Key('d, %s:2, t' % LEADER),
+
+    # Sneak
+    # 'sneak ': Key('%s:2, b' % LEADER),
 
     "next para [<n>]": esc + Key("%(n)d, rbrace"),
     "preev para [<n>]": esc + Key("%(n)d, lbrace"),
