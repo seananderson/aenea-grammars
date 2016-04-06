@@ -49,7 +49,7 @@ alternatives.append(RuleRef(rule=KeystrokeRule()))
 alternatives.append(RuleRef(rule=words.FormatRule()))
 root_action = Alternative(alternatives)
 
-sequence = Repetition(root_action, min=1, max=16, name="sequence")
+sequence = Repetition(root_action, min=1, max=9, name="sequence")
 
 class RepeatRule(CompoundRule):
     spec = "<sequence>"

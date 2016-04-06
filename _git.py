@@ -12,7 +12,7 @@ git_mapping = aenea.configuration.make_grammar_commands('git', {
 
     'git amend': Text("git commit --amend") + Key("enter"),
     'git commit': Text("git commit") + Key("enter"),
-    'git all commit': Text("git commit -av") + Key("enter"),
+    'git commit all': Text("git commit -av") + Key("enter"),
     'git pull': Text("git pull") + Key("enter"),
     'git branches': Text("git branch -l") + Key("enter"),
     'git status': Text("git status") + Key("enter"),

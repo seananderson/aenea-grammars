@@ -37,6 +37,8 @@ chrome_mapping = {
     'lest': Key("k:10"),
     # 'go to top': Key("g, g"),
     # 'go to bottom': Key("s-g"),
+    'edit in vim': Key("f12"),
+
 
     #  Searching
     # 'find <text>': Key("escape, slash") + Text("%(text)s") + Key("enter"),

@@ -14,6 +14,7 @@ import aenea.vocabulary
 import aenea.configuration
 import aenea.format
 import formatting
+import re
 
 from aenea import (
     AeneaContext,
@@ -82,7 +83,7 @@ class ReFormatRule(CompoundRule):
 class FormatRule(CompoundRule):
     spec = ('[upper | natural] ( proper | camel | rel-path | abs-path | score | '
     'scope-resolve | jumble | dotword | dashword |  titlecase |'
-    'snakeword | brooding-narrative) [<dictation>] [bomb]')
+    'snakeword ) [<dictation>]')
     extras = [Dictation(name='dictation')]
 
     def value(self, node):
@@ -101,25 +102,50 @@ class FormatRule(CompoundRule):
         if words[0].lower() in ('upper', 'natural'):
             del words[0]
 
-        bomb = None
-        if 'bomb' in words:
-            bomb_point = words.index('bomb')
-            if bomb_point+1 < len(words):
-                bomb = words[bomb_point+1 : ]
-            words = words[ : bomb_point]
-
         function = getattr(formatting, 'format_%s' % words[0].lower())
         formatted = function(words[1:])
-        global lastFormatRuleWords
-        lastFormatRuleWords = words[1:]
 
-        global lastFormatRuleLength
-        lastFormatRuleLength = len(formatted)
-
-        # empty formatted causes problems here
+        # Key("i").execute()
         print "  ->", formatted
-        if bomb != None:
-            return Text(formatted) + Mimic(' '.join(bomb))
-        else:
-            return Text(formatted)
+        return Text(formatted).execute()
+        # return Key("escape,l")
 
+def upperfirst(x):
+    return x[0].upper() + x[1:]
+
+def clean_prose(text):
+    print "was: " + str(text)
+    # strip out the \punctuation that Dragon adds in for some reason:
+    text = re.sub(r'\\[a-z-]+', r'', str(text))
+    text = re.sub(r'space', r' ', str(text))
+    # fix the spacing around punctuation:
+    text = re.sub(r' ([\?\!\.\:;,])', r'\1 ', text)
+    # capitalize the letter I if it's a word on its own:
+    text = re.sub(r'i([\' ]+)', r'I\1', text)
+    # be smart about double spaces:
+    text = re.sub(r'[ ]+', r' ', text)
+    # if these punctuation characters are on their own then don't have any spacing:
+    text = re.sub(r'^([\:\.;\!,]) $', r'\1', text)
+    # enforce space at the at the end:
+    text = re.sub(r'[ ]+$', r'', text)
+    text = text + ' '
+    return text
+
+def cap_that(text):
+    # if mode == "normal":
+      # Key("i").execute()
+    text = clean_prose(str(text))
+    text = upperfirst(text)
+    print "typing: " + text
+    Text(text).execute()
+    # if mode == "normal":
+      # Key("escape:2,l").execute()
+
+def lower_that(text, mode = "normal"):
+    # if mode == "normal":
+      # Key("i").execute()
+    text = clean_prose(str(text))
+    print "typing: " + text
+    Text(text).execute()
+    # if mode == "normal":
+      # Key("escape:2,l").execute()
