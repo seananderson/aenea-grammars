@@ -452,8 +452,9 @@ class RepeatRule(CompoundRule):
 
 mvim_context = aenea.ProxyCustomAppContext(id="MacVim")
 nvim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
+git_context = aenea.ProxyCustomAppContext(match="substring", titl="git") & aenea.ProxyCustomAppContext(id="iTerm2")
 gmail_context = aenea.ProxyCustomAppContext(titl="Mail") & aenea.ProxyCustomAppContext(id = "Google Chrome")
-vim_plus_wasavi_context = nvim_context | mvim_context
+vim_plus_wasavi_context = nvim_context | mvim_context | git_context
 grammar = Grammar("root rule", context = vim_plus_wasavi_context)
 grammar.add_rule(RepeatRule())
 grammar.load()
