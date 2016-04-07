@@ -3,7 +3,7 @@
 Grammars for use with [Aenea](https://github.com/dictation-toolbox/aenea) /
 [Dragonfly](https://github.com/t4ngo/dragonfly).
 
-These are the configuration files that I used to code and edit text entirely
+These are the configuration files that I use to code and edit text entirely
 by voice. The bulk of my attention so far has been on developing a Vim
 grammar.
 
