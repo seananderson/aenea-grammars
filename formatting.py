@@ -53,11 +53,11 @@ def format_jumble(text):
     return ''.join(text)
 
 
-def format_dotword(text):
+def format_dotify(text):
     return '.'.join(text)
 
 
-def format_dashword(text):
+def format_dashify(text):
     return '-'.join(text)
 
 

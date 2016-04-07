@@ -1,13 +1,3 @@
-# module for dictating words and basic sentences
-#
-# (based on the multiedit module from dragonfly-modules project)
-# (heavily modified)
-# (the original copyright notice is reproduced below)
-#
-# (c) Copyright 2008 by Christo Butcher
-# Licensed under the LGPL, see <http://www.gnu.org/licenses/>
-#
-
 import aenea
 import aenea.misc
 import aenea.vocabulary
@@ -52,8 +42,8 @@ class NopeFormatRule(CompoundRule):
 
 class ReFormatRule(CompoundRule):
     spec = ('that was [upper | natural] ( proper | camel | rel-path | '
-    'abs-path | score | scope-resolve | jumble | dotword | titlecase |'
-    'dashword | snakeword | brooding-narrative)')
+    'abs-path | score | scope-resolve | jumble | dotify | titlecase |'
+    'dashify | snakeword')
 
     def value(self, node):
         global lastFormatRuleWords
@@ -82,7 +72,7 @@ class ReFormatRule(CompoundRule):
 
 class FormatRule(CompoundRule):
     spec = ('[upper | natural] ( proper | camel | rel-path | abs-path | score | '
-    'scope-resolve | jumble | dotword | dashword |  titlecase |'
+    'scope-resolve | jumble | dotify | dashify |  titlecase |'
     'snakeword ) [<dictation>]')
     extras = [Dictation(name='dictation')]
 
@@ -107,7 +97,7 @@ class FormatRule(CompoundRule):
 
         # Key("i").execute()
         print "  ->", formatted
-        return Text(formatted).execute()
+        return Text(formatted)
         # return Key("escape,l")
 
 def upperfirst(x):

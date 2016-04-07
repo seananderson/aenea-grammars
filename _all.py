@@ -33,7 +33,6 @@ class KeystrokeRule(MappingRule):
         Dictation("text"),
         Choice("modifier1", generic.modifierMap),
         Choice("modifier2", generic.modifierMap),
-        Choice("modifierSingle", generic.singleModifierMap),
         Choice('letters', generic.letterMap),
         Choice('specials', generic.specialKeys),
         Choice('numbers', generic.numberMap),

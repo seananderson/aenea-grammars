@@ -120,7 +120,7 @@ vimEditing = {
     "chuck [<n>]": Key("backspace:%(n)d"),
     "kill [<n>]": Key("del:%(n)d"),
 
-    "dish [<n>]": esc + Key("%(n)d,d,l"),
+    "rosh [<n>]": esc + Key("%(n)d,d,l"),
     "dosh [<n>]": esc + Key("%(n)d,d,h"),
 
     # "litteral <letters>": Key("%(letters)s"),
@@ -182,26 +182,26 @@ vimEditing = {
 
     'matching': esc + Key("percent"),
 
-    'yope [<n>]': esc + Key('%(n)d, w'),
-    'iyope [<n>]': esc + Key('%(n)d, e'),
+    'rope [<n>]': esc + Key('%(n)d, w'),
+    'irope [<n>]': esc + Key('%(n)d, e'),
     'lope [<n>]': esc + Key('%(n)d, b'),
     'ilope [<n>]': esc + Key('%(n)d, g, e'),
 
-    'yopert [<n>]': esc + Key('%(n)d, s-W'),
-    'iyopert [<n>]': esc + Key('%(n)d, s-E'),
+    'ropert [<n>]': esc + Key('%(n)d, s-W'),
+    'iropert [<n>]': esc + Key('%(n)d, s-E'),
     'lopert [<n>]': esc + Key('%(n)d, s-B'),
     'ilopert [<n>]': esc + Key('%(n)d, g, s-E'),
 
     # EasyMotion
     'easy lope': esc + Key('%s:2, b' % LEADER),
-    'easy yope': esc + Key('%s:2, w' % LEADER),
+    'easy rope': esc + Key('%s:2, w' % LEADER),
     'easy elope': esc + Key('%s:2, g, e' % LEADER),
-    'easy iyope': esc + Key('%s:2, e' % LEADER),
+    'easy irope': esc + Key('%s:2, e' % LEADER),
 
     'easy lopert': esc + Key('%s:2, B' % LEADER),
-    'easy yopert': esc + Key('%s:2, W' % LEADER),
+    'easy ropert': esc + Key('%s:2, W' % LEADER),
     'easy elopert': esc + Key('%s:2, g, E' % LEADER),
-    'easy eyopert': esc + Key('%s:2, E' % LEADER),
+    'easy eropert': esc + Key('%s:2, E' % LEADER),
 
     'easy jump': esc + Key('%s:2, f' % LEADER),
     'easy dosh': esc + Key('d, %s:2, t' % LEADER),
@@ -240,8 +240,8 @@ vimEditing = {
 
     # Magic:
     "<verbKey> <advKey> <opKey>": esc + Key("%(verbKey)s") + Key("%(advKey)s") + Key("%(opKey)s"),
-    "chuck <n> (words|word)": esc + Key("d,%(n)d") + Key("s-B"),
-    "kill <n> (words|word)": esc + Key("d,%(n)d") + Key("s-W"),
+    "dosh [<n>] (words|word)": esc + Key("d,%(n)d") + Key("s-B"),
+    "rosh [<n>] (words|word)": esc + Key("d,%(n)d") + Key("s-W"),
     "<lineVerbKey>": esc + Key("%(lineVerbKey)s"),
 
     "find": esc + Key("slash"),
@@ -262,6 +262,7 @@ vimEditing = {
     # "change mark [<letters>]": esc + Key("c,backtick,%(letters)s"),
     # "del mark [<letters>]": esc + Key("d,backtick,%(letters)s"),
     "mark that": esc + Key("m,a"),
+    "mark bravo": esc + Key("m,b"),
     "jump mark": esc + Key("backtick,a"),
     "format mark": esc + Key("g,q,backtick,a"),
     "select mark": esc + Key("v,backtick,a"),
@@ -291,8 +292,9 @@ vimEditing = {
     "format para": esc + Key("s-Q"),
 
     "comment": esc + Key("g,c"),
+    "vis comment": Key("g,c"),
     "comment line": esc + Key("g,c,c"),
-    "comment paragraph": esc + Key("g,c,a,p"),
+    "comment para": esc + Key("g,c,a,p"),
 
     "(mort|scroll-down) [<n>]": esc + Key("c-d:%(n)d") ,
     "(lest|scroll-up) [<n>]": esc + Key("c-u:%(n)d") ,
@@ -363,6 +365,8 @@ class vimCommands(MappingRule):
     "make split short": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
     "make splits equal": esc + Key("c-w,equal"),
 
+    "run makefile": esc + Key("colon/100,exclamation,m,a,k,e,enter"),
+
     "toggle obsession": esc + Key("colon,s-o,b,s,e,s,s,i,o,n,exclamation,enter"),
     'toggle quick scope': esc + Key('colon,s-Q,u,i,c,k,s-S,c,o,p,e,s-T,o,g,g,l,e,enter'),
     'toggle tagbar': esc + Key('colon,s-T,a,g,b,a,r,s-T,o,g,g,l,e,enter'),
@@ -371,6 +375,8 @@ class vimCommands(MappingRule):
     "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
 
     "show ring": esc+Key("colon,s-Y,s-R,s-S,h,o,w,enter"),
+
+    "strip all white space": esc+Key("colon,s-C,h,o,m,p,enter"),
 
     "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
     "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
@@ -394,6 +400,138 @@ class vimCommands(MappingRule):
     "fuzzy (history|recent)": esc + Key("colon,s-H,i,s,t,o,r,y,enter"),
     "fuzzy commits": esc + Key("colon,s-C,o,m,m,i,t,s,enter"),
     "fuzzy help": esc + Key("colon,s-H,e,l,p,enter"),
+
+    ### R stats - Nvim-R plugin
+    # TODO create R language module
+     # Start/Close
+     "Start R": esc + Key("comma,r,f"),
+     # Start R (custom) \rc
+     # --------------------------------------------------------
+     "Close R session": esc + Key("comma,r,q"),
+     "Stop R session": esc + Key("colon,s-R,s-S,t,o,p"),
+    # -----------------------------------------------------------
+
+    # Send
+     "Run File": esc + Key("comma,a,a"),
+     "Run File and echo": esc + Key("comma,a,e"),
+     # . "Run File (open .Rout)": esc + Key("comma,a,o"),
+     # --------------------------------------------------------
+     "Run Mark": esc + Key("comma,b,b"),
+     "Run Mark and echo": esc + Key("comma,b,e"),
+     "Run Mark and down": esc + Key("comma,b,d"),
+     "Run Mark and echo and down": esc + Key("comma,b,a"),
+     # --------------------------------------------------------
+     "Run Chunk": esc + Key("comma,c,c"),
+     "Run Chunk and echo": esc + Key("comma,c,e"),
+     "Run Chunk and down": esc + Key("comma,c,d"),
+     "Run Chunk and echo and down": esc + Key("comma,c,a"),
+     "Run Chunk from top": esc + Key("comma,c,h"),
+     # --------------------------------------------------------
+     "Run Func": esc + Key("comma,f,f"),
+     "Run Func and echo": esc + Key("comma,f,e"),
+     "Run Func and down": esc + Key("comma,f,d"),
+     "Run Func and echo and down": esc + Key("comma,f,a"),
+     # --------------------------------------------------------
+     "Run Selected": esc + Key("comma,s,s"),
+     "Run Selected and echo": esc + Key("comma,s,e"),
+     "Run Selected down": esc + Key("comma,s,d"),
+     "Run Selected and echo and down": esc + Key("comma,s,a"),
+     "Run Preev": esc + Key("g,v/100,comma,s,s"),
+     "Run Preev and echo": esc + Key("g,v/100,comma,s,e"),
+     # . "Run Selected (Runuate and insert output in new tab)": esc + Key("comma,s,o"),
+     # --------------------------------------------------------
+     "Run Para": esc + Key("comma,p,p"),
+     "Run Para and echo": esc + Key("comma,p,e"),
+     "Run Para and down": esc + Key("comma,p,d"),
+     "Run Para and echo and down": esc + Key("comma,p,a"),
+     # --------------------------------------------------------
+     "Run Line and stay": esc + Key("comma,l"),
+     "Run Line": esc + Key("comma,d"),
+     "Run Line and new": esc + Key("comma,q"),
+     # . "Send Left part of line (cur)": \r<Left>
+     # . "Send Right part of line (cur)": \r<Right>
+    "Run Line and comment": esc + Key("comma,o"),
+    # -----------------------------------------------------------
+
+    # Command
+     "List R workspace": esc + Key("comma,r,l"),
+     "Clear R console": esc + Key("comma,r,r"),
+     "Clear R workspace": esc + Key("comma,r,m"),
+     # --------------------------------------------------------
+     "Print": esc + Key("comma,r,p"),
+     "Names": esc + Key("comma,r,n"),
+     "Structure": esc + Key("comma,r,t"),
+     "View data.frame": esc + Key("comma,r,v"),
+     # --------------------------------------------------------
+     "Arguments": esc + Key("comma,r,a"),
+     "Example": esc + Key("comma,r,e"),
+     "Help": esc + Key("comma,r,h"),
+     # --------------------------------------------------------
+     "Summary": esc + Key("comma,r,s"),
+     "Plot": esc + Key("comma,r,g"),
+     "Plot and summary": esc + Key("comma,r,b"),
+     # --------------------------------------------------------
+      "Set working directory": esc + Key("comma,r,d"),
+     # --------------------------------------------------------
+     # "call Sweave" esc: + Key("comma,s,w"),
+     # "call Sweave and PDF file" esc: + Key("comma,s,p"),
+     # "Sweave, BibTeX and PDF file) (Linux/Unix)" esc: + Key("comma,s,b"),
+     # --------------------------------------------------------
+     "Knit this file": esc + Key("comma,k,n"),
+     "Knit and PDF this file": esc + Key("comma,k,p"),
+     "Knit BibTeX and PDF this file": esc + Key("comma,k,b"),
+     # "Knit and Beamer PDF file) (only .Rmd)": esc + Key("comma,k,l"),
+     # "Knit and ODT file) (only .Rmd)": esc + Key("comma,k,o"),
+     # "Knit and Word Document file) (only .Rmd)": esc + Key("comma,k,w"),
+     "Knit and HTML this file": esc + Key("comma,k,h"),
+     "Spin this file": esc + Key("comma,k,s"),
+     # --------------------------------------------------------
+     "view PDF this file": esc + Key("comma,o,p"),
+     "SyncTeX": esc + Key("comma,g,p"),
+     # "Go to LaTeX (SyncTeX)": esc + Key("comma,g,t"),
+     # --------------------------------------------------------
+     # "R Build tags": :RBuildTags
+    # -----------------------------------------------------------
+
+    # Edit
+     # Insert "<-" _
+     # Complete object name ^X^O
+     # Complete function arguments ^X^A
+     # --------------------------------------------------------
+     # Indent (line) ==
+     # Indent (selected lines) =
+     # Indent (whole buffer) gg=G
+     # --------------------------------------------------------
+     # Toggle comment (line, sel) esc + Key("comma,x,x"),
+     # Comment (line, sel) esc + Key("comma,x,c"),
+     # Uncomment (line, sel) esc + Key("comma,x,u"),
+     # Add/Align right comment (line, sel) esc + Key("comma,semicolon"),
+     # --------------------------------------------------------
+     "next R chunk": esc + Key("comma,g,n"),
+     "preev R chunk": esc + Key("comma,g,s-N"),
+    # -----------------------------------------------------------
+
+    # Object Browser
+     "(Show|Update) R objects": esc + Key("comma,r,o"),
+     "Expand R objects": esc + Key("comma,r,equal"),
+     "Collapse R objects": esc + Key("comma,r,hyphen"),
+     # Toggle (cur) Enter
+
+    # "rstudio toggle comment": Key("s-c-c"),
+    # "r-assign": Key("a-hyphen"),
+    # "[go] to (source|editor)": Key("c-1"),
+    # "[go] to plots": Key("c-6"),
+    # "[go] to git": Key("c-9"),
+    # "[go] to console": Key("c-2"),
+    # "[go] to help": Key("c-3"),
+    # "[go] to files": Key("c-5"),
+    # "[go] to build": Key("c-0"),
+    # "[go] to history": Key("c-4"),
+    # "[go] to file": Key("c-dot"),
+    # # "[go] to tab": Key("s-c-dot"),
+    "G G plot": Key("g,g,p,l,o,t"),
+    "dplyr": Key("d,p,l,y,r"),
+    "mutate": Key("m,u,t,a,t,e"),
 }
 
 generalKeys = {}
