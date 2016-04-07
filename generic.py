@@ -42,10 +42,10 @@ letterMap = {
 numberMap = {
     "zero": "0",
     "one": "1",
-    "two": "2",
+    # "two": "2",
     "duo": "2",
     "three": "3",
-    "four": "4",
+    # "four": "4",
     "quad": "4",
     "five": "5",
     "six": "6",
