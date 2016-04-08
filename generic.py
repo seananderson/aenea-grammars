@@ -132,7 +132,7 @@ reservedWord = {
     "paste": "paste",
     "copy": "copy",
     "cut": "cut",
-    "undo": "undo",
+    "scratch": "scratch",
     "release": "release",
     "page up": "page up",
     "page down": "page down",
@@ -168,7 +168,7 @@ nonVimGenericKeys = {
     "[<n>] left": Key("left:%(n)d"),
     "[<n>] right": Key("right:%(n)d"),
 
-    "undo [<n>]": Key("w-z:%(n)d"),
+    "scratch [<n>]": Key("w-z:%(n)d"),
     "redo [<n>]": Key("sw-z:%(n)d"),
     "kill [<n>]": Key("del:%(n)d"),
     "kill to end": Key("c-k"),

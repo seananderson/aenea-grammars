@@ -106,8 +106,8 @@ lineVerbCharMap = {
 
 vimEditing = {
     # inserting:
-    "<letters>": Key("%(letters)s"),
-    "sky <letters>": Key("s-%(letters)s"),
+    "<letters> [<n>]": Key("%(letters)s:%(n)d"),
+    "sky <letters> [<n>]": Key("s-%(letters)s:%(n)d"),
     "num <numbers>": Key("%(numbers)s"),
     "<numbers>": Key("%(numbers)s"),
     "space [<n>]": Key("space:%(n)d"),
@@ -216,7 +216,7 @@ vimEditing = {
     "next sec [<n>]": esc + Key("%(n)d, rbracket, rbracket"),
     "preev sec [<n>]": esc + Key("%(n)d, lbracket, lbracket"),
 
-    "undo [<n>]": esc + Key("u:%(n)d"),
+    "scratch [<n>]": esc + Key("u:%(n)d"),
     "redo [<n>]": esc + Key("c-r:%(n)d"),
     "repeat [<n>]": esc + Key("%(n)d, dot"),
 
@@ -289,7 +289,7 @@ vimEditing = {
     "(pip|pop) cancel": Key("c-e"),
     "snip": Key("c-b"),
 
-    "format para": esc + Key("s-Q"),
+    "fip": esc + Key("s-Q"),
 
     "comment": esc + Key("g,c"),
     "vis comment": Key("g,c"),
@@ -400,6 +400,9 @@ class vimCommands(MappingRule):
     "fuzzy (history|recent)": esc + Key("colon,s-H,i,s,t,o,r,y,enter"),
     "fuzzy commits": esc + Key("colon,s-C,o,m,m,i,t,s,enter"),
     "fuzzy help": esc + Key("colon,s-H,e,l,p,enter"),
+
+    "disable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-d,i,s,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
+    "enable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-e,n,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
 
     ### R stats - Nvim-R plugin
     # TODO create R language module
