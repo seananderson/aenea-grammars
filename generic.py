@@ -9,32 +9,31 @@ from words import (
     lower_that
 )
 import re
-
 letterMap = {
     "(alpha|arch)": "a",
-    "(bravo) ": "b",
+    "(bravo|brav) ": "b",
     "(charlie|char) ": "c",
-    "(delta) ": "d",
-    "(echo|eck) ": "e",
+    "(delta|delt) ": "d",
+    "(echo|eek) ": "e",
     "(foxtrot|fox) ": "f",
     "(golf|gee) ": "g",
-    "(hotel) ": "h",
-    "(india|ice) ": "i",
-    "(juliet) ": "j",
+    "(hotel|hoat) ": "h",
+    "(ice) ": "i",
+    "(juliet|jinx) ": "j",
     "(kilo) ": "k",
     "(lug) ": "l",
     "(mike) ": "m",
-    "(november) ": "n",
+    "(november|nerb) ": "n",
     "(oscar|ork) ": "o",
     "pooch ": "p",
     "(quebec|queen) ": "q",
-    "(romeo) ": "r",
+    "(romeo|Rome) ": "r",
     "(sierra|souk) ": "s",
-    "(tango) ": "t",
-    "(union|unks) ": "u",
-    "(victor|verge) ": "v",
-    "(whiskey|womp) ": "w",
-    "(x-ray) ": "x",
+    "(tango|teek) ": "t",
+    "(union|unks|unk) ": "u",
+    "(victor|vick) ": "v",
+    "(whiskey|whisk|wisk) ": "w",
+    "(x-ray|ecks) ": "x",
     "(yankee) ": "y",
     "(zulu) ": "z",
 }
@@ -72,7 +71,7 @@ controlKeyMap = {
 
 specialCharMap = {
     # "(bar|vertical bar|pipe)": "|",
-    # "(dash|minus|hyphen)": "-",
+    "hyphen": "hyphen",
     # "(dot|period)": ".",
     "calm": "comma",
     "backslash": "backslash",
@@ -83,15 +82,14 @@ specialCharMap = {
     # "semi-col": ";",
     # "at symbol": "@",
     # "[double] quote": """,
-    # "single quote": """,
+    "single quote": "squote",
     # "pound|hash": "#",
     # "dollar": "$",
     # "percent": "%",
     # "and": "&",
     "slash": "slash",
-    # "equal": "=",
-    # "plus": "+",
-    # "space": " "
+    "equals": "equal",
+    "plus": "plus",
 }
 
 release = Key("shift:up, ctrl:up, alt:up, win:up")

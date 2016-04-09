@@ -42,29 +42,29 @@ navCharMap = {
     "single quote": "squote",
     "hyphen": "hyphen",
     "(alpha|arch)": "a",
-    "(bravo)": "b",
-    "(charlie|char)": "c",
-    "(delta)": "d",
-    "(echo|eck)": "e",
+    "(bravo|brav) ": "b",
+    "(charlie|char) ": "c",
+    "(delta|delt) ": "d",
+    "(echo|eek) ": "e",
     "(foxtrot|fox) ": "f",
-    "(golf|gee)": "g",
-    "(hotel) ": "h",
-    "(india|ice) ": "i",
-    "(juliet) ": "j",
+    "(golf|gee) ": "g",
+    "(hotel|hoat) ": "h",
+    "(ice) ": "i",
+    "(juliet|jinx) ": "j",
     "(kilo) ": "k",
     "(lug) ": "l",
     "(mike) ": "m",
-    "(november) ": "n",
+    "(november|nerb) ": "n",
     "(oscar|ork) ": "o",
     "pooch ": "p",
     "(quebec|queen) ": "q",
-    "(romeo) ": "r",
+    "(romeo|Rome) ": "r",
     "(sierra|souk) ": "s",
-    "(tango) ": "t",
-    "(union|unks) ": "u",
-    "(victor|verge) ": "v",
-    "(whiskey|womp) ": "w",
-    "(x-ray) ": "x",
+    "(tango|teek) ": "t",
+    "(union|unks|unk) ": "u",
+    "(victor|vick) ": "v",
+    "(whiskey|whisk|wisk) ": "w",
+    "(x-ray|ecks) ": "x",
     "(yankee) ": "y",
     "(zulu) ": "z",
 }
@@ -353,6 +353,7 @@ class vimCommands(MappingRule):
     "set theme Seoul": esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6") + Key("enter"),
     "toggle lights": esc + Key("colon/50,s-T,o,g,g,l,e,s-B,s-G") + Key("enter"),
     "toggle spelling": esc + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter"),
+    "Lucky correct": esc + Key("1,z,equal"),
     "toggle invisible characters": esc + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter"),
     "toggle nerd": esc + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter"),
     "toggle cursor-line": esc + Key("colon/50,s,e,space,c,u,r,s,o,r,l,i,n,e/50,exclamation,enter"),
@@ -593,9 +594,11 @@ class RepeatRule(CompoundRule):
 
 mvim_context = aenea.ProxyCustomAppContext(id="MacVim")
 nvim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
+vim_context = aenea.ProxyCustomAppContext(match="substring", titl="vim") & aenea.ProxyCustomAppContext(id="iTerm2")
 git_context = aenea.ProxyCustomAppContext(match="substring", titl="git") & aenea.ProxyCustomAppContext(id="iTerm2")
+z_context = aenea.ProxyCustomAppContext(match="substring", titl="fg (Python)") & aenea.ProxyCustomAppContext(id="iTerm2")
 gmail_context = aenea.ProxyCustomAppContext(titl="Mail") & aenea.ProxyCustomAppContext(id = "Google Chrome")
-vim_plus_wasavi_context = nvim_context | mvim_context | git_context
+vim_plus_wasavi_context = nvim_context | mvim_context | git_context | z_context | vim_context
 grammar = Grammar("root rule", context = vim_plus_wasavi_context)
 grammar.add_rule(RepeatRule())
 grammar.load()
