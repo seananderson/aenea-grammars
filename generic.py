@@ -90,6 +90,7 @@ specialCharMap = {
     "slash": "slash",
     "equals": "equal",
     "plus": "plus",
+    "quest mark": "question",
 }
 
 release = Key("shift:up, ctrl:up, alt:up, win:up")
