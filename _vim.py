@@ -45,7 +45,7 @@ navCharMap = {
     "(alpha|arch)": "a",
     "(bravo|brav) ": "b",
     "(charlie|char) ": "c",
-    "(delta) ": "d",
+    "(delta|dee) ": "d",
     "(echo|eek) ": "e",
     "(foxtrot|fox) ": "f",
     "(golf|gee) ": "g",
@@ -217,7 +217,7 @@ vimEditing = {
     "next sec [<n>]": esc + Key("%(n)d, rbracket, rbracket"),
     "preev sec [<n>]": esc + Key("%(n)d, lbracket, lbracket"),
 
-    "scratch [<n>]": esc + Key("u:%(n)d"),
+    "(undo|scratch) [<n>]": esc + Key("u:%(n)d"),
     "redo [<n>]": esc + Key("c-r:%(n)d"),
     "repeat [<n>]": esc + Key("%(n)d, dot"),
 

@@ -13,7 +13,7 @@ letterMap = {
     "(alpha|arch)": "a",
     "(bravo|brav) ": "b",
     "(charlie|char) ": "c",
-    "(delta) ": "d",
+    "(delta|dee) ": "d",
     "(echo|eek) ": "e",
     "(foxtrot|fox) ": "f",
     "(golf|gee) ": "g",
