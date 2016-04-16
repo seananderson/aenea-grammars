@@ -10,12 +10,14 @@ import words
 import generic
 import osx
 import vocab
+import r_vocab
 
 generalKeys = {}
 generalKeys.update(generic.genericKeys)
 generalKeys.update(generic.nonVimGenericKeys)
 generalKeys.update(osx.osx)
 generalKeys.update(vocab.vocabWord)
+generalKeys.update(r_vocab.r_vocab)
 
 grammarCfg = Config("all")
 grammarCfg.cmd = Section("Language section")

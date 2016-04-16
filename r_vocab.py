@@ -9,4 +9,5 @@ r_vocab = {
   "say geom": Text("geom"),
   "say S S 3": Text("ss3"),
   "say S S 3 (sim|sam)": Text("ss3sim"),
+  "say dev off": Text("dev.off()"),
 }

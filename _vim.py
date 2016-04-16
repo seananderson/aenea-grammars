@@ -10,6 +10,7 @@ import words
 from words import clean_prose, cap_that, lower_that
 import generic
 import osx
+import r_vocab
 import vocab
 import formatting
 
@@ -44,7 +45,7 @@ navCharMap = {
     "(alpha|arch)": "a",
     "(bravo|brav) ": "b",
     "(charlie|char) ": "c",
-    "(delta|delt) ": "d",
+    "(delta) ": "d",
     "(echo|eek) ": "e",
     "(foxtrot|fox) ": "f",
     "(golf|gee) ": "g",
@@ -289,7 +290,7 @@ vimEditing = {
     "(pip|pop) cancel": Key("c-e"),
     "snip": Key("c-b"),
 
-    "fip": esc + Key("s-Q"),
+    "(format para|fip)": esc + Key("s-Q"),
 
     "comment": esc + Key("g,c"),
     "vis comment": Key("g,c"),
@@ -315,7 +316,7 @@ class vimCommands(MappingRule):
     "(screen|window) right": esc + Key("c-w,l"),
     "(screen|window) up": esc + Key("c-w,k"),
     "(screen|window) down": esc + Key("c-w,j"),
-    "(split|screen|window) close": esc + Key("c-w,c"),
+    "close (split|screen|window)": esc + Key("c-w,c"),
     "close other splits": esc + Key("colon/100,o,n,l,y/100,enter"),
 
     "edit file": esc + Key("colon,e,space,tab"),
@@ -416,45 +417,46 @@ class vimCommands(MappingRule):
     # -----------------------------------------------------------
 
     # Send
-     "Run File": esc + Key("comma,a,a"),
-     "Run File and echo": esc + Key("comma,a,e"),
-     # . "Run File (open .Rout)": esc + Key("comma,a,o"),
+     "eval File": esc + Key("comma,a,a"),
+     # "eval File and echo": esc + Key("comma,a,e"),
+     # . "eval File (open .Rout)": esc + Key("comma,a,o"),
      # --------------------------------------------------------
-     "Run Mark": esc + Key("comma,b,b"),
-     "Run Mark and echo": esc + Key("comma,b,e"),
-     "Run Mark and down": esc + Key("comma,b,d"),
-     "Run Mark and echo and down": esc + Key("comma,b,a"),
+     "eval Mark": esc + Key("comma,b,d"),
+     # "eval Mark and echo": esc + Key("comma,b,e"),
+     # "eval Mark and down": esc + Key("comma,b,d"),
+     # "eval Mark and echo and down": esc + Key("comma,b,a"),
      # --------------------------------------------------------
-     "Run Chunk": esc + Key("comma,c,c"),
-     "Run Chunk and echo": esc + Key("comma,c,e"),
-     "Run Chunk and down": esc + Key("comma,c,d"),
-     "Run Chunk and echo and down": esc + Key("comma,c,a"),
-     "Run Chunk from top": esc + Key("comma,c,h"),
+     "eval Chunk": esc + Key("comma,c,d"),
+     # "eval Chunk and echo": esc + Key("comma,c,e"),
+     # "eval Chunk and down": esc + Key("comma,c,d"),
+     # "eval Chunk and echo and down": esc + Key("comma,c,a"),
+     "eval Chunks from top": esc + Key("comma,c,h"),
      # --------------------------------------------------------
-     "Run Func": esc + Key("comma,f,f"),
-     "Run Func and echo": esc + Key("comma,f,e"),
-     "Run Func and down": esc + Key("comma,f,d"),
-     "Run Func and echo and down": esc + Key("comma,f,a"),
+     "eval Func": esc + Key("comma,f,d"),
+     # "eval Func and echo": esc + Key("comma,f,e"),
+     # "eval Func and down": esc + Key("comma,f,d"),
+     # "eval Func and echo and down": esc + Key("comma,f,a"),
      # --------------------------------------------------------
-     "Run Selected": esc + Key("comma,s,s"),
-     "Run Selected and echo": esc + Key("comma,s,e"),
-     "Run Selected down": esc + Key("comma,s,d"),
-     "Run Selected and echo and down": esc + Key("comma,s,a"),
-     "Run Preev": esc + Key("g,v/100,comma,s,s"),
-     "Run Preev and echo": esc + Key("g,v/100,comma,s,e"),
-     # . "Run Selected (Runuate and insert output in new tab)": esc + Key("comma,s,o"),
+     "eval Selected": esc + Key("comma,s,d"),
+     # "eval Selected and echo": esc + Key("comma,s,e"),
+     # "eval Selected down": esc + Key("comma,s,d"),
+     # "eval Selected and echo and down": esc + Key("comma,s,a"),
+
+     "eval Preev": esc + Key("g,v/100,comma,s,d"),
+     # "eval Preev and echo": esc + Key("g,v/100,comma,s,e"),
+     # . "eval Selected (Runuate and insert output in new tab)": esc + Key("comma,s,o"),
      # --------------------------------------------------------
-     "Run Para": esc + Key("comma,p,p"),
-     "Run Para and echo": esc + Key("comma,p,e"),
-     "Run Para and down": esc + Key("comma,p,d"),
-     "Run Para and echo and down": esc + Key("comma,p,a"),
+     "eval Para": esc + Key("comma,p,d"),
+     # "eval Para and echo": esc + Key("comma,p,e"),
+     # "eval Para and down": esc + Key("comma,p,d"),
+     # "eval Para and echo and down": esc + Key("comma,p,a"),
      # --------------------------------------------------------
-     "Run Line and stay": esc + Key("comma,l"),
-     "Run Line": esc + Key("comma,d"),
-     "Run Line and new": esc + Key("comma,q"),
+     "eval Line and stay": esc + Key("comma,l"),
+     "(bam|eval line)": esc + Key("comma,d"),
+     "eval Line and new": esc + Key("comma,q"),
      # . "Send Left part of line (cur)": \r<Left>
      # . "Send Right part of line (cur)": \r<Right>
-    "Run Line and comment": esc + Key("comma,o"),
+    "eval Line and comment": esc + Key("comma,o"),
     # -----------------------------------------------------------
 
     # Command
@@ -520,6 +522,9 @@ class vimCommands(MappingRule):
      "Expand R objects": esc + Key("comma,r,equal"),
      "Collapse R objects": esc + Key("comma,r,hyphen"),
      # Toggle (cur) Enter
+
+    "assign that": Key("space,langle,hyphen,space"),
+    "pipe that": Key("space,percent,rangle,percent,space"),
 
     # "rstudio toggle comment": Key("s-c-c"),
     # "r-assign": Key("a-hyphen"),

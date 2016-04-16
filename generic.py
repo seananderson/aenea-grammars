@@ -13,7 +13,7 @@ letterMap = {
     "(alpha|arch)": "a",
     "(bravo|brav) ": "b",
     "(charlie|char) ": "c",
-    "(delta|delt) ": "d",
+    "(delta) ": "d",
     "(echo|eek) ": "e",
     "(foxtrot|fox) ": "f",
     "(golf|gee) ": "g",
@@ -72,7 +72,7 @@ controlKeyMap = {
 specialCharMap = {
     # "(bar|vertical bar|pipe)": "|",
     "hyphen": "hyphen",
-    # "(dot|period)": ".",
+    "dot": "dot",
     "calm": "comma",
     "backslash": "backslash",
     "tilde": "tilde",
@@ -100,7 +100,7 @@ modifierMap = {
     "alt|option": "a",
     "control": "c",
     "shift": "s",
-    "command": "w",
+    "command|cod": "w",
 }
 
 # Modifiers for the press-command, if only the modifier is pressed.
@@ -108,7 +108,7 @@ singleModifierMap = {
     "alt|option": "a",
     "control": "c",
     "shift": "s",
-    "command": "w",
+    "command|cod": "w",
 }
 
 pressKeyMap = {}
@@ -132,6 +132,7 @@ reservedWord = {
     "copy": "copy",
     "cut": "cut",
     "scratch": "scratch",
+    "undo": "undo",
     "release": "release",
     "page up": "page up",
     "page down": "page down",
@@ -167,7 +168,7 @@ nonVimGenericKeys = {
     "[<n>] left": Key("left:%(n)d"),
     "[<n>] right": Key("right:%(n)d"),
 
-    "scratch [<n>]": Key("w-z:%(n)d"),
+    "(undo|scratch) [<n>]": Key("w-z:%(n)d"),
     "redo [<n>]": Key("sw-z:%(n)d"),
     "kill [<n>]": Key("del:%(n)d"),
     "kill to end": Key("c-k"),
@@ -253,6 +254,10 @@ genericKeys = {
     "press <pressKey>": Key("%(pressKey)s"),
 
     "say <reservedWord>": Text("%(reservedWord)s"),
+
+# vocabulary
+    "say PDF-lay-tech": Text("pdflatex "),
+    "say (bib-teck|big-tech)": Text("bibtex "),
 
  # Navigation keys.
     "page up [<n>]": Key("pgup:%(n)d"),

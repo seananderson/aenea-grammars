@@ -4,6 +4,8 @@ from aenea.lax import Key
 from aenea import Text
 import dragonfly
 
+# For now this file will also cover all other iTerm2 commands
+
 git_context = aenea.ProxyCustomAppContext(id="iTerm2")
 grammar = dragonfly.Grammar('git', context=git_context)
 
@@ -25,11 +27,14 @@ git_mapping = aenea.configuration.make_grammar_commands('git', {
 
     # Incomplete Commands
     'git add': Text("git add "),
+    'git clone': Text("git clone "),
     'git word-diff': Text("git diff --color-words "),
     'git checkout': Text("git checkout "),
     'git interactive rebase': Text("git rebase -i "),
     'git rebase': Text("git rebase "),
-    'git push to': Text("git push"),
+    'git move': Text("git mv "),
+
+    'change dir': Text("cd "),
 
 })
 
