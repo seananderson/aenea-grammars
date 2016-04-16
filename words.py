@@ -41,9 +41,9 @@ class NopeFormatRule(CompoundRule):
         return Key('backspace:' + str(lastFormatRuleLength))
 
 class ReFormatRule(CompoundRule):
-    spec = ('that was [upper | natural] ( proper | camel | rel-path | '
-    'abs-path | score | scope-resolve | jumble | dotify | titlecase |'
-    'dashify | snakeword')
+    spec = ('that was [upper | natural] ( proper | camel | relative-path | '
+    'absolute-path | score | double-colon | jumble | dotify | titlecase |'
+    'jive | snakeword')
 
     def value(self, node):
         global lastFormatRuleWords
@@ -71,8 +71,8 @@ class ReFormatRule(CompoundRule):
         return Text(formatted)
 
 class FormatRule(CompoundRule):
-    spec = ('[upper | natural] ( proper | camel | rel-path | abs-path | score | '
-    'scope-resolve | jumble | dotify | dashify |  titlecase |'
+    spec = ('[upper | natural] ( proper | camel | relative-path | absolute-path | score | '
+    'double-colon | jumble | dotify | jive |  titlecase |'
     'snakeword ) [<dictation>]')
     extras = [Dictation(name='dictation')]
 

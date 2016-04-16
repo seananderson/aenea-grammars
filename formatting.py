@@ -37,15 +37,15 @@ def format_proper(text):
     return ''.join(word.capitalize() for word in text)
 
 
-def format_relpath(text):
+def format_relativepath(text):
     return '/'.join(text)
 
 
-def format_abspath(text):
-    return '/' + format_relpath(text)
+def format_absolutepath(text):
+    return '/' + format_relativepath(text)
 
 
-def format_scoperesolve(text):
+def format_doublecolon(text):
     return '::'.join(text)
 
 
@@ -57,7 +57,7 @@ def format_dotify(text):
     return '.'.join(text)
 
 
-def format_dashify(text):
+def format_jive(text):
     return '-'.join(text)
 
 
