@@ -8,14 +8,16 @@ by voice. The bulk of my attention so far has been on developing a Vim
 grammar.
 
 This is a work in progress and unlikely to work on your system
-without considerable modification.
+without considerable modification. I work with my
+[fork of Aenea](https://github.com/seananderson/aenea).
 
-Concepts and bits of code were primarily borrowed from the following:
+I have borrowed concepts and pieces of code from the following:
 
 - <https://github.com/dwks/aenea-grammar-simple>
 - <https://github.com/tgrosinger/aenea-grammars>
 - <https://github.com/dictation-toolbox/dragonfly-scripts>
 - <https://github.com/dictation-toolbox/aenea-grammars>
 - <https://www.youtube.com/watch?v=8SkdfdXWYaI>
+- <https://github.com/VoiceCode/docs/wiki>
 
 Thanks for everyone's hard work that has made this possible.
