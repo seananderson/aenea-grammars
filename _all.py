@@ -61,8 +61,12 @@ class RepeatRule(CompoundRule):
         for action in sequence:
             action.execute()
 
-vim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
-grammar = Grammar("root rule", context = ~vim_context)
+mvim_context = aenea.ProxyCustomAppContext(id="MacVim")
+nvim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
+vim_context = aenea.ProxyCustomAppContext(match="substring", titl="vim") & aenea.ProxyCustomAppContext(id="iTerm2")
+git_vim_context = aenea.ProxyCustomAppContext(match="substring", titl="git") & aenea.ProxyCustomAppContext(id="iTerm2")
+vim_plus_context = nvim_context | mvim_context | vim_context | git_vim_context
+grammar = Grammar("root rule", context = ~vim_plus_context)
 grammar.add_rule(RepeatRule())
 grammar.load()
 

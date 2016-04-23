@@ -22,6 +22,7 @@ rstudioMap = {
     '[go] to start': Key('w-left'),
     '[go] to end': Key('w-right'),
     'pop history': Key('w-up'),
+    'sert': Key('i'),
 
     # 'source'
 
@@ -49,7 +50,7 @@ rstudioMap = {
     'run preeve chunks': Key('wa-p'),
     'run chunk': Key('wa-c'),
     'run next chunk': Key('wa-n'),
-    'source doct': Key('ws-s'),
+    'source doc': Key('ws-s'),
     'source doc and echo': Key('ws-enter'),
     'fold sel': Key('wa-l'),
     'unfold sel': Key('wsa-l'),

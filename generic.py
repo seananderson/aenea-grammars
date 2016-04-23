@@ -224,6 +224,7 @@ specialKeys = {
     "semi": "semicolon",
     "quote": "dquote",
     "equals": "space, equal, space",
+    "equal": "equal",
     "bang": "exclamation",
     "hash": "hash",
     "hyphen": "hyphen",

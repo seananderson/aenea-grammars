@@ -25,6 +25,9 @@ osx = {
     "spotify app": Key("caw-f9"),
     "git-hub app": Key("caw-f10"),
     "1-password app": Key("caw-f11"),
+    "zotero app": Key("caw-f12"),
+    "are app": Key("scaw-f12"),
+    "macvim app": Key("scaw-f11"),
     "preeve app": Key("caw-lbracket"),
     "next app": Key("caw-rbracket"),
 

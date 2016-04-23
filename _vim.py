@@ -107,8 +107,8 @@ lineVerbCharMap = {
 
 vimEditing = {
     # inserting:
-    "<letters> [<n>]": Key("%(letters)s:%(n)d"),
-    "sky <letters> [<n>]": Key("s-%(letters)s:%(n)d"),
+    "<letters>": Key("%(letters)s"),
+    "sky <letters>": Key("s-%(letters)s"),
     "num <numbers>": Key("%(numbers)s"),
     "<numbers>": Key("%(numbers)s"),
     "space [<n>]": Key("space:%(n)d"),
@@ -166,7 +166,7 @@ vimEditing = {
     "vis-mode": esc + Key("v"),
     "vis-line": esc + Key("s-v"),
     "vis-block": esc + Key("c-v"),
-    "reselect": esc + Key("g,v"),
+    "reselect that": esc + Key("g,v"),
 
     "sert": esc + Key("i"),
     "big sert": esc + Key("s-i"),
@@ -181,7 +181,7 @@ vimEditing = {
     "next [<n>]": esc + Key("n:%(n)d"),
     "preeve [<n>]": esc + Key("N:%(n)d"),
 
-    'matching': esc + Key("percent"),
+    'match that': esc + Key("percent"),
 
     'rope [<n>]': esc + Key('%(n)d, w'),
     'irope [<n>]': esc + Key('%(n)d, e'),
@@ -194,21 +194,21 @@ vimEditing = {
     'ilopert [<n>]': esc + Key('%(n)d, g, s-E'),
 
     # EasyMotion
-    'easy lope': esc + Key('%s:2, b' % LEADER),
-    'easy rope': esc + Key('%s:2, w' % LEADER),
-    'easy elope': esc + Key('%s:2, g, e' % LEADER),
-    'easy irope': esc + Key('%s:2, e' % LEADER),
-
-    'easy lopert': esc + Key('%s:2, B' % LEADER),
-    'easy ropert': esc + Key('%s:2, W' % LEADER),
-    'easy elopert': esc + Key('%s:2, g, E' % LEADER),
-    'easy eropert': esc + Key('%s:2, E' % LEADER),
-
-    'easy jump': esc + Key('%s:2, f' % LEADER),
-    'easy dosh': esc + Key('d, %s:2, t' % LEADER),
+#    'easy lope': esc + Key('%s:2, b' % LEADER),
+#    'easy rope': esc + Key('%s:2, w' % LEADER),
+#    'easy elope': esc + Key('%s:2, g, e' % LEADER),
+#    'easy irope': esc + Key('%s:2, e' % LEADER),
+#
+#    'easy lopert': esc + Key('%s:2, B' % LEADER),
+#    'easy ropert': esc + Key('%s:2, W' % LEADER),
+#    'easy elopert': esc + Key('%s:2, g, E' % LEADER),
+#    'easy eropert': esc + Key('%s:2, E' % LEADER),
+#
+#    'easy jump': esc + Key('%s:2, f' % LEADER),
+#    'easy dosh': esc + Key('d, %s:2, t' % LEADER),
 
     # Sneak
-    'sneaker <letters> <letters2>': esc + Key('s') + Key("%(letters)s") + Key("%(letters2)s"),
+    'sneak <letters> <letters2>': esc + Key('s') + Key("%(letters)s") + Key("%(letters2)s"),
 
     "next para [<n>]": esc + Key("%(n)d, rbrace"),
     "preev para [<n>]": esc + Key("%(n)d, lbrace"),
@@ -225,17 +225,16 @@ vimEditing = {
     'select till <navKey>': esc + Key("escape, v, t") + Key("%(navKey)s"),
     'dosh till <navKey>': esc + Key("escape, d, t") + Key("%(navKey)s"),
     'change till <navKey>': esc + Key("escape, c, t") + Key("%(navKey)s"),
-    'quick <navKey> [<n>]': esc + Key("escape, %(n)d, f") + Key("%(navKey)s"),
-    'quick back <navKey> [<n>]': esc + Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
-    'skip [<n>]': esc + Key("escape, %(n)d, f"),
-    'skip back [<n>]': esc + Key("escape, %(n)d, s-f"),
+    'skip <navKey> [<n>]': esc + Key("escape, %(n)d, f") + Key("%(navKey)s"),
+    'skip back <navKey> [<n>]': esc + Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
+
     # 'jump (bill|till) again [<n>]': esc + Key("escape, %(n)d, semicolon"),
      # nnoremap K ;
     'reverse semi [<n>]': esc + Key("escape, %(n)d, f6"),
      # nnoremap <F6> ,
 
-    "indent": esc + Key("rangle,rangle"),
-    "out-dent": esc + Key("langle,langle"),
+    "indent that": esc + Key("rangle,rangle"),
+    "out-dent that": esc + Key("langle,langle"),
     "join [<n>]": esc + Key("s-J:%(n)d"),
     "toggle case": esc + Key("tilde"),
 
@@ -251,8 +250,8 @@ vimEditing = {
     "find back": esc + Key("question"),
     "find now <text>": esc + Key("slash") + Text("%(text)s"),
     "find back now <text>": esc + Key("question") + Text("%(text)s"),
-    "vis find <text>": Key("slash") + Text("%(text)s"),
-    "vis find back <text>": Key("question") + Text("%(text)s"),
+    # "vis find <text>": Key("slash") + Text("%(text)s"),
+    # "vis find back <text>": Key("question") + Text("%(text)s"),
     "jump till <text>": esc + Key("slash") + Text("%(text)s") + Key("enter"),
     "jump back till <text>": esc + Key("question") + Text("%(text)s") + Key("enter"),
 
@@ -288,12 +287,12 @@ vimEditing = {
     "(pip|pop) omni": Key("c-x,c-o"),
     "(pip|pop) arg": Key("c-x,c-a"),
     "(pip|pop) cancel": Key("c-e"),
-    "snip": Key("c-b"),
+    # "snip": Key("c-b"),
 
-    "(format para|fip)": esc + Key("s-Q"),
+    "(format para)": esc + Key("s-Q"),
 
     "comment": esc + Key("g,c"),
-    "vis comment": Key("g,c"),
+    # "vis comment": Key("g,c"),
     "comment line": esc + Key("g,c,c"),
     "comment para": esc + Key("g,c,a,p"),
 
@@ -305,11 +304,8 @@ vimEditing = {
     "repeat macro [<n>]": Key("%(n)d,at,q"),
     "(maru|magic star) [<n>]": esc + Key("%(n)d, asterisk"),
     "(paru|magic pound) [<n>]": esc + Key("%(n)d, hash"),
-}
 
-class vimCommands(MappingRule):
-    mapping  = {
-### splits:
+    ### splits:
     "split (screen|window)": esc + Key("c-w,s"),
     "split (screen|window) vertically": esc + Key("c-w,v"),
     "(screen|window) left": esc + Key("c-w,h"),
@@ -330,91 +326,6 @@ class vimCommands(MappingRule):
     'screen bottom': esc + Key("z, b"),
     "swiddle": esc + Key("escape, c-p"),
     "swiddle recent": esc + Key("escape,colon,s-C,t,r,l,s-P,s-M,s-R,s-U,enter"),
-
-    'suspend': Key('c-z'),
-    "edit config file": esc + Key("comma, e, v"),
-    "table of contents": esc + Key("colon, s-T, s-O, s-C, enter"),
-    "source config file": esc + Key("comma, s, v"),
-    "source session": esc + Key("colon,s,o,space"),
-    "run command": esc + Key("colon,exclamation,space"),
-    "exit vim": esc + Key("colon,q,enter"),
-    "split explorer": esc + Key("colon,s-S,e,x,enter"),
-    "please exit vim": esc + Key("colon,q,exclamation,enter"),
-    "write and exit please": esc + Key("colon,w,q,exclamation,enter"),
-    "write and (exit|quit)": esc + Key("colon,w,q,enter"),
-    "write file": esc + Key("colon,u,p,d,a,t,e,enter"),
-    "write all files": esc + Key("colon,w,a,l,l,enter"),
-    "write as": esc + Key("colon,s,a,v,e,a,s,space"),
-    "toggle numbers": esc + Key("colon,s,e,t,space,r,e,l,a,t,i,v,e,n,u,m,b,e,r,exclamation") + Key("enter"),
-    "browse (old|recent) files": esc + Key("colon,b,r,o,space,o,l") + Key("enter"),
-    "set theme ocean": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,o,c,e,a,n/50,enter"),
-    "set theme mocha": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,m,o,c,h,a/50,enter"),
-    "set theme one dark": esc + Key("colon,c,o,l,o/50,space,o,n,e,d,a,r,k") + Key("enter"),
-    # "set theme solarized": esc + Key("colon/50,c,o,l,o/50,space,s,o,l,a,r,i,z,e,d") + Key("enter"),
-    "set theme Seoul": esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6") + Key("enter"),
-    "toggle lights": esc + Key("colon/50,s-T,o,g,g,l,e,s-B,s-G") + Key("enter"),
-    "toggle spelling": esc + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter"),
-    "Lucky correct": esc + Key("1,z,equal"),
-    "toggle invisible characters": esc + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter"),
-    "toggle nerd": esc + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter"),
-    "toggle cursor-line": esc + Key("colon/50,s,e,space,c,u,r,s,o,r,l,i,n,e/50,exclamation,enter"),
-    "get directory": esc + Key("p,w,d/10,enter"),
-    "vim help": esc + Key("colon,h,space"),
-    "substitute": esc + Key("s,slash"),
-    "make split wide": esc + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter"),
-    "make split narrow": esc + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
-    "make split tall": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter"),
-    "make split short": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
-    "make splits equal": esc + Key("c-w,equal"),
-
-    "run makefile": esc + Key("colon/100,exclamation,m,a,k,e,enter"),
-
-    "toggle obsession": esc + Key("colon,s-o,b,s,e,s,s,i,o,n,exclamation,enter"),
-    'toggle quick scope': esc + Key('colon,s-Q,u,i,c,k,s-S,c,o,p,e,s-T,o,g,g,l,e,enter'),
-    'toggle tagbar': esc + Key('colon,s-T,a,g,b,a,r,s-T,o,g,g,l,e,enter'),
-    'jump to tag': esc + Key('c-rbracket'),
-
-    "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
-
-    "show ring": esc+Key("colon,s-Y,s-R,s-S,h,o,w,enter"),
-
-    "strip all white space": esc+Key("colon,s-C,h,o,m,p,enter"),
-
-    "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
-    "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
-    "fugitive commit": esc + Key("colon,s-G,c,o,m,m,i,t,enter,i"),
-    "fugitive add": esc + Key("colon,s-G,w,r,i,t,e,enter"),
-    "fugitive blame": esc + Key("colon,s-G,b,l,a,m,e,enter"),
-    "fugitive remove": esc + Key("colon,s-G,r,e,m,o,v,e,enter"),
-    "fugitive grep": esc + Key("colon,s-G,g,r,e,p,space"),
-    "fugitive browse": esc + Key("colon,s-G,b,r,o,w,s,e,enter"),
-    "fugitive move": esc + Key("colon,s-G,m,o,v,e,space"),
-    "fugitive log": esc + Key("colon,s-G,l,o,g,enter"),
-    "fugitive commit all": esc + Key("colon,s-G,i,t,space,c,o,m,m,i,t,space,hyphen,a,v,enter"),
-
-    "fuzzy (buffs|buffers)": esc + Key("colon,s-B,u,f,f,e,r,s,enter"),
-    "fuzzy files": esc + Key("colon,s-F,i,l,e,s,enter"),
-    "fuzzy lines all": esc + Key("colon,s-L,i,n,e,s,enter"),
-    "fuzzy lines": esc + Key("colon,s-B,s-L,i,n,e,s,enter"),
-    "fuzzy tags all": esc + Key("colon,s-T,a,g,s,enter"),
-    "fuzzy tags": esc + Key("colon,s-B,s-T,a,g,s,enter"),
-    "fuzzy git files": esc + Key("colon,s-G,i,t,s-F,i,l,e,s,enter"),
-    "fuzzy (history|recent)": esc + Key("colon,s-H,i,s,t,o,r,y,enter"),
-    "fuzzy commits": esc + Key("colon,s-C,o,m,m,i,t,s,enter"),
-    "fuzzy help": esc + Key("colon,s-H,e,l,p,enter"),
-
-    "disable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-d,i,s,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
-    "enable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-e,n,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
-
-    ### R stats - Nvim-R plugin
-    # TODO create R language module
-     # Start/Close
-     "Start R": esc + Key("comma,r,f"),
-     # Start R (custom) \rc
-     # --------------------------------------------------------
-     "Close R session": esc + Key("comma,r,q"),
-     "Stop R session": esc + Key("colon,s-R,s-S,t,o,p"),
-    # -----------------------------------------------------------
 
     # Send
      "eval File": esc + Key("comma,a,a"),
@@ -452,7 +363,105 @@ class vimCommands(MappingRule):
      # "eval Para and echo and down": esc + Key("comma,p,a"),
      # --------------------------------------------------------
      "eval Line and stay": esc + Key("comma,l"),
-     "(bam|eval line)": esc + Key("comma,d"),
+     "(bam|eval line|rip) [<n>]": esc + Key("enter/100:%(n)d"),
+
+    "assign that": Key("space,langle,hyphen,space"),
+    "pipe that": Key("space,percent,rangle,percent,space"),
+
+    "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
+    "run makefile": esc + Key("colon/100,exclamation,m,a,k,e,enter"),
+
+    "write and (exit|quit)": esc + Key("colon,w,q,enter"),
+    "write file": esc + Key("colon,u,p,d,a,t,e,enter"),
+    "write all files": esc + Key("colon,w,a,l,l,enter"),
+    "write as": esc + Key("colon,s,a,v,e,a,s,space"),
+}
+
+class vimCommands(MappingRule):
+    mapping  = {
+    'suspend': Key('c-z'),
+    "edit config file": esc + Key("comma, e, v"),
+    "table of contents": esc + Key("colon, s-T, s-O, s-C, enter"),
+    "source config file": esc + Key("comma, s, v"),
+    "source session": esc + Key("colon,s,o,space"),
+    "run command": esc + Key("colon,exclamation,space"),
+    "exit vim": esc + Key("colon,q,enter"),
+    "split explorer": esc + Key("colon,s-S,e,x,enter"),
+    "please exit vim": esc + Key("colon,q,exclamation,enter"),
+    "write and exit please": esc + Key("colon,w,q,exclamation,enter"),
+    "toggle numbers": esc + Key("colon,s,e,t,space,r,e,l,a,t,i,v,e,n,u,m,b,e,r,exclamation") + Key("enter"),
+    "browse (old|recent) files": esc + Key("colon,b,r,o,space,o,l") + Key("enter"),
+    "set theme ocean": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,o,c,e,a,n/50,enter"),
+    "set theme mocha": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,m,o,c,h,a/50,enter"),
+    "set theme one dark": esc + Key("colon,c,o,l,o/50,space,o,n,e,d,a,r,k") + Key("enter"),
+    # "set theme solarized": esc + Key("colon/50,c,o,l,o/50,space,s,o,l,a,r,i,z,e,d") + Key("enter"),
+    "set theme solarized-light": esc + Key("colon/50,c,o,l,o/50,space,f,l,a,t,t,e,n,e,d,underscore,l,i,g,h,t") + Key("enter"),
+    "set theme solarized-dark": esc + Key("colon/50,c,o,l,o/50,space,f,l,a,t,t,e,n,e,d,underscore,d,a,r,k") + Key("enter"),
+    "set theme Seoul": esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6") + Key("enter"),
+    "toggle lights": esc + Key("colon/50,s-T,o,g,g,l,e,s-B,s-G") + Key("enter"),
+    "toggle spelling": esc + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter"),
+    "Lucky correct": esc + Key("1,z,equal"),
+    "toggle invisible characters": esc + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter"),
+    "toggle nerdtree": esc + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter"),
+    "toggle cursor-line": esc + Key("colon/50,s,e,space,c,u,r,s,o,r,l,i,n,e/50,exclamation,enter"),
+    "get directory": esc + Key("p,w,d/10,enter"),
+    "vim help": esc + Key("colon,h,space"),
+    "substitute": esc + Key("s,slash"),
+    "make split wide": esc + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter"),
+    "make split narrow": esc + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
+    "make split tall": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter"),
+    "make split short": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
+    "make splits equal": esc + Key("c-w,equal"),
+
+
+    "toggle obsession": esc + Key("colon,s-o,b,s,e,s,s,i,o,n,exclamation,enter"),
+    'toggle quick scope': esc + Key('colon,s-Q,u,i,c,k,s-S,c,o,p,e,s-T,o,g,g,l,e,enter'),
+    'toggle tagbar': esc + Key('colon,s-T,a,g,b,a,r,s-T,o,g,g,l,e,enter'),
+    'jump to tag': esc + Key('c-rbracket'),
+
+
+    "show ring": esc+Key("colon,s-Y,s-R,s-S,h,o,w,enter"),
+
+    "strip all white space": esc+Key("colon,s-C,h,o,m,p,enter"),
+
+    "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
+    "fugitive push": esc + Key("colon,s-G,p,u,s,h,enter"),
+    "fugitive pull": esc + Key("colon,s-G,p,u,l,l,enter"),
+    "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
+    "fugitive commit": esc + Key("colon,s-G,c,o,m,m,i,t,enter,i"),
+    "fugitive add": esc + Key("colon,s-G,w,r,i,t,e,enter"),
+    "fugitive blame": esc + Key("colon,s-G,b,l,a,m,e,enter"),
+    "fugitive remove": esc + Key("colon,s-G,r,e,m,o,v,e,enter"),
+    "fugitive grep": esc + Key("colon,s-G,g,r,e,p,space"),
+    "fugitive browse": esc + Key("colon,s-G,b,r,o,w,s,e,enter"),
+    "fugitive move": esc + Key("colon,s-G,m,o,v,e,space"),
+    "fugitive log": esc + Key("colon,s-G,l,o,g,enter"),
+    "fugitive commit all": esc + Key("colon,s-G,i,t,space,c,o,m,m,i,t,space,hyphen,a,v,enter"),
+
+    "fuzzy (buffs|buffers)": esc + Key("colon,s-B,u,f,f,e,r,s,enter"),
+    "fuzzy files": esc + Key("colon,s-F,i,l,e,s,enter"),
+    "fuzzy lines all": esc + Key("colon,s-L,i,n,e,s,enter"),
+    "fuzzy lines": esc + Key("colon,s-B,s-L,i,n,e,s,enter"),
+    "fuzzy tags all": esc + Key("colon,s-T,a,g,s,enter"),
+    "fuzzy tags": esc + Key("colon,s-B,s-T,a,g,s,enter"),
+    "fuzzy git files": esc + Key("colon,s-G,i,t,s-F,i,l,e,s,enter"),
+    "fuzzy (history|recent)": esc + Key("colon,s-H,i,s,t,o,r,y,enter"),
+    "fuzzy commits": esc + Key("colon,s-C,o,m,m,i,t,s,enter"),
+    "fuzzy help": esc + Key("colon,s-H,e,l,p,enter"),
+
+    "disable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-d,i,s,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
+    "enable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-e,n,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
+
+    ### R stats - Nvim-R plugin
+    # TODO create R language module
+     # Start/Close
+     "Start are session": esc + Key("comma,r,f"),
+     # Start R (custom) \rc
+     # --------------------------------------------------------
+     "(quit|Close) are session": esc + Key("comma,r,q"),
+     "Stop are session": esc + Key("colon,s-R,s-S,t,o,p"),
+    # -----------------------------------------------------------
+
      "eval Line and new": esc + Key("comma,q"),
      # . "Send Left part of line (cur)": \r<Left>
      # . "Send Right part of line (cur)": \r<Right>
@@ -523,8 +532,6 @@ class vimCommands(MappingRule):
      "Collapse R objects": esc + Key("comma,r,hyphen"),
      # Toggle (cur) Enter
 
-    "assign that": Key("space,langle,hyphen,space"),
-    "pipe that": Key("space,percent,rangle,percent,space"),
 
     # "rstudio toggle comment": Key("s-c-c"),
     # "r-assign": Key("a-hyphen"),
@@ -540,7 +547,6 @@ class vimCommands(MappingRule):
     # # "[go] to tab": Key("s-c-dot"),
     "G G plot": Key("g,g,p,l,o,t"),
     "dplyr": Key("d,p,l,y,r"),
-    "mutate": Key("m,u,t,a,t,e"),
 }
 
 generalKeys = {}
@@ -600,15 +606,13 @@ class RepeatRule(CompoundRule):
 mvim_context = aenea.ProxyCustomAppContext(id="MacVim")
 nvim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
 vim_context = aenea.ProxyCustomAppContext(match="substring", titl="vim") & aenea.ProxyCustomAppContext(id="iTerm2")
-git_context = aenea.ProxyCustomAppContext(match="substring", titl="git") & aenea.ProxyCustomAppContext(id="iTerm2")
-z_context = aenea.ProxyCustomAppContext(match="substring", titl="fg (Python)") & aenea.ProxyCustomAppContext(id="iTerm2")
-gmail_context = aenea.ProxyCustomAppContext(titl="Mail") & aenea.ProxyCustomAppContext(id = "Google Chrome")
-vim_plus_wasavi_context = nvim_context | mvim_context | git_context | z_context | vim_context
-grammar = Grammar("root rule", context = vim_plus_wasavi_context)
+git_vim_context = aenea.ProxyCustomAppContext(match="substring", titl="git") & aenea.ProxyCustomAppContext(id="iTerm2")
+vim_plus_context = nvim_context | mvim_context | vim_context | git_vim_context
+grammar = Grammar("root rule", context = vim_plus_context)
 grammar.add_rule(RepeatRule())
 grammar.load()
 
-exmode_grammar = Grammar("ExMode grammar",context=vim_plus_wasavi_context)
+exmode_grammar = Grammar("ExMode grammar",context=vim_plus_context)
 exmode_grammar.add_rule(vimCommands())
 exmode_grammar.load()
 
