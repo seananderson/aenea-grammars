@@ -140,10 +140,10 @@ vimEditing = {
     "gee left [<n>]": esc + Text("%(n)d") + Key("g,h"),
     "gee right [<n>]": esc + Text("%(n)d") + Key("g,l"),
 
-    "[<n>] arrow up": Key("up:%(n)d"),
-    "[<n>] arrow down": Key("down:%(n)d"),
-    "[<n>] arrow left": Key("left:%(n)d"),
-    "[<n>] arrow right": Key("right:%(n)d"),
+    "[<n>] upper": Key("up:%(n)d"),
+    "[<n>] downer": Key("down:%(n)d"),
+    "[<n>] lefter": Key("left:%(n)d"),
+    "[<n>] righter": Key("right:%(n)d"),
 
     "cary": esc + Key("0"),
     "car": esc + Key("caret"),
@@ -158,7 +158,6 @@ vimEditing = {
     "paste newer": esc + Key("comma,s-P"), # maxbrunsfeld/vim-yankstack
 
     "copy that": Key("y"),
-    "copy that": Key("y"),
 
     "duplicate line [<n>]": esc + Key("y,y,p:%(n)d"),
     "duplicate line above <n>": esc + Key("y,y,P:%(n)d"),
@@ -172,7 +171,7 @@ vimEditing = {
     "big sert": esc + Key("s-i"),
     "append": esc + Key("a"),
     "big append": esc + Key("s-a"),
-    "escape": Key("escape:2"),
+    "scape|escape": Key("escape:2"),
     "open": esc + Key("o"),
     "big open": esc + Key("s-o"),
     "paste": esc + Key("p"),
@@ -208,7 +207,8 @@ vimEditing = {
 #    'easy dosh': esc + Key('d, %s:2, t' % LEADER),
 
     # Sneak
-    'sneak <letters> <letters2>': esc + Key('s') + Key("%(letters)s") + Key("%(letters2)s"),
+    'sneak': esc + Key('s'),
+    'sneak back': esc + Key('s'),
 
     "next para [<n>]": esc + Key("%(n)d, rbrace"),
     "preev para [<n>]": esc + Key("%(n)d, lbrace"),
@@ -221,12 +221,15 @@ vimEditing = {
     "redo [<n>]": esc + Key("c-r:%(n)d"),
     "repeat [<n>]": esc + Key("%(n)d, dot"),
 
-    'copy till <navKey>': esc + Key("escape, y, t") + Key("%(navKey)s"),
-    'select till <navKey>': esc + Key("escape, v, t") + Key("%(navKey)s"),
-    'dosh till <navKey>': esc + Key("escape, d, t") + Key("%(navKey)s"),
-    'change till <navKey>': esc + Key("escape, c, t") + Key("%(navKey)s"),
-    'skip <navKey> [<n>]': esc + Key("escape, %(n)d, f") + Key("%(navKey)s"),
-    'skip back <navKey> [<n>]': esc + Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
+    # 'copy till <navKey>': esc + Key("escape, y, t") + Key("%(navKey)s"),
+    # 'select till <navKey>': esc + Key("escape, v, t") + Key("%(navKey)s"),
+    # 'dosh till <navKey>': esc + Key("escape, d, t") + Key("%(navKey)s"),
+    # 'change till <navKey>': esc + Key("escape, c, t") + Key("%(navKey)s"),
+    # 'skip <navKey> [<n>]': esc + Key("escape, %(n)d, f") + Key("%(navKey)s"),
+    # 'skip back <navKey> [<n>]': esc + Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
+
+    'skip [<n>]': esc + Key("%(n)d, f"),
+    'skip back [<n>]': esc + Key("%(n)d, s-F"),
 
     # 'jump (bill|till) again [<n>]': esc + Key("escape, %(n)d, semicolon"),
      # nnoremap K ;
@@ -248,8 +251,8 @@ vimEditing = {
     "find and replace": esc + Key("colon, percent, s, slash, slash, g, left, left"),
     "vis find and replace": Key("colon, s, slash, slash, g, left, left"),
     "find back": esc + Key("question"),
-    "find now <text>": esc + Key("slash") + Text("%(text)s"),
-    "find back now <text>": esc + Key("question") + Text("%(text)s"),
+    # "find now <text>": esc + Key("slash") + Text("%(text)s"),
+    # "find back now <text>": esc + Key("question") + Text("%(text)s"),
     # "vis find <text>": Key("slash") + Text("%(text)s"),
     # "vis find back <text>": Key("question") + Text("%(text)s"),
     "jump till <text>": esc + Key("slash") + Text("%(text)s") + Key("enter"),
@@ -285,7 +288,7 @@ vimEditing = {
     "(pip|pop) file": Key("c-x,c-f"),
     "(pip|pop) line": Key("c-x,c-l"),
     "(pip|pop) omni": Key("c-x,c-o"),
-    "(pip|pop) arg": Key("c-x,c-a"),
+    "(pip|pop) argument": Key("c-x,c-a"),
     "(pip|pop) cancel": Key("c-e"),
     # "snip": Key("c-b"),
 
@@ -328,11 +331,11 @@ vimEditing = {
     "swiddle recent": esc + Key("escape,colon,s-C,t,r,l,s-P,s-M,s-R,s-U,enter"),
 
     # Send
-     "eval File": esc + Key("comma,a,a"),
+     "(eval|rip) File": esc + Key("comma,a,a"),
      # "eval File and echo": esc + Key("comma,a,e"),
      # . "eval File (open .Rout)": esc + Key("comma,a,o"),
      # --------------------------------------------------------
-     "eval Mark": esc + Key("comma,b,d"),
+     "(eval Mark|rip mark)": esc + Key("comma,b,d"),
      # "eval Mark and echo": esc + Key("comma,b,e"),
      # "eval Mark and down": esc + Key("comma,b,d"),
      # "eval Mark and echo and down": esc + Key("comma,b,a"),
@@ -343,12 +346,12 @@ vimEditing = {
      # "eval Chunk and echo and down": esc + Key("comma,c,a"),
      "eval Chunks from top": esc + Key("comma,c,h"),
      # --------------------------------------------------------
-     "eval Func": esc + Key("comma,f,d"),
+     "(eval|rip) Func": esc + Key("comma,f,d"),
      # "eval Func and echo": esc + Key("comma,f,e"),
      # "eval Func and down": esc + Key("comma,f,d"),
      # "eval Func and echo and down": esc + Key("comma,f,a"),
      # --------------------------------------------------------
-     "eval Selected": esc + Key("comma,s,d"),
+     "(eval|rip) Selected": esc + Key("comma,s,d"),
      # "eval Selected and echo": esc + Key("comma,s,e"),
      # "eval Selected down": esc + Key("comma,s,d"),
      # "eval Selected and echo and down": esc + Key("comma,s,a"),
