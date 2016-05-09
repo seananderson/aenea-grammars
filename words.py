@@ -41,7 +41,7 @@ class NopeFormatRule(CompoundRule):
         return Key('backspace:' + str(lastFormatRuleLength))
 
 class ReFormatRule(CompoundRule):
-    spec = ('that was [upper | natural] ( proper | camel | relative-path | '
+    spec = ('that was [uppercase | natural] ( proper | camel | relative-path | '
     'absolute-path | score | double-colon | jumble | dotify | titlecase |'
     'jive | snakeword')
 
@@ -51,7 +51,7 @@ class ReFormatRule(CompoundRule):
         words = node.words()[2:] + lastFormatRuleWords
         print words
 
-        uppercase = words[0] == 'upper'
+        uppercase = words[0] == 'uppercase'
         lowercase = words[0] != 'natural'
 
         if lowercase:
@@ -60,7 +60,7 @@ class ReFormatRule(CompoundRule):
             words = [word.upper() for word in words]
 
         words = [word.split('\\', 1)[0].replace('-', '') for word in words]
-        if words[0].lower() in ('upper', 'natural'):
+        if words[0].lower() in ('uppercase', 'natural'):
             del words[0]
 
         function = getattr(aenea.format, 'format_%s' % words[0].lower())
@@ -71,7 +71,7 @@ class ReFormatRule(CompoundRule):
         return Text(formatted)
 
 class FormatRule(CompoundRule):
-    spec = ('[upper | natural] ( proper | camel | relative-path | absolute-path | score | '
+    spec = ('[uppercase | natural] ( proper | camel | relative-path | absolute-path | score | '
     'double-colon | jumble | dotify | jive |  titlecase |'
     'snakeword ) [<dictation>]')
     extras = [Dictation(name='dictation')]
@@ -80,7 +80,7 @@ class FormatRule(CompoundRule):
         words = node.words()
         print "format rule:", words
 
-        uppercase = words[0] == 'upper'
+        uppercase = words[0] == 'uppercase'
         lowercase = words[0] != 'natural'
 
         if lowercase:
@@ -89,7 +89,7 @@ class FormatRule(CompoundRule):
             words = [word.upper() for word in words]
 
         words = [word.split('\\', 1)[0].replace('-', '') for word in words]
-        if words[0].lower() in ('upper', 'natural'):
+        if words[0].lower() in ('uppercase', 'natural'):
             del words[0]
 
         function = getattr(formatting, 'format_%s' % words[0].lower())
