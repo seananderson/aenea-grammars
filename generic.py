@@ -201,7 +201,7 @@ nonVimGenericKeys = {
     "sky <letters>": Key("s-%(letters)s"),
     "num <numbers>": Key("%(numbers)s"),
     "<numbers>": Key("%(numbers)s"),
-    "(del|chuck) [<n>]": Key("backspace:%(n)d"),
+    "(chuck) [<n>]": Key("backspace:%(n)d"),
 
     "<specials> [<n>]": Key("%(specials)s:%(n)d"),
     "(slap|slop) [<n>]": Key("enter:%(n)d"),
