@@ -28,7 +28,7 @@ mm_mapping = {
     '[go] to message': Key("9"),
     '[go] to editor': Key("c-j"),  # working ?
 
-    'archive [message] [<n>]': Key("sw-m:%(n)d"),
+    'archive [message]': Key("sw-m"),
     'junk [message]': Key("sw-j"),
     'move [message]': Key("aw-t"),
     'flag [message]': Key("sw-l"),
