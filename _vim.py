@@ -288,19 +288,18 @@ vimEditing = {
     "(pip|pop) file": Key("c-x,c-f"),
     "(pip|pop) line": Key("c-x,c-l"),
     "(pip|pop) omni": Key("c-x,c-o"),
-    "(pip|pop) argument": Key("c-x,c-a"),
+    "(pip|pop) arg": Key("c-x,c-a"),
     "(pip|pop) cancel": Key("c-e"),
     # "snip": Key("c-b"),
 
-    "(format para)": esc + Key("s-Q"),
+    "format para": esc + Key("s-Q"),
 
-    "comment": esc + Key("g,c"),
-    # "vis comment": Key("g,c"),
+    "comment that": esc + Key("g,c"),
     "comment line": esc + Key("g,c,c"),
     "comment para": esc + Key("g,c,a,p"),
 
-    "(mort|scroll-down) [<n>]": esc + Key("c-d:%(n)d") ,
-    "(lest|scroll-up) [<n>]": esc + Key("c-u:%(n)d") ,
+    "(mort) [<n>]": esc + Key("c-d:%(n)d") ,
+    "(lest) [<n>]": esc + Key("c-u:%(n)d") ,
 
     "record macro": esc + Key("q,q"),
     "end macro": Key("q"),
@@ -336,6 +335,7 @@ vimEditing = {
      # . "eval File (open .Rout)": esc + Key("comma,a,o"),
      # --------------------------------------------------------
      "(eval Mark|rip mark)": esc + Key("comma,b,d"),
+     "eye-rip mark": esc + Key("comma,b,b"),
      # "eval Mark and echo": esc + Key("comma,b,e"),
      # "eval Mark and down": esc + Key("comma,b,d"),
      # "eval Mark and echo and down": esc + Key("comma,b,a"),
@@ -356,7 +356,7 @@ vimEditing = {
      # "eval Selected down": esc + Key("comma,s,d"),
      # "eval Selected and echo and down": esc + Key("comma,s,a"),
 
-     "eval Preev": esc + Key("g,v/100,comma,s,d"),
+     "(eval|rip) Preev": esc + Key("g,v/100,comma,s,d"),
      # "eval Preev and echo": esc + Key("g,v/100,comma,s,e"),
      # . "eval Selected (Runuate and insert output in new tab)": esc + Key("comma,s,o"),
      # --------------------------------------------------------
@@ -365,8 +365,8 @@ vimEditing = {
      # "eval Para and down": esc + Key("comma,p,d"),
      # "eval Para and echo and down": esc + Key("comma,p,a"),
      # --------------------------------------------------------
-     "eval Line and stay": esc + Key("comma,l"),
-     "(bam|eval line|rip) [<n>]": esc + Key("enter/100:%(n)d"),
+     "eye-rip": esc + Key("comma,l"),
+     "rip [<n>]": esc + Key("enter/100:%(n)d"),
 
     "assign that": Key("space,langle,hyphen,space"),
     "pipe that": Key("space,percent,rangle,percent,space"),
@@ -374,6 +374,7 @@ vimEditing = {
     "edit args": esc+Key("colon,a,r,g,s,space,asterisk,dot"),
     "run makefile": esc + Key("colon/100,exclamation,m,a,k,e,enter"),
 
+    "close buffer": esc + Key("colon,q,enter"),
     "write and (exit|quit)": esc + Key("colon,w,q,enter"),
     "write file": esc + Key("colon,u,p,d,a,t,e,enter"),
     "write all files": esc + Key("colon,w,a,l,l,enter"),
@@ -407,7 +408,8 @@ class vimCommands(MappingRule):
     "toggle invisible characters": esc + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter"),
     "toggle nerdtree": esc + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter"),
     "toggle cursor-line": esc + Key("colon/50,s,e,space,c,u,r,s,o,r,l,i,n,e/50,exclamation,enter"),
-    "get directory": esc + Key("p,w,d/10,enter"),
+    "get directory": esc + Key("colon/100,p,w,d/10,enter"),
+    "set directory": esc + Key("comma,c,d"),
     "vim help": esc + Key("colon,h,space"),
     "substitute": esc + Key("s,slash"),
     "make split wide": esc + Key("colon/100,v,e,r,t,i,c,a,l/100,space,r,e,s,i,z,e/100,space,plus,6/100,enter"),
@@ -416,14 +418,12 @@ class vimCommands(MappingRule):
     "make split short": esc + Key("colon/100,space,r,e,s,i,z,e/100,space,minus,6/100,enter"),
     "make splits equal": esc + Key("c-w,equal"),
 
-
     "toggle obsession": esc + Key("colon,s-o,b,s,e,s,s,i,o,n,exclamation,enter"),
     'toggle quick scope': esc + Key('colon,s-Q,u,i,c,k,s-S,c,o,p,e,s-T,o,g,g,l,e,enter'),
     'toggle tagbar': esc + Key('colon,s-T,a,g,b,a,r,s-T,o,g,g,l,e,enter'),
     'jump to tag': esc + Key('c-rbracket'),
 
-
-    "show ring": esc+Key("colon,s-Y,s-R,s-S,h,o,w,enter"),
+    # "show ring": esc+Key("colon,s-Y,s-R,s-S,h,o,w,enter"),
 
     "strip all white space": esc+Key("colon,s-C,h,o,m,p,enter"),
 
@@ -476,20 +476,20 @@ class vimCommands(MappingRule):
      "Clear R console": esc + Key("comma,r,r"),
      "Clear R workspace": esc + Key("comma,r,m"),
      # --------------------------------------------------------
-     "Print": esc + Key("comma,r,p"),
-     "Names": esc + Key("comma,r,n"),
-     "Structure": esc + Key("comma,r,t"),
-     "View data.frame": esc + Key("comma,r,v"),
+     "Print that": esc + Key("comma,r,p"),
+     "Name that": esc + Key("comma,r,n"),
+     "Structure that": esc + Key("comma,r,t"),
+     "View that": esc + Key("comma,r,v"),
      # --------------------------------------------------------
-     "Arguments": esc + Key("comma,r,a"),
-     "Example": esc + Key("comma,r,e"),
-     "Help": esc + Key("comma,r,h"),
+     "Argument that": esc + Key("comma,r,a"),
+     "Example that": esc + Key("comma,r,e"),
+     "Help that": esc + Key("comma,r,h"),
      # --------------------------------------------------------
-     "Summary": esc + Key("comma,r,s"),
-     "Plot": esc + Key("comma,r,g"),
+     "Summary that": esc + Key("comma,r,s"),
+     "Plot that": esc + Key("comma,r,g"),
      "Plot and summary": esc + Key("comma,r,b"),
      # --------------------------------------------------------
-      "Set working directory": esc + Key("comma,r,d"),
+      "Set R directory": esc + Key("comma,r,d"),
      # --------------------------------------------------------
      # "call Sweave" esc: + Key("comma,s,w"),
      # "call Sweave and PDF file" esc: + Key("comma,s,p"),
