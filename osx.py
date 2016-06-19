@@ -7,8 +7,8 @@ osx = {
     "switch apps": Key("win:down") + Key("tab"),
     "choose app": Key("win:up"),
 
-    "quit that": Key("w-q"),
-    "close that": Key("w-w"),
+    "please quit that": Key("w-q"),
+    "please close that": Key("w-w"),
     "hide that": Key("w-h"),
     "new that": Key("w-n"),
     "minimize that": Key("w-m"),

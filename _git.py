@@ -13,13 +13,12 @@ git_mapping = aenea.configuration.make_grammar_commands('git', {
     'git': Text("git"),
 
     'git amend': Text("git commit --amend") + Key("enter"),
+    'git stash': Text("git stash") + Key("enter"),
     'git commit': Text("git commit") + Key("enter"),
     'git commit all': Text("git commit -av") + Key("enter"),
     'git pull': Text("git pull") + Key("enter"),
     'git branches': Text("git branch -l") + Key("enter"),
     'git status': Text("git status") + Key("enter"),
-    # 'git stat': Text("git show --stat") + Key("enter"),
-    # 'git log': Text("git log") + Key("enter"),
     'git push': Text("git push") + Key("enter"),
     'git diff': Text("git diff") + Key("enter"),
     'git log': Text("git lg") + Key("enter"),
@@ -27,14 +26,17 @@ git_mapping = aenea.configuration.make_grammar_commands('git', {
 
     # Incomplete Commands
     'git add': Text("git add "),
+    'git add force': Text("git add -f "),
     'git clone': Text("git clone "),
     'git word-diff': Text("git diff --color-words "),
     'git checkout': Text("git checkout "),
     'git interactive rebase': Text("git rebase -i "),
     'git rebase': Text("git rebase "),
     'git move': Text("git mv "),
+    'git remove': Text("git rm "),
+    'git remove cached': Text("git rm --cached"),
 
-    'change dir': Text("cd "),
+    'change directory': Text("cd "),
 
 })
 

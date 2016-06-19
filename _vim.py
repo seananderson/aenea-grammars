@@ -368,6 +368,19 @@ vimEditing = {
      "eye-rip": esc + Key("comma,l"),
      "rip [<n>]": esc + Key("enter/100:%(n)d"),
 
+     "Print that": esc + Key("comma,r,p"),
+     "Name that": esc + Key("comma,r,n"),
+     "Structure that": esc + Key("comma,r,t"),
+     "View that": esc + Key("comma,r,v"),
+     # --------------------------------------------------------
+     "Argument that": esc + Key("comma,r,a"),
+     "Example that": esc + Key("comma,r,e"),
+     "Help that": esc + Key("comma,r,h"),
+     # --------------------------------------------------------
+     "Summary that": esc + Key("comma,r,s"),
+     "Plot that": esc + Key("comma,r,g"),
+     "Plot and summary": esc + Key("comma,r,b"),
+
     "assign that": Key("space,langle,hyphen,space"),
     "pipe that": Key("space,percent,rangle,percent,space"),
 
@@ -379,6 +392,31 @@ vimEditing = {
     "write file": esc + Key("colon,u,p,d,a,t,e,enter"),
     "write all files": esc + Key("colon,w,a,l,l,enter"),
     "write as": esc + Key("colon,s,a,v,e,a,s,space"),
+
+    "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
+    "fugitive push": esc + Key("colon,s-G,p,u,s,h,enter"),
+    "fugitive pull": esc + Key("colon,s-G,p,u,l,l,enter"),
+    "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
+    "fugitive commit": esc + Key("colon,s-G,c,o,m,m,i,t,enter,i"),
+    "fugitive add": esc + Key("colon,s-G,w,r,i,t,e,enter"),
+    "fugitive blame": esc + Key("colon,s-G,b,l,a,m,e,enter"),
+    "fugitive remove": esc + Key("colon,s-G,r,e,m,o,v,e,enter"),
+    "fugitive grep": esc + Key("colon,s-G,g,r,e,p,space"),
+    "fugitive browse": esc + Key("colon,s-G,b,r,o,w,s,e,enter"),
+    "fugitive move": esc + Key("colon,s-G,m,o,v,e,space"),
+    "fugitive log": esc + Key("colon,s-G,l,o,g,enter"),
+    "fugitive commit all": esc + Key("colon,s-G,i,t,space,c,o,m,m,i,t,space,hyphen,a,v,enter"),
+
+    "fuzzy (buffs|buffers)": esc + Key("colon,s-B,u,f,f,e,r,s,enter"),
+    "fuzzy files": esc + Key("colon,s-F,i,l,e,s,enter"),
+    "fuzzy lines all": esc + Key("colon,s-L,i,n,e,s,enter"),
+    "fuzzy lines": esc + Key("colon,s-B,s-L,i,n,e,s,enter"),
+    "fuzzy tags all": esc + Key("colon,s-T,a,g,s,enter"),
+    "fuzzy tags": esc + Key("colon,s-B,s-T,a,g,s,enter"),
+    "fuzzy git files": esc + Key("colon,s-G,i,t,s-F,i,l,e,s,enter"),
+    "fuzzy (history|recent)": esc + Key("colon,s-H,i,s,t,o,r,y,enter"),
+    "fuzzy commits": esc + Key("colon,s-C,o,m,m,i,t,s,enter"),
+    "fuzzy help": esc + Key("colon,s-H,e,l,p,enter"),
 }
 
 class vimCommands(MappingRule):
@@ -427,31 +465,6 @@ class vimCommands(MappingRule):
 
     "strip all white space": esc+Key("colon,s-C,h,o,m,p,enter"),
 
-    "fugitive status": esc + Key("colon,s-G,s,t,a,t,u,s,enter"),
-    "fugitive push": esc + Key("colon,s-G,p,u,s,h,enter"),
-    "fugitive pull": esc + Key("colon,s-G,p,u,l,l,enter"),
-    "fugitive diff": esc + Key("colon,s-G,d,i,f,f,enter"),
-    "fugitive commit": esc + Key("colon,s-G,c,o,m,m,i,t,enter,i"),
-    "fugitive add": esc + Key("colon,s-G,w,r,i,t,e,enter"),
-    "fugitive blame": esc + Key("colon,s-G,b,l,a,m,e,enter"),
-    "fugitive remove": esc + Key("colon,s-G,r,e,m,o,v,e,enter"),
-    "fugitive grep": esc + Key("colon,s-G,g,r,e,p,space"),
-    "fugitive browse": esc + Key("colon,s-G,b,r,o,w,s,e,enter"),
-    "fugitive move": esc + Key("colon,s-G,m,o,v,e,space"),
-    "fugitive log": esc + Key("colon,s-G,l,o,g,enter"),
-    "fugitive commit all": esc + Key("colon,s-G,i,t,space,c,o,m,m,i,t,space,hyphen,a,v,enter"),
-
-    "fuzzy (buffs|buffers)": esc + Key("colon,s-B,u,f,f,e,r,s,enter"),
-    "fuzzy files": esc + Key("colon,s-F,i,l,e,s,enter"),
-    "fuzzy lines all": esc + Key("colon,s-L,i,n,e,s,enter"),
-    "fuzzy lines": esc + Key("colon,s-B,s-L,i,n,e,s,enter"),
-    "fuzzy tags all": esc + Key("colon,s-T,a,g,s,enter"),
-    "fuzzy tags": esc + Key("colon,s-B,s-T,a,g,s,enter"),
-    "fuzzy git files": esc + Key("colon,s-G,i,t,s-F,i,l,e,s,enter"),
-    "fuzzy (history|recent)": esc + Key("colon,s-H,i,s,t,o,r,y,enter"),
-    "fuzzy commits": esc + Key("colon,s-C,o,m,m,i,t,s,enter"),
-    "fuzzy help": esc + Key("colon,s-H,e,l,p,enter"),
-
     "disable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-d,i,s,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
     "enable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-e,n,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
 
@@ -476,18 +489,6 @@ class vimCommands(MappingRule):
      "Clear R console": esc + Key("comma,r,r"),
      "Clear R workspace": esc + Key("comma,r,m"),
      # --------------------------------------------------------
-     "Print that": esc + Key("comma,r,p"),
-     "Name that": esc + Key("comma,r,n"),
-     "Structure that": esc + Key("comma,r,t"),
-     "View that": esc + Key("comma,r,v"),
-     # --------------------------------------------------------
-     "Argument that": esc + Key("comma,r,a"),
-     "Example that": esc + Key("comma,r,e"),
-     "Help that": esc + Key("comma,r,h"),
-     # --------------------------------------------------------
-     "Summary that": esc + Key("comma,r,s"),
-     "Plot that": esc + Key("comma,r,g"),
-     "Plot and summary": esc + Key("comma,r,b"),
      # --------------------------------------------------------
       "Set R directory": esc + Key("comma,r,d"),
      # --------------------------------------------------------
