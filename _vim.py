@@ -440,6 +440,7 @@ class vimCommands(MappingRule):
     "set theme solarized-light": esc + Key("colon/50,c,o,l,o/50,space,f,l,a,t,t,e,n,e,d,underscore,l,i,g,h,t") + Key("enter"),
     "set theme solarized-dark": esc + Key("colon/50,c,o,l,o/50,space,f,l,a,t,t,e,n,e,d,underscore,d,a,r,k") + Key("enter"),
     "set theme Seoul": esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6") + Key("enter"),
+    "set theme Seoul light": esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6,hyphen,l,i,g,h,t") + Key("enter"),
     "toggle lights": esc + Key("colon/50,s-T,o,g,g,l,e,s-B,s-G") + Key("enter"),
     "toggle spelling": esc + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter"),
     "Lucky correct": esc + Key("1,z,equal"),
@@ -610,8 +611,9 @@ class RepeatRule(CompoundRule):
 mvim_context = aenea.ProxyCustomAppContext(id="MacVim")
 nvim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
 vim_context = aenea.ProxyCustomAppContext(match="substring", titl="vim") & aenea.ProxyCustomAppContext(id="iTerm2")
+tmux_context = aenea.ProxyCustomAppContext(match="substring", titl="tmux") & aenea.ProxyCustomAppContext(id="iTerm2")
 git_vim_context = aenea.ProxyCustomAppContext(match="substring", titl="git") & aenea.ProxyCustomAppContext(id="iTerm2")
-vim_plus_context = nvim_context | mvim_context | vim_context | git_vim_context
+vim_plus_context = nvim_context | mvim_context | vim_context | git_vim_context | tmux_context
 grammar = Grammar("root rule", context = vim_plus_context)
 grammar.add_rule(RepeatRule())
 grammar.load()
