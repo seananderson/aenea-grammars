@@ -328,6 +328,7 @@ vimGeneric = {
     "fuzzy (history|recent)": esc + Key("colon,s-H,i,s,t,o,r,y,enter"),
     "fuzzy commits": esc + Key("colon,s-C,o,m,m,i,t,s,enter"),
     "fuzzy help": esc + Key("colon,s-H,e,l,p,enter"),
+    "fuzzy grep": esc + Key("colon,s-A,g,enter"),
 }
 
 class vimCommands(MappingRule):
