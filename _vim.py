@@ -19,58 +19,6 @@ LEADER = 'comma'
 out = Key("escape:2,l")
 ii = Key("i")
 
-# these are the characters that can be jumped to with f or F
-# note that I have reprinted the alphabet here
-# I get dragonfly complexity errors if I try to append the alphabet
-navCharMap = {
-    "colon": "colon",
-    "calm": "comma",
-    "dollar": "dollar",
-    "dot": "dot",
-    "equal": "equal",
-    "percent": "percent",
-    "underscore": "underscore",
-    "semi": "semicolon",
-    "rap": "rparen",
-    "lap": "lparen",
-    "race": "rbrace",
-    "lace": "lbrace",
-    "langle": "langle",
-    "rangle": "rangle",
-    "rack": "rbracket",
-    "lack": "lbracket",
-    "quote": "dquote",
-    "single quote": "squote",
-    "hyphen": "hyphen",
-    "(alpha|arch)": "a",
-    "(bravo|brav) ": "b",
-    "(charlie|char) ": "c",
-    "(delta|dee) ": "d",
-    "(echo|eek) ": "e",
-    "(foxtrot|fox) ": "f",
-    "(golf|gee) ": "g",
-    "(hotel|hoat) ": "h",
-    "(ice) ": "i",
-    "(juliet|jinx) ": "j",
-    "(kilo) ": "k",
-    "(lug) ": "l",
-    "(mike) ": "m",
-    "(november|nerb) ": "n",
-    "(oscar|ork) ": "o",
-    "pooch ": "p",
-    "(quebec|queen) ": "q",
-    "(romeo|Rome) ": "r",
-    "(sierra|souk) ": "s",
-    "(tango|teek) ": "t",
-    "(union|unks|unk) ": "u",
-    "(victor|vick) ": "v",
-    "(whiskey|whisk|wisk) ": "w",
-    "(x-ray|ecks) ": "x",
-    "(yankee) ": "y",
-    "(zulu) ": "z",
-}
-# navCharMap.update(generic.letterMap)
-
 operateCharMap = {
     "parens": "rparen",
     "word": "w",
@@ -105,7 +53,7 @@ lineVerbCharMap = {
         "change till end": "s-C,escape",
 }
 
-vimEditing = {
+vimGeneric = {
     # inserting:
     "<letters>": Key("%(letters)s"),
     "sky <letters>": Key("s-%(letters)s"),
@@ -123,12 +71,6 @@ vimEditing = {
 
     "rosh [<n>]": esc + Key("%(n)d,d,l"),
     "dosh [<n>]": esc + Key("%(n)d,d,h"),
-
-    # "litteral <letters>": Key("%(letters)s"),
-    # "teral sky <letters>": Key("s-%(letters)s"),
-    # "litteral num <numbers>":  Key("%(numbers)s"),
-    # "litteral <numbers>": Key("%(numbers)s"),
-    # "litteral space [<n>]": Key("space:%(n)d"),
 
     "[<n>] up": esc + Key("k:%(n)d"),
     "[<n>] down": esc + Key("j:%(n)d"),
@@ -192,20 +134,6 @@ vimEditing = {
     'lopert [<n>]': esc + Key('%(n)d, s-B'),
     'ilopert [<n>]': esc + Key('%(n)d, g, s-E'),
 
-    # EasyMotion
-#    'easy lope': esc + Key('%s:2, b' % LEADER),
-#    'easy rope': esc + Key('%s:2, w' % LEADER),
-#    'easy elope': esc + Key('%s:2, g, e' % LEADER),
-#    'easy irope': esc + Key('%s:2, e' % LEADER),
-#
-#    'easy lopert': esc + Key('%s:2, B' % LEADER),
-#    'easy ropert': esc + Key('%s:2, W' % LEADER),
-#    'easy elopert': esc + Key('%s:2, g, E' % LEADER),
-#    'easy eropert': esc + Key('%s:2, E' % LEADER),
-#
-#    'easy jump': esc + Key('%s:2, f' % LEADER),
-#    'easy dosh': esc + Key('d, %s:2, t' % LEADER),
-
     # Sneak
     'sneak': esc + Key('s'),
     'sneak back': esc + Key('s'),
@@ -220,13 +148,6 @@ vimEditing = {
     "(undo|scratch) [<n>]": esc + Key("u:%(n)d"),
     "redo [<n>]": esc + Key("c-r:%(n)d"),
     "repeat [<n>]": esc + Key("%(n)d, dot"),
-
-    # 'copy till <navKey>': esc + Key("escape, y, t") + Key("%(navKey)s"),
-    # 'select till <navKey>': esc + Key("escape, v, t") + Key("%(navKey)s"),
-    # 'dosh till <navKey>': esc + Key("escape, d, t") + Key("%(navKey)s"),
-    # 'change till <navKey>': esc + Key("escape, c, t") + Key("%(navKey)s"),
-    # 'skip <navKey> [<n>]': esc + Key("escape, %(n)d, f") + Key("%(navKey)s"),
-    # 'skip back <navKey> [<n>]': esc + Key("escape, %(n)d, s-F") + Key("%(navKey)s"),
 
     'skip [<n>]': esc + Key("%(n)d, f"),
     'skip back [<n>]': esc + Key("%(n)d, s-F"),
@@ -258,12 +179,6 @@ vimEditing = {
     "jump till <text>": esc + Key("slash") + Text("%(text)s") + Key("enter"),
     "jump back till <text>": esc + Key("question") + Text("%(text)s") + Key("enter"),
 
-    # "mark [<letters>]": esc + Key("m,%(letters)s"),
-    # "jump mark [<letters>]": esc + Key("backtick,%(letters)s"),
-    # "sel mark [<letters>]": esc + Key("v,backtick,%(letters)s"),
-    # "yank mark [<letters>]": esc + Key("y,backtick,%(letters)s"),
-    # "change mark [<letters>]": esc + Key("c,backtick,%(letters)s"),
-    # "del mark [<letters>]": esc + Key("d,backtick,%(letters)s"),
     "mark that": esc + Key("m,a"),
     "mark bravo": esc + Key("m,b"),
     "jump mark": esc + Key("backtick,a"),
@@ -273,9 +188,6 @@ vimEditing = {
     "change mark": esc + Key("c,backtick,a"),
     "dosh mark": esc + Key("d,backtick,a"),
     "remove mark": esc + Key("m,hyphen"),
-
-    # "mark that <letters>": esc + Key("m,%(letters)s"),
-    # "jump mark <letters>": esc + Key("backtick,%(letters)s"),
 
     "jump forward [<n>]": esc + Key("c-i:%(n)d"),
     "jump back [<n>]": esc + Key("c-o:%(n)d"),
@@ -290,7 +202,6 @@ vimEditing = {
     "(pip|pop) omni": Key("c-x,c-o"),
     "(pip|pop) arg": Key("c-x,c-a"),
     "(pip|pop) cancel": Key("c-e"),
-    # "snip": Key("c-b"),
 
     "format para": esc + Key("s-Q"),
 
@@ -537,19 +448,6 @@ class vimCommands(MappingRule):
      "Collapse R objects": esc + Key("comma,r,hyphen"),
      # Toggle (cur) Enter
 
-
-    # "rstudio toggle comment": Key("s-c-c"),
-    # "r-assign": Key("a-hyphen"),
-    # "[go] to (source|editor)": Key("c-1"),
-    # "[go] to plots": Key("c-6"),
-    # "[go] to git": Key("c-9"),
-    # "[go] to console": Key("c-2"),
-    # "[go] to help": Key("c-3"),
-    # "[go] to files": Key("c-5"),
-    # "[go] to build": Key("c-0"),
-    # "[go] to history": Key("c-4"),
-    # "[go] to file": Key("c-dot"),
-    # # "[go] to tab": Key("s-c-dot"),
     "G G plot": Key("g,g,p,l,o,t"),
     "dplyr": Key("d,p,l,y,r"),
 }
@@ -558,7 +456,7 @@ generalKeys = {}
 generalKeys.update(generic.genericKeys)
 generalKeys.update(osx.osx)
 generalKeys.update(vocab.vocabWord)
-generalKeys.update(vimEditing)
+generalKeys.update(vimGeneric)
 
 grammarCfg = Config("all")
 grammarCfg.cmd = Section("Language section")
@@ -582,7 +480,6 @@ class KeystrokeRule(MappingRule):
         Choice('numbers', generic.numberMap),
         Choice("pressKey", generic.pressKeyMap),
         Choice("reservedWord", generic.reservedWord),
-        Choice("navKey", navCharMap),
         Choice("opKey", operateCharMap),
         Choice("advKey", advCharMap),
         Choice("verbKey", verbCharMap),
