@@ -1,4 +1,4 @@
-# Commands for interatcting with MS Word
+# Commands for interatcting with Google Chrome
 
 import aenea
 import aenea.configuration
@@ -7,7 +7,6 @@ import dragonfly
 from aenea import *
 
 chrome_mapping = {
-    # Tab navigation
     '(preev|left) tab': Key("cs-tab"),
     '(next|right) tab': Key("c-tab"),
     'new (window|tab)': Key("w-t"),
@@ -20,30 +19,17 @@ chrome_mapping = {
     'refresh': Key("w-r"),
     'link|show links|links': Key("f"),
     'link new': Key("s-f"),
-    # 'press <letters1>': Key("%(letters1)s"),
-    # 'two press <letters1> <letters2>': Key("%(letters1)s") + Key("%(letters2)s"),
-    # 'one click [<letters1>]': Key("%(letters1)s"),
-    # "page up": Key("pgup"),
-    # "page down": Key("pgdown"),
-
-    # "<letters1>": Key("%(letters1)s"),
-
-    # "(delete|del) [<n>]": Key("del:%(n)d"),
-    # "(backspace|chuck) [<n>]": Key("backspace:%(n)d"),
-    # "(enter|slap|slop)": Key("enter"),
-
-    #  Moving around
+    'easy proxy that': Key("cs-e"),
+    'easy proxy and zotero that': Key("cs-o"),
+    'zotero that': Key("cs-z"),
     'mort': Key("j:10"),
     'lest': Key("k:10"),
-    # 'go to top': Key("g, g"),
-    # 'go to bottom': Key("s-g"),
     'edit in vim': Key("f12"),
 
-
     #  Searching
-    # 'find <text>': Key("escape, slash") + Text("%(text)s") + Key("enter"),
-    # 'next': Key("n"),
-    # 'prev|previous': Key("N"),
+    'jump till <text>': Key("escape, slash") + Text("%(text)s") + Key("enter"),
+    'previous [<n>]': Key("s-N:%(n)d"),
+    'next [<n>]': Key("n:%(n)d"),
 }
 
 gmail_mapping = {
@@ -60,8 +46,7 @@ gmail_mapping = {
     '[go] to label': Key("g, l"),
     '[go to] label <text>': Key("g, l") + Text("%(text)s") + Key("enter"),
     '(delete|trash) message': Key("hash"),
-    'archive message': Key("e"),
-    'next [<n>]': Key("n:%(n)d"),
+    'archive (message|that)': Key("e"),
     'preeve [<n>]': Key("p:%(n)d"),
 }
 
@@ -73,10 +58,8 @@ gmail_grammar = dragonfly.Grammar('gmail', context=gmail_context)
 class MappingChrome(dragonfly.MappingRule):
     mapping = chrome_mapping
     extras = [
-        IntegerRef('n', 1, 60),
+        IntegerRef('n', 1, 25),
         Dictation('text'),
-        # Choice('letters1', pressKeyMap),
-        # Choice('letters2', pressKeyMap),
     ]
     defaults = {
         "n": 1,
@@ -85,7 +68,7 @@ class MappingChrome(dragonfly.MappingRule):
 class MappingMail(dragonfly.MappingRule):
      mapping = gmail_mapping
      extras = [
-        IntegerRef('n', 1, 60),
+        IntegerRef('n', 1, 25),
         Dictation('text')
      ]
      defaults = {
