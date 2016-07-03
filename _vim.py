@@ -94,8 +94,6 @@ vimGeneric = {
     "go to bottom": esc + Key("s-G"),
     "extract [<n>]": esc + Key("x:%(n)d"),
 
-    "paste": esc + Key("p"),
-    "paste up": esc + Key("P"),
     "paste older": esc + Key("comma,p"), # maxbrunsfeld/vim-yankstack
     "paste newer": esc + Key("comma,s-P"), # maxbrunsfeld/vim-yankstack
 
