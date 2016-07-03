@@ -11,11 +11,28 @@ if 'semicolon' not in typeables:
 # import osx
 # import vocab
 import r_vocab
+# from _vim import vimGeneric
 
 # generalKeys = {}
 # generalKeys.update(generic.genericKeys)
 # generalKeys.update(osx.osx)
 # generalKeys.update(vocab.vocabWord)
+
+esc = Key("escape")
+LEADER = 'comma'
+out = Key("escape,l")
+ii = Key("i")
+
+lineVerbCharMap = {
+        "dosh line": "d:2",
+        "copy line": "y:2",
+        "change line": "c:2,escape",
+        "select line": "s-V",
+        "kill till end": "s-D",
+        "select till end": "v,dollar",
+        "copy till end": "y,dollar",
+        "change till end": "s-C,escape",
+}
 
 rstudioMap = {
     'clear console': Key('c-l'),
@@ -23,6 +40,86 @@ rstudioMap = {
     '[go] to end': Key('w-right'),
     'pop history': Key('w-up'),
     'sert': Key('i'),
+###########################################
+    # temp vim paste:
+    "cary": esc + Key("0"),
+    "car": esc + Key("caret"),
+    "doll": esc + Key("dollar"),
+    "go to top": esc + Key("g,g"),
+    "go to bottom": esc + Key("s-G"),
+    "extract [<n>]": esc + Key("x:%(n)d"),
+
+    "copy that": Key("y"),
+
+    "duplicate line [<n>]": esc + Key("y,y,p:%(n)d"),
+    "duplicate line above [<n>]": esc + Key("y,y,P:%(n)d"),
+
+    "vis-mode": esc + Key("v"),
+    "vis-line": esc + Key("s-v"),
+    "vis-block": esc + Key("c-v"),
+    "reselect that": esc + Key("g,v"),
+
+    "sert": esc + Key("i"),
+    "big sert": esc + Key("s-i"),
+    "append": esc + Key("a"),
+    "big append": esc + Key("s-a"),
+    "scape|escape": Key("escape:2"),
+    "open": esc + Key("o"),
+    "big open": esc + Key("s-o"),
+    "paste": esc + Key("p"),
+    "big paste": esc + Key("s-p"),
+
+    "next [<n>]": esc + Key("n:%(n)d"),
+    "preeve [<n>]": esc + Key("N:%(n)d"),
+
+    'match that': esc + Key("percent"),
+
+    'rope [<n>]': esc + Key('%(n)d, w'),
+    'irope [<n>]': esc + Key('%(n)d, e'),
+    'lope [<n>]': esc + Key('%(n)d, b'),
+    'ilope [<n>]': esc + Key('%(n)d, g, e'),
+
+    'ropert [<n>]': esc + Key('%(n)d, s-W'),
+    'iropert [<n>]': esc + Key('%(n)d, s-E'),
+    'lopert [<n>]': esc + Key('%(n)d, s-B'),
+    'ilopert [<n>]': esc + Key('%(n)d, g, s-E'),
+
+    "(undo|scratch) [<n>]": esc + Key("u:%(n)d"),
+    "redo [<n>]": esc + Key("c-r:%(n)d"),
+    "repeat [<n>]": esc + Key("%(n)d, dot"),
+
+    'skip [<n>]': esc + Key("%(n)d, f"),
+    'skip back [<n>]': esc + Key("%(n)d, s-F"),
+
+    'reverse semi [<n>]': esc + Key("escape, %(n)d, comma"),
+
+    "indent that": esc + Key("rangle,rangle"),
+    "out-dent that": esc + Key("langle,langle"),
+    "join [<n>]": esc + Key("s-J:%(n)d"),
+    "toggle case": esc + Key("tilde"),
+
+    "dosh [<n>] (words|word)": esc + Key("d,%(n)d") + Key("s-B"),
+    "rosh [<n>] (words|word)": esc + Key("d,%(n)d") + Key("s-W"),
+    "<lineVerbKey>": esc + Key("%(lineVerbKey)s"),
+
+    "mark that": esc + Key("m,a"),
+    "mark bravo": esc + Key("m,b"),
+    "jump mark": esc + Key("backtick,a"),
+    "format mark": esc + Key("g,q,backtick,a"),
+    "select mark": esc + Key("v,backtick,a"),
+    "copy mark": esc + Key("y,backtick,a"),
+    "change mark": esc + Key("c,backtick,a"),
+    "dosh mark": esc + Key("d,backtick,a"),
+    "remove mark": esc + Key("m,hyphen"),
+
+    "jump forward [<n>]": esc + Key("c-i:%(n)d"),
+    "jump back [<n>]": esc + Key("c-o:%(n)d"),
+    "last edit [<n>]": esc + Key("%(n)d,g,semicolon"),
+
+    "(mort) [<n>]": esc + Key("c-d:%(n)d") ,
+    "(lest) [<n>]": esc + Key("c-u:%(n)d") ,
+    ###########################################
+
 
     # 'source'
 
@@ -39,23 +136,23 @@ rstudioMap = {
     'compile pdf': Key('ws-k'),
     'insert chunk': Key('wa-i'),
     'insert code section': Key('ws-r'),
-    '(rip|run line|run sell) [<n>]': Key('w-enter/10:%(n)d'),
-    'run line and stay': Key('a-enter'),
+    '(rip|eval line|eval selected) [<n>]': Key('w-enter/10:%(n)d'),
+    'eye-rip': Key('a-enter'),
     're-run that': Key('ws-p'),
     # 'run current document': Key('wa-r'),
-    'run to here': Key('wa-b'),
-    'run from here': Key('wa-e'),
-    'run func': Key('wa-f'),
-    'run section': Key('wa-t'),
-    'run preeve chunks': Key('wa-p'),
-    'run chunk': Key('wa-c'),
-    'run next chunk': Key('wa-n'),
+    '(rip|eval) to here': Key('wa-b'),
+    '(rip|eval) from here': Key('wa-e'),
+    '(rip|eval) func': Key('wa-f'),
+    '(rip|eval) section': Key('wa-t'),
+    '(rip|eval) preeve chunks': Key('wa-p'),
+    '(rip|eval) chunk': Key('wa-c'),
+    '(rip|eval) next chunk': Key('wa-n'),
     'source doc': Key('ws-s'),
     'source doc and echo': Key('ws-enter'),
-    'fold sel': Key('wa-l'),
-    'unfold sel': Key('wsa-l'),
-    'fold all': Key('wa-o'),
-    'unfold all': Key('wsa-o'),
+    # 'fold selected': Key('wa-l'),
+    # 'unfold selected': Key('wsa-l'),
+    # 'fold all': Key('wa-o'),
+    # 'unfold all': Key('wsa-o'),
     'go to [line]': Key('wsa-g'),
     'jump to': Key('wsa-j'),
     'switch to tab': Key('c-rangle'),
@@ -63,8 +160,8 @@ rstudioMap = {
     'next tab': Key('c-f12'),
     'first tab': Key('cs-f11'),
     'last tab': Key('cs-f12'),
-    'go back [<n>]': Key('w-f9:%(n)d'),
-    'go forward [<n>]': Key('w-f10:%(n)d'),
+    'jump back [<n>]': Key('w-f9:%(n)d'),
+    'jump forward [<n>]': Key('w-f10:%(n)d'),
     'extract func from sell': Key('wa-x'),
     # 'extract var from sell': Key('wa-v'),
     'reindent lines': Key('w-i'),
@@ -87,7 +184,7 @@ rstudioMap = {
     'find next': Key('w-g'),
     'find preeve': Key('ws-g'),
     'use selection for find': Key('w-e'),
-    'find [with] sell': Key('ws-j'),
+    # 'find [with] selection': Key('ws-j'),
     'find in files': Key('ws-f'),
     'check spelling': Key('f7'),
 
@@ -96,7 +193,7 @@ rstudioMap = {
     # 'dell line|delline|dine': Key('w-d'),
     # 'select word right': Key('as-right'),
     # 'select word': Key('a-s-left'),
-    'expand sell|sell expand': Key('asc-up'),
+    'expand selection|selection expand': Key('asc-up'),
 
     # 'sell page up': Key('s-pgup'),
     # 'sell page down': Key('s-pgdown'),
@@ -109,10 +206,11 @@ rstudioMap = {
     'outdent': Key('s-tab'),
     # 'yank to cursor': Key('c-u'),
     # 'insert yanked': Key('c-y'),
-    'assign to': Key('space,langle,hyphen,space'),
-    'R pipe': Key('ws-m'),
-    'show func help': Key('f1'),
-    'show func source code': Key('f2'),
+    'assign that': Key('space,langle,hyphen,space'),
+    'pipe that': Key('ws-m'),
+
+    'help that': Key('f1'),
+    'source code that': Key('f2'),
 
     # 'views'
 
@@ -126,6 +224,19 @@ rstudioMap = {
     '[go] to environment': Key('c-8'),
     '[go] to git': Key('c-f1'),
     '[go] to build': Key('c-0'),
+
+    'zoom source': Key('cs-1'),
+    'zoom console': Key('cs-2'),
+    'zoom help': Key('cs-3'),
+    'zoom history': Key('cs-4'),
+    'zoom files': Key('cs-5'),
+    'zoom plots': Key('cs-6'),
+    'zoom packages': Key('cs-7'),
+    'zoom environment': Key('cs-8'),
+    'zoom git': Key('cs-f1'),
+
+    'zoom all': Key('cs-0'),
+
     'sync pdf': Key('w-f8'),
 
     # 'build'
@@ -152,19 +263,17 @@ rstudioMap = {
 
     ### # 'git/svn'
     ###
-    ### 'diff active source document': Key('ca-d'),
-    ### 'commit changes': Key('ca-m'),
+    'fugitive diff': Key('ca-d'),
+    'fugitive commit': Key('ca-m'),
     ### 'scroll diff view': Key('c-up/down'),
     ### 'stage-unstage': Key('spacebar'),
     ### 'stage-unstage and move to next': Key('enter'),
     ###
-    ### # 'session'
-    # 'quit R-Studio': Key('w-q'),
     'restart R': Key('ws-f10'),
     ###
     ### # more
     ###
-    ### 'execute code up to here': Key('aw-b'),
+
     ### 'snip': Key('s-tab'),###
 
 }
@@ -185,7 +294,8 @@ class KeystrokeRule(MappingRule):
     exported = False
     mapping = grammarCfg.cmd.map
     extras = [
-        IntegerRef("n", 1, 20),
+        IntegerRef("n", 1, 60),
+        Choice("lineVerbKey", lineVerbCharMap),
         # Dictation("text"),
         # Choice("modifier1", generic.modifierMap),
         # Choice("modifier2", generic.modifierMap),
