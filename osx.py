@@ -39,7 +39,7 @@ osx = {
     "window bottom-right": Key("asw-down"),
     "window top-left": Key("asw-up"),
     "window top-right": Key("asw-right"),
-    "window (center|middle)": Key("caw-down"),
+    "window [half] (center|middle)": Key("caw-down"),
     "window third (middle|center)": Key("asw-t"),
     "window third left": Key("asw-l"),
     "window third right": Key("asw-r"),
