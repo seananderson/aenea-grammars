@@ -379,6 +379,9 @@ class vimCommands(MappingRule):
     "disable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-d,i,s,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
     "enable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-e,n,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
 
+    "(windows|window) diff on": esc + Key("w,i,n,d,o,w,space,d,i,f,f,o,n,enter"),
+    "(windows|window) diff off": esc + Key("w,i,n,d,o,w,space,d,i,f,f,o,f,f,enter"),
+
     ### R stats - Nvim-R plugin
     # TODO create R language module
      # Start/Close
