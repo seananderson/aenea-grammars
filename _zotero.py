@@ -11,7 +11,7 @@ zotero_mapping = {
     'add note': Key("c-n"),
     'copy bibtex': Key("c-b"),
     'copy formatted reference': Key("c-r"),
-    'copy zotero link': Key("c-z"),
+    'copy [zotero] link': Key("c-z"),
     'focus info': Key("c-i"),
     'edit (info|that)': Key("c-e"),
     'delete tags': Key("c-d"),
