@@ -224,7 +224,7 @@ vimGeneric = {
     "(screen|window) up": esc + Key("c-w,k"),
     "(screen|window) down": esc + Key("c-w,j"),
     "close (split|screen|window)": esc + Key("c-w,c"),
-    "close other splits": esc + Key("colon/100,o,n,l,y/100,enter"),
+    "close other splits": esc + Key("colon/10,o,n,l,y/10,enter"),
 
     "edit file": esc + Key("colon,e,space,tab"),
     "buff-switch": esc + Key("colon,b,space,tab"),
@@ -265,7 +265,7 @@ vimGeneric = {
      # "eval Selected down": esc + Key("comma,s,d"),
      # "eval Selected and echo and down": esc + Key("comma,s,a"),
 
-     "(eval|rip) Preev": esc + Key("g,v/100,comma,s,d"),
+     "(eval|rip) Preev": esc + Key("g,v/2,comma,s,d"),
      # "eval Preev and echo": esc + Key("g,v/100,comma,s,e"),
      # . "eval Selected (Runuate and insert output in new tab)": esc + Key("comma,s,o"),
      # --------------------------------------------------------
@@ -275,7 +275,7 @@ vimGeneric = {
      # "eval Para and echo and down": esc + Key("comma,p,a"),
      # --------------------------------------------------------
      "eye-rip": esc + Key("comma,l"),
-     "rip [<n>]": esc + Key("enter/100:%(n)d"),
+     "rip [<n>]": esc + Key("enter/2:%(n)d"),
 
      "Print that": esc + Key("comma,r,p"),
      "Name that": esc + Key("comma,r,n"),
