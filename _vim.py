@@ -59,8 +59,8 @@ vimGeneric = {
     "sky <letters>": Key("s-%(letters)s"),
     "num <numbers>": Key("%(numbers)s"),
     "<numbers>": Key("%(numbers)s"),
-    "space [<n>]": Key("space:%(n)d"),
-    "<specials> [<n>]": Key("%(specials)s:%(n)d"),
+    "space [repeat <n>]": Key("space:%(n)d"),
+    "<specials> [repeat <n>]": Key("%(specials)s:%(n)d"),
     "say <text>": Function(lower_that),
     # "<text>": Function(lower_that),
     "cap <text>": Function(cap_that),
@@ -77,10 +77,10 @@ vimGeneric = {
     "[<n>] left": esc + Key("h:%(n)d"),
     "[<n>] right": esc + Key("l:%(n)d"),
 
-    "gee up [<n>]": esc + Text("%(n)d") + Key("g,k"),
-    "gee down [<n>]": esc + Text("%(n)d") + Key("g,j"),
-    "gee left [<n>]": esc + Text("%(n)d") + Key("g,h"),
-    "gee right [<n>]": esc + Text("%(n)d") + Key("g,l"),
+#    "gee up [<n>]": esc + Text("%(n)d") + Key("g,k"),
+#    "gee down [<n>]": esc + Text("%(n)d") + Key("g,j"),
+#    "gee left [<n>]": esc + Text("%(n)d") + Key("g,h"),
+#    "gee right [<n>]": esc + Text("%(n)d") + Key("g,l"),
 
     "[<n>] upper": Key("up:%(n)d"),
     "[<n>] downer": Key("down:%(n)d"),
@@ -161,7 +161,7 @@ vimGeneric = {
     "toggle case": esc + Key("tilde"),
 
     # Magic:
-    "<verbKey> <advKey> <opKey>": esc + Key("%(verbKey)s") + Key("%(advKey)s") + Key("%(opKey)s"),
+    # "<verbKey> <advKey> <opKey>": esc + Key("%(verbKey)s") + Key("%(advKey)s") + Key("%(opKey)s"),
     "dosh [<n>] (words|word)": esc + Key("d,%(n)d") + Key("s-B"),
     "rosh [<n>] (words|word)": esc + Key("d,%(n)d") + Key("s-W"),
     "<lineVerbKey>": esc + Key("%(lineVerbKey)s"),
@@ -213,8 +213,8 @@ vimGeneric = {
     "record macro": esc + Key("q,q"),
     "end macro": Key("q"),
     "repeat macro [<n>]": Key("%(n)d,at,q"),
-    "(maru|magic star) [<n>]": esc + Key("%(n)d, asterisk"),
-    "(paru|magic pound) [<n>]": esc + Key("%(n)d, hash"),
+    "(maru) [<n>]": esc + Key("%(n)d, asterisk"),
+    "(paru) [<n>]": esc + Key("%(n)d, hash"),
 
     ### splits:
     "split (screen|window)": esc + Key("c-w,s"),
@@ -331,6 +331,8 @@ vimGeneric = {
 
 class vimCommands(MappingRule):
     mapping  = {
+
+    "that's it": esc + Key("colon,w,q,enter"),
     'suspend': Key('c-z'),
     "edit config file": esc + Key("comma, e, v"),
     "table of contents": esc + Key("colon, s-T, s-O, s-C, enter"),
@@ -343,9 +345,9 @@ class vimCommands(MappingRule):
     "write and exit please": esc + Key("colon,w,q,exclamation,enter"),
     "toggle numbers": esc + Key("colon,s,e,t,space,r,e,l,a,t,i,v,e,n,u,m,b,e,r,exclamation") + Key("enter"),
     "browse (old|recent) files": esc + Key("colon,b,r,o,space,o,l") + Key("enter"),
-    "set theme ocean": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,o,c,e,a,n/50,enter"),
-    "set theme mocha": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,m,o,c,h,a/50,enter"),
-    "set theme one dark": esc + Key("colon,c,o,l,o/50,space,o,n,e,d,a,r,k") + Key("enter"),
+    # "set theme ocean": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,o,c,e,a,n/50,enter"),
+    # "set theme mocha": esc + Key("colon,c,o,l,o/50,space,b,a,s,e,1,6/50,minus,m,o,c,h,a/50,enter"),
+    # "set theme one dark": esc + Key("colon,c,o,l,o/50,space,o,n,e,d,a,r,k") + Key("enter"),
     # "set theme solarized": esc + Key("colon/50,c,o,l,o/50,space,s,o,l,a,r,i,z,e,d") + Key("enter"),
     "set theme solarized-light": esc + Key("colon/50,c,o,l,o/50,space,f,l,a,t,t,e,n,e,d,underscore,l,i,g,h,t") + Key("enter"),
     "set theme solarized-dark": esc + Key("colon/50,c,o,l,o/50,space,f,l,a,t,t,e,n,e,d,underscore,d,a,r,k") + Key("enter"),
@@ -353,7 +355,7 @@ class vimCommands(MappingRule):
     "set theme Seoul light": esc + Key("colon/50,c,o,l,o/50,space,s,e,o,u,l,2,5,6,hyphen,l,i,g,h,t") + Key("enter"),
     "toggle lights": esc + Key("colon/50,s-T,o,g,g,l,e,s-B,s-G") + Key("enter"),
     "toggle spelling": esc + Key("colon/50,s,e,t,l,o,c,a,l,space,s,p,e,l,l,exclamation")+Key("enter"),
-    "Lucky correct": esc + Key("1,z,equal"),
+    "lucky correct": esc + Key("1,z,equal"),
     "toggle invisible characters": esc + Key("colon,s,e,space,l,i,s,t,exclamation")+Key("enter"),
     "toggle nerdtree": esc + Key("colon/50,s-N,s-E,s-R,s-D,s-T,r,e,e,s-T,o,g,g,l,e/50,enter"),
     "toggle cursor-line": esc + Key("colon/50,s,e,space,c,u,r,s,o,r,l,i,n,e/50,exclamation,enter"),
@@ -376,8 +378,8 @@ class vimCommands(MappingRule):
 
     "strip all white space": esc+Key("colon,s-C,h,o,m,p,enter"),
 
-    "disable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-d,i,s,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
-    "enable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-e,n,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
+    # "disable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-d,i,s,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
+    # "enable auto formatting": esc + Key("colon,c,a,l,l,space,p,a,n,d,o,c,hash,f,o,r,m,a,t,t,i,n,g,hash,s-e,n,a,b,l,e,s-a,u,t,o,f,o,r,m,a,t,lparen,rparen,enter"),
 
     "(windows|window) diff on": esc + Key("w,i,n,d,o,w,space,d,i,f,f,o,n,enter"),
     "(windows|window) diff off": esc + Key("w,i,n,d,o,w,space,d,i,f,f,o,f,f,enter"),
@@ -392,7 +394,7 @@ class vimCommands(MappingRule):
      "Stop are session": esc + Key("colon,s-R,s-S,t,o,p"),
     # -----------------------------------------------------------
 
-     "eval Line and new": esc + Key("comma,q"),
+     # "eval Line and new": esc + Key("comma,q"),
      # . "Send Left part of line (cur)": \r<Left>
      # . "Send Right part of line (cur)": \r<Right>
     "eval Line and comment": esc + Key("comma,o"),
@@ -412,15 +414,15 @@ class vimCommands(MappingRule):
      # --------------------------------------------------------
      "Knit this file": esc + Key("comma,k,n"),
      "Knit and PDF this file": esc + Key("comma,k,p"),
-     "Knit BibTeX and PDF this file": esc + Key("comma,k,b"),
+     # "Knit BibTeX and PDF this file": esc + Key("comma,k,b"),
      # "Knit and Beamer PDF file) (only .Rmd)": esc + Key("comma,k,l"),
      # "Knit and ODT file) (only .Rmd)": esc + Key("comma,k,o"),
      # "Knit and Word Document file) (only .Rmd)": esc + Key("comma,k,w"),
      "Knit and HTML this file": esc + Key("comma,k,h"),
-     "Spin this file": esc + Key("comma,k,s"),
+     # "Spin this file": esc + Key("comma,k,s"),
      # --------------------------------------------------------
      "view PDF this file": esc + Key("comma,o,p"),
-     "SyncTeX": esc + Key("comma,g,p"),
+     # "SyncTeX": esc + Key("comma,g,p"),
      # "Go to LaTeX (SyncTeX)": esc + Key("comma,g,t"),
      # --------------------------------------------------------
      # "R Build tags": :RBuildTags
@@ -445,13 +447,11 @@ class vimCommands(MappingRule):
     # -----------------------------------------------------------
 
     # Object Browser
-     "(Show|Update) R objects": esc + Key("comma,r,o"),
-     "Expand R objects": esc + Key("comma,r,equal"),
-     "Collapse R objects": esc + Key("comma,r,hyphen"),
+     # "(Show|Update) R objects": esc + Key("comma,r,o"),
+     # "Expand R objects": esc + Key("comma,r,equal"),
+     # "Collapse R objects": esc + Key("comma,r,hyphen"),
      # Toggle (cur) Enter
 
-    "G G plot": Key("g,g,p,l,o,t"),
-    "dplyr": Key("d,p,l,y,r"),
 }
 
 generalKeys = {}
@@ -510,9 +510,10 @@ class RepeatRule(CompoundRule):
 mvim_context = aenea.ProxyCustomAppContext(id="MacVim")
 nvim_context = aenea.ProxyCustomAppContext(match="substring", titl="nvim") & aenea.ProxyCustomAppContext(id="iTerm2")
 vim_context = aenea.ProxyCustomAppContext(match="substring", titl="vim") & aenea.ProxyCustomAppContext(id="iTerm2")
+mutt_vim_context = aenea.ProxyCustomAppContext(match="substring", titl="mutt") & aenea.ProxyCustomAppContext(id="iTerm2")
 tmux_context = aenea.ProxyCustomAppContext(match="substring", titl="tmux") & aenea.ProxyCustomAppContext(id="iTerm2")
 git_vim_context = aenea.ProxyCustomAppContext(match="substring", titl="git") & aenea.ProxyCustomAppContext(id="iTerm2")
-vim_plus_context = nvim_context | mvim_context | vim_context | git_vim_context | tmux_context
+vim_plus_context = nvim_context | mvim_context | vim_context | git_vim_context | tmux_context | mutt_vim_context
 grammar = Grammar("root rule", context = vim_plus_context)
 grammar.add_rule(RepeatRule())
 grammar.load()

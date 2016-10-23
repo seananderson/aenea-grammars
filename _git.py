@@ -37,6 +37,9 @@ git_mapping = aenea.configuration.make_grammar_commands('git', {
     'git remove cached': Text("git rm --cached"),
 
     'change directory': Text("cd "),
+    'iterm next tab': Key("sw-rbracket"),
+    'iterm preev tab': Key("sw-lbracket"),
+    'iterm next split': Key("w-rbracket"),
 
 })
 

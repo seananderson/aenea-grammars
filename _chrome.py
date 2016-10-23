@@ -33,6 +33,8 @@ chrome_mapping = {
 }
 
 gmail_mapping = {
+    'reply in vim': Key("r/200,f12"),
+    'reply all in vim': Key("a/200,f12"),
     'open message': Key("o"),
     'reply message': Key("r"),
     'send message': Key("w-enter"),

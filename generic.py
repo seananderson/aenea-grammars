@@ -1,3 +1,4 @@
+from natlink import setMicState
 from aenea import (
     Key,
     Text,
@@ -9,30 +10,42 @@ from words import (
     lower_that
 )
 import re
+
+def cancel_and_sleep(text=None, text2=None):
+    """Used to cancel an ongoing dictation and puts microphone to sleep.
+    This method notifies the user that the dictation was in fact canceled,
+     a message in the Natlink feedback window.
+    Then the the microphone is put to sleep.
+    Example:
+    "'random mumbling go to sleep'" => Microphone sleep.
+    """
+    print("* Dictation canceled. Going to sleep. *")
+    setMicState("sleeping")
+
 letterMap = {
     "(arch)": "a",
-    "(bravo|brav) ": "b",
+    "brav ": "b",
     "(char) ": "c",
-    "(delta|dilbert|dixie|dixy) ": "d",
+    "(dilbert) ": "d",
     "(echo) ": "e",
     "(fox) ": "f",
     "(golf) ": "g",
-    "(hotel|hoat) ": "h",
-    "(ice) ": "i",
-    "(juliet|jinx) ": "j",
+    "(hotel) ": "h",
+    "(ice)": "i",
+    "(juliet) ": "j",
     "(kilo) ": "k",
     "(lug) ": "l",
     "(mike) ": "m",
     "(nerb) ": "n",
     "(ork) ": "o",
     "pooch ": "p",
-    "(quebec|queen) ": "q",
-    "(romeo|Rome) ": "r",
+    "(queen) ": "q",
+    "(romeo) ": "r",
     "(souk) ": "s",
     "(tango) ": "t",
-    "(union|unks|unk) ": "u",
-    "(victor|vick) ": "v",
-    "(whiskey|whisk|wisk) ": "w",
+    "(unk) ": "u",
+    "(victor) ": "v",
+    "(whiskey) ": "w",
     "(x-ray) ": "x",
     "(yankee) ": "y",
     "(zulu) ": "z",
@@ -41,10 +54,8 @@ letterMap = {
 numberMap = {
     "zero": "0",
     "one": "1",
-    # "two": "2",
     "duo": "2",
     "three": "3",
-    # "four": "4",
     "quad": "4",
     "five": "5",
     "six": "6",
@@ -119,44 +130,47 @@ pressKeyMap.update(specialCharMap)
 
 # These words can be prefaced by the word "say"
 reservedWord = {
-    "up": "up",
-    "down": "down",
-    "left": "left",
-    "right": "right",
-    "space": "space",
-    "tab": "tab",
-    "backspace": "backspace",
-    "delete": "delete",
-    "enter": "enter",
-    "paste": "paste",
-    "copy": "copy",
-    "cut": "cut",
-    "scratch": "scratch",
-    "undo": "undo",
-    "release": "release",
-    "page up": "page up",
-    "page down": "page down",
-    "say": "say",
-    "select": "select",
-    "uppercase": "uppercase",
-    "lowercase": "lowercase",
-    "expand": "expand",
-    "squash": "squash",
-    "dash": "dash",
-    "underscore": "underscore",
-    "dot": "dot",
-    "period": "period",
-    "minus": "minus",
-    # "semicolon": "semi-colon",
-    "semi": "semi",
-    "hyphen": "hyphen",
-    "triple": "triple",
-    "kill": "kill",
-    "to end": "to end",
-    "slap": "slap",
-    "pound": "pound",
-    "hash": "hash",
-    "escape": "escape",
+    "PDF-lay-tech": "pdflatex",
+    "(bib-teck|big-tech)": "bibtex",
+    "G G plot": "ggplot",
+    "dee plyer": "dplyr",
+    "geom point": "geom_point",
+    "geom line": "geom_line",
+
+    "up": "up ",
+    "down": "down ",
+    "left": "left ",
+    "right": "right ",
+    "space": "space ",
+    "tab": "tab ",
+    "backspace": "backspace ",
+    "delete": "delete ",
+    "enter": "enter ",
+    "paste": "paste ",
+    "copy": "copy ",
+    "cut": "cut ",
+    "scratch": "scratch ",
+    "undo": "undo ",
+    "release": "release ",
+    "page up": "page up ",
+    "page down": "page down ",
+    "say": "say ",
+    "select": "select ",
+    "uppercase": "uppercase ",
+    "lowercase": "lowercase ",
+    "dash": "dash ",
+    "underscore": "underscore ",
+    "dot": "dot ",
+    "period": "period ",
+    "minus": "minus ",
+    "semi": "semi ",
+    "hyphen": "hyphen ",
+    "kill": "kill ",
+    "to end": "to end ",
+    "slap": "slap ",
+    "pound": "pound ",
+    "hash": "hash ",
+    "escape": "escape ",
 }
 
 nonVimGenericKeys = {
@@ -196,14 +210,14 @@ nonVimGenericKeys = {
     "de-fit [<n>]": Key("sa-right:%(n)d") + Key("del"),
 
     "save file": Key("w-s"),
-    "space [<n>]": Key("space:%(n)d"),
+    "space [repeat <n>]": Key("space:%(n)d"),
     "<letters>": Key("%(letters)s"),
     "sky <letters>": Key("s-%(letters)s"),
     "num <numbers>": Key("%(numbers)s"),
     "<numbers>": Key("%(numbers)s"),
     "(chuck) [<n>]": Key("backspace:%(n)d"),
 
-    "<specials> [<n>]": Key("%(specials)s:%(n)d"),
+    "<specials> [repeat <n>]": Key("%(specials)s:%(n)d"),
     "(slap|slop) [<n>]": Key("enter:%(n)d"),
 }
 
@@ -220,7 +234,6 @@ specialKeys = {
     "calm": "comma",
     "dollar": "dollar",
     "dot": "dot",
-    # "period": "dot,space",
     "semi": "semicolon",
     "quote": "dquote",
     "equals": "space, equal, space",
@@ -256,14 +269,11 @@ genericKeys = {
 
     "say <reservedWord>": Text("%(reservedWord)s"),
 
-# vocabulary
-    "say PDF-lay-tech": Text("pdflatex "),
-    "say (bib-teck|big-tech)": Text("bibtex "),
-
  # Navigation keys.
     "page up [<n>]": Key("pgup:%(n)d"),
     "page down [<n>]": Key("pgdown:%(n)d"),
 
+    "edit vim": Key("f12"),
 
     "<modifier1> <pressKey> [<n>]":
       Key("%(modifier1)s-%(pressKey)s:%(n)d"),
@@ -275,4 +285,5 @@ genericKeys = {
     "tock": Mouse("right"),
     "pick that": Key("casw-0"),
     "pock": Key("casw-9"),
+    "snore": Function(cancel_and_sleep),
 }
