@@ -24,7 +24,7 @@ def cancel_and_sleep(text=None, text2=None):
 
 letterMap = {
     "(arch)": "a",
-    "brav ": "b",
+    "bravo ": "b",
     "(char) ": "c",
     "(dilbert) ": "d",
     "(echo) ": "e",
@@ -34,7 +34,7 @@ letterMap = {
     "(ice)": "i",
     "(juliet) ": "j",
     "(kilo) ": "k",
-    "(lug) ": "l",
+    "(lug|lima) ": "l",
     "(mike) ": "m",
     "(nerb) ": "n",
     "(ork) ": "o",
@@ -136,6 +136,7 @@ reservedWord = {
     "dee plyer": "dplyr",
     "geom point": "geom_point",
     "geom line": "geom_line",
+    "jay store": "JSTOR ",
 
     "up": "up ",
     "down": "down ",
@@ -171,16 +172,19 @@ reservedWord = {
     "pound": "pound ",
     "hash": "hash ",
     "escape": "escape ",
+    "hi": "Hi ",
+    "semi": "semi ",
+    "talk": "talk",
 }
 
 nonVimGenericKeys = {
     "say <text>": Function(lower_that),
     "cap <text>": Function(cap_that),
 
-    "[<n>] up": Key("up:%(n)d"),
-    "[<n>] down": Key("down:%(n)d"),
-    "[<n>] left": Key("left:%(n)d"),
-    "[<n>] right": Key("right:%(n)d"),
+    "up [<n>]": Key("up:%(n)d"),
+    "down [<n>]": Key("down:%(n)d"),
+    "left [<n>]": Key("left:%(n)d"),
+    "right [<n>]": Key("right:%(n)d"),
 
     "(undo|scratch) [<n>]": Key("w-z:%(n)d"),
     "redo [<n>]": Key("sw-z:%(n)d"),
@@ -192,8 +196,8 @@ nonVimGenericKeys = {
     "cut [that]": Key("w-x"),
     "paste [that]": Key("w-v"),
 
-    "home": Key("w-left"),
-    "end": Key("w-right"),
+    # "home": Key("w-left"),
+    # "end": Key("w-right"),
     "go to top": Key("w-up"),
     "go to bottom": Key("w-down"),
 
@@ -280,10 +284,11 @@ genericKeys = {
     "<modifier1> <modifier2> <pressKey> [<n>]":
       Key("%(modifier1)s%(modifier2)s-%(pressKey)s:%(n)d"),
 
+    "add omni task": Key("ca-space"), # Add task with quick and entry to omnifocus
     "tick": Mouse("left"),
     "dub": Mouse("left:2"),
     "tock": Mouse("right"),
-    "pick that": Key("casw-0"),
-    "pock": Key("casw-9"),
-    "snore": Function(cancel_and_sleep),
+    # "pick that": Key("casw-0"),
+    # "pock": Key("casw-9"),
+    "dragon snore": Function(cancel_and_sleep),
 }
