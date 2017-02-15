@@ -15,6 +15,8 @@ do_mapping = {
 
     'planning mode': Key("w-1"),
     'context mode': Key("w-2"),
+
+    'star that': Key("sw-l"),
 }
 
 do_context = aenea.ProxyCustomAppContext(id="OmniFocus")
