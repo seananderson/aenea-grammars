@@ -1,5 +1,6 @@
 from aenea import (
     Key,
+    Text,
 )
 
 osx = {
@@ -26,23 +27,29 @@ osx = {
     "git-hub app": Key("caw-f10"),
     "1-password app": Key("caw-f11"),
     "zotero app": Key("caw-f12"),
-    "are app": Key("scaw-f12"),
+    "are studio app": Key("scaw-f12"),
     "macvim app": Key("scaw-f11"),
     "preeve app": Key("caw-lbracket"),
     "next app": Key("caw-rbracket"),
 
 # window management
-    "window maximize": Key("asw-m"),
-    "window half left": Key("caw-left"),
-    "window half right": Key("caw-right"),
-    "window bottom-left": Key("asw-left"),
-    "window bottom-right": Key("asw-down"),
-    "window top-left": Key("asw-up"),
-    "window top-right": Key("asw-right"),
-    "window [half] (center|middle)": Key("caw-down"),
-    "window third (middle|center)": Key("asw-t"),
-    "window third left": Key("asw-l"),
-    "window third right": Key("asw-r"),
+    "window maximize": Text("KBM Maximize window"),
+    "window half left": Text("KBM Half window on left"),
+    "window half right": Text("KBM Half window on right"),
+    # "window bottom-left": Key("asw-left"),
+    # "window bottom-right": Key("asw-down"),
+    # "window top-left": Key("asw-up"),
+    # "window top-right": Key("asw-right"),
+    "window center": Text("KBM Center window"),
+    "window third (middle|center)": Text("KBM Window third width middle"),
+    "window third left": Text("KBM Window third width left"),
+    "window third right": Text("KBM Window third width right"),
+
+# smartnav mouse control
+
+    "smart precise": Key("wa-p"),
+    "smart center": Key("wa-c"),
+    "smart toggle": Key("wa-s"),
 
 # folder and file opening
     "show downloads": Key("scaw-f1"),

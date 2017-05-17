@@ -208,10 +208,10 @@ nonVimGenericKeys = {
     'sell to top': Key('ws-up'),
     'sell to bottom': Key('ws-down'),
 
-    "bit [<n>]": Key("a-left:%(n)d"),
-    "fit [<n>]": Key("a-right:%(n)d"),
-    "de-bit [<n>]": Key("sa-left:%(n)d") + Key("del"),
-    "de-fit [<n>]": Key("sa-right:%(n)d") + Key("del"),
+    # "bit [<n>]": Key("a-left:%(n)d"),
+    # "fit [<n>]": Key("a-right:%(n)d"),
+    # "de-bit [<n>]": Key("sa-left:%(n)d") + Key("del"),
+    # "de-fit [<n>]": Key("sa-right:%(n)d") + Key("del"),
 
     "save file": Key("w-s"),
     "space [repeat <n>]": Key("space:%(n)d"),
@@ -223,6 +223,7 @@ nonVimGenericKeys = {
 
     "<specials> [repeat <n>]": Key("%(specials)s:%(n)d"),
     "(slap|slop) [<n>]": Key("enter:%(n)d"),
+    "tab [<n>]": Key("tab:%(n)d"),
 }
 
 specialKeys = {
@@ -286,9 +287,56 @@ genericKeys = {
 
     "add omni task": Key("ca-space"), # Add task with quick and entry to omnifocus
     "tick": Mouse("left"),
-    "dub": Mouse("left:2"),
+    "dooble": Mouse("left:2"),
     "tock": Mouse("right"),
     # "pick that": Key("casw-0"),
     # "pock": Key("casw-9"),
     "dragon snore": Function(cancel_and_sleep),
+
+######################
+#    "launchbar": Key("w-space"),
+#    "switch apps": Key("win:down") + Key("tab"),
+#    "choose app": Key("win:up"),
+#
+#    "please quit that": Key("w-q"),
+#    "please close that": Key("w-w"),
+#    "hide that": Key("w-h"),
+#    "new that": Key("w-n"),
+#    "minimize that": Key("w-m"),
+#
+## app switching
+#    "iterm app": Key("caw-f1"),
+#    "terminal app": Key("caw-f2"),
+#    "PDF app": Key("caw-f3"),
+#    "mail-mate app": Key("caw-f4"),
+#    "chrome app": Key("caw-f5"),
+#    "calendar app": Key("caw-f6"),
+#    "finder app": Key("caw-f7"),
+#    "2-do app": Key("caw-f8"),
+#    "spotify app": Key("caw-f9"),
+#    "git-hub app": Key("caw-f10"),
+#    "1-password app": Key("caw-f11"),
+#    "zotero app": Key("caw-f12"),
+#    "are studio app": Key("scaw-f12"),
+#    "macvim app": Key("scaw-f11"),
+#    "preeve app": Key("caw-lbracket"),
+#    "next app": Key("caw-rbracket"),
+#
+## window management
+#    "window maximize": Key("asw-m"),
+#    "window half left": Key("caw-left"),
+#    "window half right": Key("caw-right"),
+#    "window bottom-left": Key("asw-left"),
+#    "window bottom-right": Key("asw-down"),
+#    "window top-left": Key("asw-up"),
+#    "window top-right": Key("asw-right"),
+#    "window [half] (center|middle)": Key("caw-down"),
+#    "window third (middle|center)": Key("asw-t"),
+#    "window third left": Key("asw-l"),
+#    "window third right": Key("asw-r"),
+#
+## folder and file opening
+#    "show downloads": Key("scaw-f1"),
+#
+#    "toggle dock": Key("aw-d"),
 }

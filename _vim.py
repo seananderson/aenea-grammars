@@ -97,10 +97,10 @@ vimGeneric = {
     "paste older": esc + Key("comma,p"), # maxbrunsfeld/vim-yankstack
     "paste newer": esc + Key("comma,s-P"), # maxbrunsfeld/vim-yankstack
 
-    "copy that": Key("y"),
+    # "copy that": Key("y"),
 
     "duplicate line [<n>]": esc + Key("y,y,p:%(n)d"),
-    "duplicate line above <n>": esc + Key("y,y,P:%(n)d"),
+    # "duplicate line above <n>": esc + Key("y,y,P:%(n)d"),
 
     "vis-mode": esc + Key("v"),
     "vis-line": esc + Key("s-v"),
@@ -120,7 +120,7 @@ vimGeneric = {
     "next [<n>]": esc + Key("n:%(n)d"),
     "preeve [<n>]": esc + Key("N:%(n)d"),
 
-    'match that': esc + Key("percent"),
+    # 'match that': esc + Key("percent"),
 
     'rope [<n>]': esc + Key('%(n)d, w'),
     'irope [<n>]': esc + Key('%(n)d, e'),
@@ -155,8 +155,8 @@ vimGeneric = {
     'reverse semi [<n>]': esc + Key("escape, %(n)d, f6"),
      # nnoremap <F6> ,
 
-    "indent that": esc + Key("rangle,rangle"),
-    "out-dent that": esc + Key("langle,langle"),
+    # "indent that": esc + Key("rangle,rangle"),
+    # "out-dent that": esc + Key("langle,langle"),
     "join [<n>]": esc + Key("s-J:%(n)d"),
     "toggle case": esc + Key("tilde"),
 
@@ -230,7 +230,7 @@ vimGeneric = {
     "buff-switch": esc + Key("colon,b,space,tab"),
     'buff-delete': esc + Key('colon,b,d,enter'),
     'buff-next': esc + Key('colon,b,n,enter'),
-    'buff-previous': esc + Key('colon,b,p,enter'),
+    'buff-prev': esc + Key('colon,b,p,enter'),
     'buff-list': esc + Key('colon,l,s,enter'),
     'screen (center|middle)': esc + Key("z, dot"),
     'screen top': esc + Key("z, t"),
@@ -442,8 +442,8 @@ class vimCommands(MappingRule):
      # Uncomment (line, sel) esc + Key("comma,x,u"),
      # Add/Align right comment (line, sel) esc + Key("comma,semicolon"),
      # --------------------------------------------------------
-     "next R chunk": esc + Key("comma,g,n"),
-     "preev R chunk": esc + Key("comma,g,s-N"),
+     "go to next chunk": esc + Key("comma,g,n"),
+     "go to preev chunk": esc + Key("comma,g,s-N"),
     # -----------------------------------------------------------
 
     # Object Browser
