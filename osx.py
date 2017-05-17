@@ -32,6 +32,8 @@ osx = {
     "zotero app": Text("KBM Launch Reference Manager"),
     "are-studio app": Text("KBM Launch RStudio"),
     "macvim app": Text("KBM Launch MacVim"),
+    "fusion app": Text("KBM Launch VMware Fusion"),
+    "system preferences app": Text("KBM Launch System Preferences"),
     "preeve app": Text("KBM Activate previous application"),
     "next app": Text("KBM Activate next application"),
 
@@ -55,7 +57,7 @@ osx = {
     "smart toggle": Key("wa-s"),
 
 # folder and file opening
-    "show downloads": Key("scaw-f1"),
+    "show downloads": Text("Go to Downloads"),
 
     "toggle dock": Key("aw-d"),
 }
